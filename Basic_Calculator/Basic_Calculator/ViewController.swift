@@ -44,8 +44,6 @@ class ViewController: UIViewController {
         }
         
         displayLable.text = curreuntDisplay
-        
-        print(numberValue)
     }
         
     @IBAction func didTapCalculateButton(_ sender: UIButton) {
@@ -102,7 +100,6 @@ class Calculator {
             break
         }
         
-        print("result - \(returnResult)")
         return returnResult
     }
     
