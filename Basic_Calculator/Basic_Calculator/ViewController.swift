@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         
         if numberValue[0] != 0 && numberValue[1] != 0 {
             let result = calculator.calculate(numberValue, operatorType)
-            print("결과값 도출 -> \(result)")
+            print("결과값 -> \(result)")
             
             numberValue = [result, 0]
             displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
@@ -57,18 +57,18 @@ class ViewController: UIViewController {
         
     @IBAction func didTapCalculateButton(_ sender: UIButton) {
         equalOpeSign = sender.currentTitle!
-        
+            
         if numberValue[0] == 0 && curreuntDisplay != "" {
             numberValue[0] = numberValue[1]
             numberValue[1] = Double(curreuntDisplay)!
-            
+                
             basicOperations(operatorSign)
         } else {
             numberValue[0] == 0 ? (numberValue[0] = Double(curreuntDisplay)!) : (numberValue[1] = (curreuntDisplay != "" ? Double(curreuntDisplay)! : 0))
-                    
+                
             basicOperations(operatorSign)
         }
-                
+            
         curreuntDisplay = ""
         operatorSign = sender.currentTitle!
     }
@@ -118,8 +118,8 @@ class Calculator {
                 returnResult = mul.operate(numbers)
             case "÷":
                 returnResult = div.operate(numbers)
-            case "%":
-                returnResult = rem.operate(numbers)
+//            case "%":
+//                returnResult = rem.operate(numbers)
             default:
                 break
         }
@@ -153,9 +153,9 @@ class DivideOperation: AbstractOperation {
         return numbers[0] / numbers[1]
     }
 }
-class RemainderOperation: AbstractOperation {
-    override func operate(_ numbers: [Double]) -> Double {
-        let value = numbers[0].truncatingRemainder(dividingBy: numbers[1])
-        return value
-    }
-}
+//class RemainderOperation: AbstractOperation {
+//    override func operate(_ numbers: [Double]) -> Double {
+//        let value = numbers[0].truncatingRemainder(dividingBy: numbers[1])
+//        return value
+//    }
+//}
