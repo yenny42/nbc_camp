@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     var numberValue: [Double] = [0,0] // 입력받은 값
     var operatorSign = "" // 입력받은 연산자
     var calculator = Calculator() // 계산 클래스
+    var equalOpeSign = ""
     
 //    MARK: - view load
     override func viewDidLoad() {
@@ -33,38 +34,43 @@ class ViewController: UIViewController {
         return value.truncatingRemainder(dividingBy: 1.0) == 0 ? true : false
     }
     
-    func basicOperations() {
-        let result = calculator.calculate(numberValue, operatorSign)
-        numberValue[0] = result
-        displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
+    func basicOperations(_ operatorType: String) {
+        
+        if numberValue[0] != 0 && numberValue[1] != 0 {
+            let result = calculator.calculate(numberValue, operatorType)
+            print("결과값 도출 -> \(result)")
+            
+            numberValue = [result, 0]
+            displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
+            
+            curreuntDisplay = ""
+            
+        }
     }
     
 //    MARK: - IBAction
     
     @IBAction func didTapNumButton(_ sender: UIButton) {
         curreuntDisplay += sender.currentTitle!
-        numberValue[1] = Double(curreuntDisplay)!
-        
-        if operatorSign != "" {
-            basicOperations()
-            numberValue[1] = 0
-        }
-        
         displayLable.text = curreuntDisplay
     }
         
     @IBAction func didTapCalculateButton(_ sender: UIButton) {
+        equalOpeSign = sender.currentTitle!
         
-        operatorSign = sender.currentTitle!
-        
-        if numberValue[1] == 0 { numberValue[1] = 1 }
-        if numberValue[0] == 0 { numberValue = [numberValue[1], 1] }
-        if (operatorSign == "+" || operatorSign == "-") { numberValue[1] = 0 }
-        else if numberValue[0] == 0 { numberValue = [numberValue[1], 0] }
-        
-        if operatorSign != "%" { basicOperations() }
+        if numberValue[0] == 0 && curreuntDisplay != "" {
+            numberValue[0] = numberValue[1]
+            numberValue[1] = Double(curreuntDisplay)!
+            
+            basicOperations(operatorSign)
+        } else {
+            numberValue[0] == 0 ? (numberValue[0] = Double(curreuntDisplay)!) : (numberValue[1] = (curreuntDisplay != "" ? Double(curreuntDisplay)! : 0))
+                    
+            basicOperations(operatorSign)
+        }
+                
         curreuntDisplay = ""
-        
+        operatorSign = sender.currentTitle!
     }
     
     @IBAction func didTapClearButton(_ sender: UIButton) {
@@ -76,8 +82,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapEqualSignButton(_ sender: UIButton) {
-        displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
-        curreuntDisplay = ""
+        
+        if numberValue[1] == 0 && curreuntDisplay != "" {
+            numberValue[1] = Double(curreuntDisplay)!
+        } else {
+            numberValue[0] = numberValue[1]
+            numberValue[1] = Double(curreuntDisplay)!
+        }
+        
+        basicOperations(equalOpeSign)
     }
     
 }
@@ -116,90 +129,33 @@ class Calculator {
 }
 // MARK: - Calculator Override
 class CalculatorSuper {
-    var title = "title"
     func operate(_ numbers:[Double]) -> Double {
-        print("\(title): \(numbers[0] + numbers[1])")
         return numbers[0] + numbers[1]
     }
 }
 class AddOperation: CalculatorSuper {
-    var name = "더하기"
-    override var title: String {
-            get {
-                return self.name
-            }
-            set {
-                self.name = newValue
-            }
-        }
-    
     override func operate(_ numbers: [Double]) -> Double {
-        print("\(title): \(numbers[0] + numbers[1])")
         return numbers[0] + numbers[1]
     }
 }
 class SubtractOperation: CalculatorSuper {
-    var name = "빼기"
-    override var title: String {
-            get {
-                return self.name
-            }
-            set {
-                self.name = newValue
-            }
-        }
-    
     override func operate(_ numbers: [Double]) -> Double {
-        print("\(title): \(numbers[0] - numbers[1])")
         return numbers[0] - numbers[1]
     }
 }
 class MultiplyOperation: CalculatorSuper {
-    var name = "곱하기"
-    override var title: String {
-            get {
-                return self.name
-            }
-            set {
-                self.name = newValue
-            }
-        }
-    
     override func operate(_ numbers:[Double]) -> Double {
-        print("\(title): \(numbers[0] * numbers[1])")
         return numbers[0] * numbers[1]
     }
 }
 class DivideOperation: CalculatorSuper {
-    var name = "나누기"
-    override var title: String {
-            get {
-                return self.name
-            }
-            set {
-                self.name = newValue
-            }
-        }
-    
     override func operate(_ numbers:[Double]) -> Double {
-        print("\(title): \(numbers[0] / numbers[1])")
         return numbers[0] / numbers[1]
     }
 }
 class RemainderOperation: CalculatorSuper {
-    var name = "나머지"
-    override var title: String {
-            get {
-                return self.name
-            }
-            set {
-                self.name = newValue
-            }
-        }
-    
     override func operate(_ numbers: [Double]) -> Double {
         let value = numbers[0].truncatingRemainder(dividingBy: numbers[1])
-        print("\(title) \(value)")
-        return value != 0 ? value : numbers[1]
+        return value
     }
 }
