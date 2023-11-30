@@ -102,7 +102,7 @@ class Calculator {
     var sub = SubtractOperation()
     var mul = MultiplyOperation()
     var div = DivideOperation()
-    var rem = RemainderOperation()
+//    var rem = RemainderOperation()
     
     func calculate(_ numbers: [Double], _ operatorType: String) -> Double {
         
