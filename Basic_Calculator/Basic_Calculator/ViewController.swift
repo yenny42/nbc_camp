@@ -28,6 +28,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
+//    MARK: - function
+    func checkDouble(value: Double) -> Bool {
+        return value.truncatingRemainder(dividingBy: 1.0) == 0 ? true : false
+    }
+    
 //    MARK: - IBAction
     
     @IBAction func didTapNumButton(_ sender: UIButton) {
@@ -38,7 +43,7 @@ class ViewController: UIViewController {
             let result = calculator.calculate(numberValue, operatorSign)
             numberValue[0] = result
             
-            displayLable.text = calculator.checkDouble(value: result) ? String(Int(result)) : String(result)
+            displayLable.text = checkDouble(value: result) ? String(Int(result)) : String(result)
             
             numberValue[1] = 0
         }
@@ -58,7 +63,7 @@ class ViewController: UIViewController {
         let result = calculator.calculate(numberValue, operatorSign)
         numberValue[0] = result
         
-        displayLable.text = calculator.checkDouble(value: result) ? String(Int(result)) : String(result)
+        displayLable.text = checkDouble(value: result) ? String(Int(result)) : String(result)
             
         curreuntDisplay = ""
         
@@ -74,7 +79,7 @@ class ViewController: UIViewController {
     
 //
     @IBAction func didTapEqualSignButton(_ sender: UIButton) {
-        displayLable.text = calculator.checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
+        displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
         curreuntDisplay = ""
     }
     
@@ -83,27 +88,50 @@ class ViewController: UIViewController {
 // MARK: - Class Calculator
 class Calculator {
     
+    var add = AddOperation()
+    var sub = SubtractOperation()
+    var mul = MultiplyOperation()
+    var div = DivideOperation()
+    
     func calculate(_ numbers: [Double], _ operatorType: String) -> Double {
         
         var returnResult: Double = 0
-        
         switch operatorType {
-        case "+":
-            returnResult = numbers[0] + numbers[1]
-        case "-":
-            returnResult = numbers[0] - numbers[1]
-        case "x":
-                returnResult = numbers[0] * numbers[1]
-        case "÷":
-                returnResult = numbers[0] / numbers[1]
-        default:
-            break
+            case "":
+                return 0
+            case "+":
+                returnResult = add.operate(numbers)
+            case "-":
+                returnResult = sub.operate(numbers)
+            case "x":
+                returnResult = mul.operate(numbers)
+            case "÷":
+                returnResult = div.operate(numbers)
+            default:
+                break
         }
         
         return returnResult
     }
-    
-    func checkDouble(value: Double) -> Bool {
-        return value.truncatingRemainder(dividingBy: 1.0) == 0 ? true : false
+}
+
+class AddOperation {
+    func operate(_ numbers:[Double]) -> Double {
+        return numbers[0] + numbers[1]
+    }
+}
+class SubtractOperation {
+    func operate(_ numbers:[Double]) -> Double {
+        return numbers[0] - numbers[1]
+    }
+}
+class MultiplyOperation {
+    func operate(_ numbers:[Double]) -> Double {
+        return numbers[0] * numbers[1]
+    }
+}
+class DivideOperation {
+    func operate(_ numbers:[Double]) -> Double {
+        return numbers[0] / numbers[1]
     }
 }
