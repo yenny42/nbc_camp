@@ -114,38 +114,92 @@ class Calculator {
         return returnResult
     }
 }
-// MARK: - Calculator Protocol
-protocol CalculatorProtocol {
-    func operate(_ numbers: [Double]) -> Double
-}
-class AddOperation: CalculatorProtocol {
+// MARK: - Calculator Override
+class CalculatorSuper {
+    var title = "title"
     func operate(_ numbers:[Double]) -> Double {
-        print("더하기 \(numbers[0] + numbers[1])")
+        print("\(title): \(numbers[0] + numbers[1])")
         return numbers[0] + numbers[1]
     }
 }
-class SubtractOperation: CalculatorProtocol {
-    func operate(_ numbers:[Double]) -> Double {
-        print("빼기 \(numbers[0] - numbers[1])")
+class AddOperation: CalculatorSuper {
+    var name = "더하기"
+    override var title: String {
+            get {
+                return self.name
+            }
+            set {
+                self.name = newValue
+            }
+        }
+    
+    override func operate(_ numbers: [Double]) -> Double {
+        print("\(title): \(numbers[0] + numbers[1])")
+        return numbers[0] + numbers[1]
+    }
+}
+class SubtractOperation: CalculatorSuper {
+    var name = "빼기"
+    override var title: String {
+            get {
+                return self.name
+            }
+            set {
+                self.name = newValue
+            }
+        }
+    
+    override func operate(_ numbers: [Double]) -> Double {
+        print("\(title): \(numbers[0] - numbers[1])")
         return numbers[0] - numbers[1]
     }
 }
-class MultiplyOperation: CalculatorProtocol {
-    func operate(_ numbers:[Double]) -> Double {
-        print("곱하기 \(numbers[0] * numbers[1])")
+class MultiplyOperation: CalculatorSuper {
+    var name = "곱하기"
+    override var title: String {
+            get {
+                return self.name
+            }
+            set {
+                self.name = newValue
+            }
+        }
+    
+    override func operate(_ numbers:[Double]) -> Double {
+        print("\(title): \(numbers[0] * numbers[1])")
         return numbers[0] * numbers[1]
     }
 }
-class DivideOperation: CalculatorProtocol {
-    func operate(_ numbers:[Double]) -> Double {
-        print("나누기 \(numbers[0] / numbers[1])")
+class DivideOperation: CalculatorSuper {
+    var name = "나누기"
+    override var title: String {
+            get {
+                return self.name
+            }
+            set {
+                self.name = newValue
+            }
+        }
+    
+    override func operate(_ numbers:[Double]) -> Double {
+        print("\(title): \(numbers[0] / numbers[1])")
         return numbers[0] / numbers[1]
     }
 }
-class RemainderOperation: CalculatorProtocol {
-    func operate(_ numbers: [Double]) -> Double {
+class RemainderOperation: CalculatorSuper {
+    var name = "나머지"
+    override var title: String {
+            get {
+                return self.name
+            }
+            set {
+                self.name = newValue
+            }
+        }
+    
+    override func operate(_ numbers: [Double]) -> Double {
         let value = numbers[0].truncatingRemainder(dividingBy: numbers[1])
-        print("나머지 \(value)")
+        print("\(title) \(value)")
         return value != 0 ? value : numbers[1]
     }
 }
