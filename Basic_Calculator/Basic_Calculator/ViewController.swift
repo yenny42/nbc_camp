@@ -43,7 +43,7 @@ class ViewController: UIViewController {
             let result = calculator.calculate(numberValue, operatorSign)
             numberValue[0] = result
             
-            displayLable.text = checkDouble(value: result) ? String(Int(result)) : String(result)
+            displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
             
             numberValue[1] = 0
         }
@@ -63,21 +63,20 @@ class ViewController: UIViewController {
         let result = calculator.calculate(numberValue, operatorSign)
         numberValue[0] = result
         
-        displayLable.text = checkDouble(value: result) ? String(Int(result)) : String(result)
+        displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
             
         curreuntDisplay = ""
         
     }
     
-//    초기화
     @IBAction func didTapClearButton(_ sender: UIButton) {
+//        변수 전체 초기화
         curreuntDisplay = ""
         displayLable.text = "0"
         numberValue = [0,0]
         operatorSign = ""
     }
     
-//
     @IBAction func didTapEqualSignButton(_ sender: UIButton) {
         displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
         curreuntDisplay = ""
@@ -85,9 +84,9 @@ class ViewController: UIViewController {
     
 }
 
+
 // MARK: - Class Calculator
 class Calculator {
-    
     var add = AddOperation()
     var sub = SubtractOperation()
     var mul = MultiplyOperation()
@@ -114,24 +113,31 @@ class Calculator {
         return returnResult
     }
 }
-
-class AddOperation {
+// MARK: - Calculator Protocol
+protocol CalculatorProtocol {
+    func operate(_ number: [Double]) -> Double
+}
+class AddOperation: CalculatorProtocol {
     func operate(_ numbers:[Double]) -> Double {
+        print("더하기 \(numbers[0] + numbers[1])")
         return numbers[0] + numbers[1]
     }
 }
-class SubtractOperation {
+class SubtractOperation: CalculatorProtocol {
     func operate(_ numbers:[Double]) -> Double {
+        print("빼기 \(numbers[0] - numbers[1])")
         return numbers[0] - numbers[1]
     }
 }
-class MultiplyOperation {
+class MultiplyOperation: CalculatorProtocol {
     func operate(_ numbers:[Double]) -> Double {
+        print("곱하기 \(numbers[0] * numbers[1])")
         return numbers[0] * numbers[1]
     }
 }
-class DivideOperation {
+class DivideOperation: CalculatorProtocol {
     func operate(_ numbers:[Double]) -> Double {
+        print("나누기 \(numbers[0] / numbers[1])")
         return numbers[0] / numbers[1]
     }
 }
