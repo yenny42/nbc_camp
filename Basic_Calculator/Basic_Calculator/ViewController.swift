@@ -33,6 +33,12 @@ class ViewController: UIViewController {
         return value.truncatingRemainder(dividingBy: 1.0) == 0 ? true : false
     }
     
+    func basicOperations() {
+        let result = calculator.calculate(numberValue, operatorSign)
+        numberValue[0] = result
+        displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
+    }
+    
 //    MARK: - IBAction
     
     @IBAction func didTapNumButton(_ sender: UIButton) {
@@ -40,11 +46,7 @@ class ViewController: UIViewController {
         numberValue[1] = Double(curreuntDisplay)!
         
         if operatorSign != "" {
-            let result = calculator.calculate(numberValue, operatorSign)
-            numberValue[0] = result
-            
-            displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
-            
+            basicOperations()
             numberValue[1] = 0
         }
         
@@ -58,13 +60,9 @@ class ViewController: UIViewController {
         if numberValue[1] == 0 { numberValue[1] = 1 }
         if numberValue[0] == 0 { numberValue = [numberValue[1], 1] }
         if (operatorSign == "+" || operatorSign == "-") { numberValue[1] = 0 }
-        if numberValue[0] == 0 { numberValue = [numberValue[1], 0] }
+        else if numberValue[0] == 0 { numberValue = [numberValue[1], 0] }
         
-        let result = calculator.calculate(numberValue, operatorSign)
-        numberValue[0] = result
-        
-        displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
-            
+        if operatorSign != "%" { basicOperations() }
         curreuntDisplay = ""
         
     }
@@ -91,6 +89,7 @@ class Calculator {
     var sub = SubtractOperation()
     var mul = MultiplyOperation()
     var div = DivideOperation()
+    var rem = RemainderOperation()
     
     func calculate(_ numbers: [Double], _ operatorType: String) -> Double {
         
@@ -106,6 +105,8 @@ class Calculator {
                 returnResult = mul.operate(numbers)
             case "÷":
                 returnResult = div.operate(numbers)
+            case "%":
+                returnResult = rem.operate(numbers)
             default:
                 break
         }
@@ -115,7 +116,7 @@ class Calculator {
 }
 // MARK: - Calculator Protocol
 protocol CalculatorProtocol {
-    func operate(_ number: [Double]) -> Double
+    func operate(_ numbers: [Double]) -> Double
 }
 class AddOperation: CalculatorProtocol {
     func operate(_ numbers:[Double]) -> Double {
@@ -139,5 +140,12 @@ class DivideOperation: CalculatorProtocol {
     func operate(_ numbers:[Double]) -> Double {
         print("나누기 \(numbers[0] / numbers[1])")
         return numbers[0] / numbers[1]
+    }
+}
+class RemainderOperation: CalculatorProtocol {
+    func operate(_ numbers: [Double]) -> Double {
+        let value = numbers[0].truncatingRemainder(dividingBy: numbers[1])
+        print("나머지 \(value)")
+        return value != 0 ? value : numbers[1]
     }
 }
