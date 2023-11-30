@@ -127,33 +127,33 @@ class Calculator {
         return returnResult
     }
 }
-// MARK: - Calculator Override
-class CalculatorSuper {
+// MARK: - AbstractOperation Override
+class AbstractOperation {
     func operate(_ numbers:[Double]) -> Double {
         return numbers[0] + numbers[1]
     }
 }
-class AddOperation: CalculatorSuper {
+class AddOperation: AbstractOperation {
     override func operate(_ numbers: [Double]) -> Double {
         return numbers[0] + numbers[1]
     }
 }
-class SubtractOperation: CalculatorSuper {
+class SubtractOperation: AbstractOperation {
     override func operate(_ numbers: [Double]) -> Double {
         return numbers[0] - numbers[1]
     }
 }
-class MultiplyOperation: CalculatorSuper {
+class MultiplyOperation: AbstractOperation {
     override func operate(_ numbers:[Double]) -> Double {
         return numbers[0] * numbers[1]
     }
 }
-class DivideOperation: CalculatorSuper {
+class DivideOperation: AbstractOperation {
     override func operate(_ numbers:[Double]) -> Double {
         return numbers[0] / numbers[1]
     }
 }
-class RemainderOperation: CalculatorSuper {
+class RemainderOperation: AbstractOperation {
     override func operate(_ numbers: [Double]) -> Double {
         let value = numbers[0].truncatingRemainder(dividingBy: numbers[1])
         return value
