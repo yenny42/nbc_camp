@@ -21,8 +21,14 @@ class ViewController: UIViewController {
     var curreuntDisplay = "" // 내가 지금 입력한 값을 보여주기 위한 문자열
     var numberValue: [Double] = [0,0] // 입력받은 값
     var operatorSign = "" // 입력받은 연산자
-    var calculator = Calculator() // 계산 클래스
     var equalOpeSign = ""
+    
+    // 계산 클래스
+    var calculatorAdd = Calculator(abstractOperation: AddOperation())
+    var calculatorSub = Calculator(abstractOperation: SubtractOperation())
+    var calculatorMul = Calculator(abstractOperation: MultiplyOperation())
+    var calculatorDiv = Calculator(abstractOperation: DivideOperation())
+    
     
 //    MARK: - view load
     override func viewDidLoad() {
@@ -37,11 +43,24 @@ class ViewController: UIViewController {
     func basicOperations(_ type: String) {
         
         if numberValue[0] != 0 && numberValue[1] != 0 {
-            let result = calculator.calculate(numberValue, type)
-            if operatorSign == "+" { print("addResult : \(result)") }
-            else if operatorSign == "-" { print("subtractResult : \(result)") }
-            else if operatorSign == "x" { print("multiplyResult : \(result)") }
-            else if operatorSign == "÷" { print("divideResult : \(result)") }
+            
+            var result: Double = 0
+            switch type {
+                case "+":
+                    result = calculatorAdd.calculate(numberValue, type)
+                    print("addResult : \(result)")
+                case "-":
+                    result = calculatorSub.calculate(numberValue, type)
+                    print("subtractResult : \(result)")
+                case "x":
+                    result = calculatorMul.calculate(numberValue, type)
+                    print("multiplyResult : \(result)")
+                case "÷":
+                    result = calculatorDiv.calculate(numberValue, type)
+                    print("divideResult : \(result)")
+                default:
+                    break
+            }
             
             numberValue = [result, 0]
             displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
@@ -101,39 +120,24 @@ class ViewController: UIViewController {
 
 // MARK: - Class Calculator
 class Calculator {
-    var add = AddOperation()
-    var sub = SubtractOperation()
-    var mul = MultiplyOperation()
-    var div = DivideOperation()
-//    var rem = RemainderOperation()
     
+    private var abstractOperation: AbstractOperation
+    
+    init(abstractOperation: AbstractOperation) {
+        self.abstractOperation = abstractOperation
+    }
+    
+    func setOperation(operation: AbstractOperation) {
+        self.abstractOperation = operation
+    }
     func calculate(_ numbers: [Double], _ operatorType: String) -> Double {
-        
-        var returnResult: Double = 0
-        switch operatorType {
-            case "":
-                return 0
-            case "+":
-                returnResult = add.operate(numbers)
-            case "-":
-                returnResult = sub.operate(numbers)
-            case "x":
-                returnResult = mul.operate(numbers)
-            case "÷":
-                returnResult = div.operate(numbers)
-//            case "%":
-//                returnResult = rem.operate(numbers)
-            default:
-                break
-        }
-        
-        return returnResult
+        abstractOperation.operate(numbers)
     }
 }
 // MARK: - AbstractOperation Override
 class AbstractOperation {
     func operate(_ numbers:[Double]) -> Double {
-        return numbers[0] + numbers[1]
+        return 0
     }
 }
 class AddOperation: AbstractOperation {
