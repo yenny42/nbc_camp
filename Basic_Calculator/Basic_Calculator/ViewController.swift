@@ -34,11 +34,14 @@ class ViewController: UIViewController {
         return value.truncatingRemainder(dividingBy: 1.0) == 0 ? true : false
     }
     
-    func basicOperations(_ operatorType: String) {
+    func basicOperations(_ type: String) {
         
         if numberValue[0] != 0 && numberValue[1] != 0 {
-            let result = calculator.calculate(numberValue, operatorType)
-            print("결과값 -> \(result)")
+            let result = calculator.calculate(numberValue, type)
+            if operatorSign == "+" { print("addResult : \(result)") }
+            else if operatorSign == "-" { print("subtractResult : \(result)") }
+            else if operatorSign == "x" { print("multiplyResult : \(result)") }
+            else if operatorSign == "÷" { print("divideResult : \(result)") }
             
             numberValue = [result, 0]
             displayLable.text = checkDouble(value: numberValue[0]) ? String(Int(numberValue[0])) : String(numberValue[0])
