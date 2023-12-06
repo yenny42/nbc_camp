@@ -47,34 +47,38 @@ class Menu {
     }
 }
 
-class Burgers: Menu {
-    let menuOptions: Product = .burgers
-
+class Category: Menu {
+    var menuOptions: Product
+        
+    init(menuOptions: Product) {
+        self.menuOptions = menuOptions
+    }
+    
     func detailMenu() {
         detailMenu(options: menuOptions)
     }
 }
 
-class FrozenCustard: Menu {
-    let menuOptions: Product = .frozencustard
-
-    func detailMenu() {
-        detailMenu(options: menuOptions)
+class Burgers: Category {
+    init() {
+        super.init(menuOptions: .burgers)
     }
 }
 
-class Drinks: Menu {
-    let menuOptions: Product = .drinks
-
-    func detailMenu() {
-        detailMenu(options: menuOptions)
+class FrozenCustard: Category {
+    init() {
+        super.init(menuOptions: .frozencustard)
     }
 }
 
-class Beer: Menu {
-    let menuOptions: Product = .beer
+class Drinks: Category {
+    init() {
+        super.init(menuOptions: .drinks)
+    }
+}
 
-    func detailMenu() {
-        detailMenu(options: menuOptions)
+class Beer: Category {
+    init() {
+        super.init(menuOptions: .beer)
     }
 }
