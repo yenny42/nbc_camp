@@ -36,9 +36,8 @@ class Orders {
     
     func processOrders(_ mainInstance: Main) {
         
-//       TODO: 변수명 바꾸는게 좋을듯
-        let priceArr = cartList.map {$0.price}
-        allPrice = priceArr.reduce(0) { $0 + $1 }
+        let cartItemAllPrice = cartList.map {$0.price}
+        allPrice = cartItemAllPrice.reduce(0) { $0 + $1 }
         
         Orders.printOrders()
         

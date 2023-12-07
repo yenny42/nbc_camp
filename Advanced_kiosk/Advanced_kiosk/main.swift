@@ -69,7 +69,7 @@ class Main {
                 default:
                     if !isCartEmpty {
                         if choice == 5 {
-                            orders.processOrders()
+                            orders.processOrders(self)
                         } else if choice == 6 {
                             orders.cancelOrders()
                             self.kiosk()
