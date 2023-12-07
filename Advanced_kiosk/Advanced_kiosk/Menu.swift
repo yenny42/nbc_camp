@@ -25,8 +25,10 @@ class Menu {
         """)
         print("번호를 입력하세요 -> ", terminator: "")
     }
+    
+    let cart = Cart()
 
-    func detailMenu(options: Product) {
+    func detailMenu(options: Product, _ mainInstance: Main) {
         printDetailMenu(options: options)
         
         while let choice = readInt() {
@@ -35,9 +37,9 @@ class Menu {
                     let index = choice - 1
                     let data: CartItem = CartItem(name: options.productName[index], price: options.productPrice[index], info: options.productInfo[index])
                     
-                    Cart().checkInputCart(option: data)
+                    cart.checkInputCart(option: data, mainInstance)
                 case 0:
-                    Main().kiosk()
+                    mainInstance.kiosk()
                 default:
                     ERROR_input()
                     continue
@@ -54,8 +56,8 @@ class Category: Menu {
         self.menuOptions = menuOptions
     }
     
-    func detailMenu() {
-        detailMenu(options: menuOptions)
+    func detailMenu(mainInstance: Main) {
+        detailMenu(options: menuOptions, mainInstance)
     }
 }
 

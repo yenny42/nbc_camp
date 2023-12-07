@@ -35,6 +35,12 @@ class Main {
         print("번호를 입력하세요 -> ", terminator: "")
     }
 
+    let burgers = Burgers()
+    let frozenCustard = FrozenCustard()
+    let drinks = Drinks()
+    let beer = Beer()
+    let orders = Orders()
+    
     func kiosk() {
         print("""
         
@@ -49,13 +55,13 @@ class Main {
             while let choice = readInt() {
                 switch choice {
                 case 1:
-                    Burgers().detailMenu()
+                    burgers.detailMenu(mainInstance: self)
                 case 2:
-                    FrozenCustard().detailMenu()
+                    frozenCustard.detailMenu(mainInstance: self)
                 case 3:
-                    Drinks().detailMenu()
+                    drinks.detailMenu(mainInstance: self)
                 case 4:
-                    Beer().detailMenu()
+                    beer.detailMenu(mainInstance: self)
                 case 0:
                     print("✂️")
                     print("----- 키오스크를 종료합니다 -----")
@@ -63,10 +69,10 @@ class Main {
                 default:
                     if !isCartEmpty {
                         if choice == 5 {
-                            Orders().processOrders()
+                            orders.processOrders()
                         } else if choice == 6 {
-                            Orders().cancelOrders()
-                            Main().kiosk()
+                            orders.cancelOrders()
+                            self.kiosk()
                         } else {
                             ERROR_input()
                             continue

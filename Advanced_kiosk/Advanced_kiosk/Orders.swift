@@ -34,8 +34,9 @@ class Orders {
         print("번호를 입력하세요 -> ", terminator: "")
     }
     
-    func processOrders() {
+    func processOrders(_ mainInstance: Main) {
         
+//       TODO: 변수명 바꾸는게 좋을듯
         let priceArr = cartList.map {$0.price}
         allPrice = priceArr.reduce(0) { $0 + $1 }
         
@@ -47,7 +48,7 @@ class Orders {
             switch choice {
                 case 1:
     
-                    if price <= 0 {
+                    if price < 0 {
                         print("현재 잔액은 \(round100(wallet))W 으로 \(-round100(price))W이 부족해서 주문할 수 없습니다.")
                     } else {
                         wallet = price
@@ -61,10 +62,10 @@ class Orders {
                         
                         """)
                     }
-                    Main().kiosk()
+                    mainInstance.kiosk()
                 case 2:
                     print("메뉴판으로 돌아갑니다.")
-                    Main().kiosk()
+                    mainInstance.kiosk()
                 default:
                     ERROR_input()
             }

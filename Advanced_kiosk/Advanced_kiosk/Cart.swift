@@ -22,7 +22,7 @@ class Cart {
         print("번호를 입력하세요 -> ", terminator: "")
     }
     
-    func checkInputCart(option: CartItem) {
+    func checkInputCart(option: CartItem, _ mainInstance: Main) {
         printCheckInputCart(name: option.name)
         
         if let choice = readInt() {
@@ -34,10 +34,10 @@ class Cart {
                 --------------------------------------------------------
                     [ \(option.name) ] 가 장바구니에 추가되었습니다.
                 """)
-                Main().kiosk()
+                mainInstance.kiosk()
             case 2:
                 print("취소하였습니다.")
-                Main().kiosk()
+                mainInstance.kiosk()
             default:
                 ERROR_input()
             }
