@@ -6,8 +6,16 @@
 =============
 <br/>
 
-### 💡 3주차
+### 💡 4주차
 - <a href="https://github.com/yenny42/nbc_camp/tree/main/iOSBasic_MyToDoList" target="_blank">iOS 앱개발 입문 과제 - To do list</a>
+
+
+<br/>
+
+### 💡 3주차
+- Swift 문법 심화 과제 - 키오스크
+  - <a href="https://github.com/yenny42/nbc_camp/tree/main/Advanced_kiosk/Advanced_kiosk" target="_blank">개인 과제 코드</a>
+  - <a href="https://github.com/yenny42/nbc_Team9_Kiosk" target="_blank">팀 과제 코드</a>
 
 
 <br/>
@@ -17,9 +25,6 @@
 
   * 더하기, 빼기, 나누기, 곱하기, 나머지 연산을 수행할 수 있는 Calculator 클래스
 
-- Swift 문법 심화 과제 - 키오스크
-  - <a href="https://github.com/yenny42/nbc_camp/tree/main/Advanced_kiosk/Advanced_kiosk" target="_blank">개인 과제 코드</a>
-  - <a href="https://github.com/yenny42/nbc_Team9_Kiosk" target="_blank">팀 과제 코드</a>
 
 
 <br/>
