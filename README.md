@@ -6,6 +6,12 @@
 =============
 <br/>
 
+### 💡 3주차
+- <a href="https://github.com/yenny42/nbc_camp/tree/main/iOSBasic_MyToDoList" target="_blank">iOS 앱개발 입문 과제 - To do list</a>
+
+
+<br/>
+
 ### 💡 2주차 
 - <a href="https://github.com/yenny42/nbc_camp/tree/main/Basic_Calculator" target="_blank">Swift 문법 기초 과제 - 계산기</a>
 
