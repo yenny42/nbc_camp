@@ -13,6 +13,7 @@
 		1BDAA38E2B2931F000338B96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BDAA38C2B2931F000338B96 /* Main.storyboard */; };
 		1BDAA3902B2931F100338B96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BDAA38F2B2931F100338B96 /* Assets.xcassets */; };
 		1BDAA3932B2931F100338B96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BDAA3912B2931F100338B96 /* LaunchScreen.storyboard */; };
+		1BDAA39F2B29863F00338B96 /* TodoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDAA39E2B29863F00338B96 /* TodoListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		1BDAA38F2B2931F100338B96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BDAA3922B2931F100338B96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BDAA3942B2931F100338B96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BDAA39E2B29863F00338B96 /* TodoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				1BDAA38A2B2931F000338B96 /* ViewController.swift */,
 				1BDAA38C2B2931F000338B96 /* Main.storyboard */,
 				1BDAA38F2B2931F100338B96 /* Assets.xcassets */,
+				1BDAA39E2B29863F00338B96 /* TodoListTableViewCell.swift */,
 				1BDAA3912B2931F100338B96 /* LaunchScreen.storyboard */,
 				1BDAA3942B2931F100338B96 /* Info.plist */,
 			);
@@ -141,6 +144,7 @@
 				1BDAA38B2B2931F000338B96 /* ViewController.swift in Sources */,
 				1BDAA3872B2931F000338B96 /* AppDelegate.swift in Sources */,
 				1BDAA3892B2931F000338B96 /* SceneDelegate.swift in Sources */,
+				1BDAA39F2B29863F00338B96 /* TodoListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
