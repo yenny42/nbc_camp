@@ -9,14 +9,19 @@ import UIKit
 
 class ToDoListTableViewCell: UITableViewCell {
     @IBOutlet weak var todoTitleLabel: UILabel!
+    @IBOutlet weak var todoDateLabel: UILabel!
     @IBOutlet weak var todoCompleteButton: UIButton!
     
     var isComplete: Bool = false {
         didSet {
             if isComplete == true {
                 todoCompleteButton.tintColor = UIColor.systemRed
+                todoTitleLabel.textColor = UIColor.lightGray
+                todoDateLabel.textColor = UIColor.lightGray
             } else {
                 todoCompleteButton.tintColor = UIColor.lightGray
+                todoTitleLabel.textColor = UIColor.black
+                todoDateLabel.textColor = UIColor.black
             }
         }
     }
