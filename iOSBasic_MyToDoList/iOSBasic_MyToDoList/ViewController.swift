@@ -10,18 +10,20 @@ import UIKit
 struct Todo {
     var title: String
     var isComplete: Bool
+    var regDate: String
 }
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var TodoListTableView: UITableView!
     
-    var testData: [Todo] = [Todo(title: "밥 먹기", isComplete: false), Todo(title: "양치하기", isComplete: false), Todo(title: "왜 이렇게 졸리냐 낮잠자기(안됨)", isComplete: false),Todo(title: "강아지랑 산책가기", isComplete: false)]
+    var testData: [Todo] = [Todo(title: "test title", isComplete: false, regDate: "23.12.17")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         TodoListTableView.dataSource = self
+        TodoListTableView.delegate = self
     }
     
     @IBAction func AddTodoContents(_ sender: UIButton) {
@@ -30,7 +32,7 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             let inputTitle = String((alert.textFields?[0].text)!)
             
-            self.testData.append(Todo(title: inputTitle, isComplete: false))
+            self.testData.append(Todo(title: inputTitle, isComplete: false, regDate: Date().toString("yy.M.d")))
             self.TodoListTableView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: NSLocalizedString("CANCEL", comment: "Default action"), style: .default, handler: { _ in
@@ -46,9 +48,10 @@ class ViewController: UIViewController {
     
 }
 
+// MARK: UITableViewDataSource
 extension ViewController: UITableViewDataSource {
     
-    // MARK: Cell 추가
+    // MARK: Cell 생성
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //    numberOfRowsInSection은 TableView에 표시할 행의 수를 return
         return testData.count
@@ -59,6 +62,9 @@ extension ViewController: UITableViewDataSource {
         let cell = TodoListTableView.dequeueReusableCell(withIdentifier: "TodoListCell", for: indexPath) as! ToDoListTableViewCell
         cell.selectionStyle = .none
         cell.todoTitleLabel.text = self.testData[indexPath.row].title
+        
+        cell.todoDateLabel.text = self.testData[indexPath.row].regDate
+        
         cell.todoCompleteButton.tag = indexPath.row
         cell.todoCompleteButton.addTarget(self, action: #selector(checkBoxButtonTapped(sender:)), for: .touchUpInside)
         return cell
@@ -89,4 +95,10 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-
+// MARK: UITableViewDelegate
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // table cell의 height
+        return 70.0
+    }
+}
