@@ -5,19 +5,22 @@
 //  Created by t2023-m0035 on 12/13/23.
 //
 
+// TODO: 마감일이 지난 것, 마감일이 지났는데 완료하지 못한 것은 어떻게 표현할지 고민
+
 import UIKit
 
 struct Todo {
     var title: String
     var isComplete: Bool
     var regDate: String
+    var dueDate: String
 }
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var TodoListTableView: UITableView!
     
-    var testData: [Todo] = [Todo(title: "test title", isComplete: false, regDate: "23.12.17")]
+    var testData: [Todo] = [Todo(title: "test title", isComplete: false, regDate: "23.12.17", dueDate: "23.12.18")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,21 +36,41 @@ class ViewController: UIViewController {
             textField in
             textField.placeholder = "To do Contents"
         })
+        
+        // TODO: alert 내부 datepicker 모양, 위치 바꿔보기
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .compact
+        datePicker.locale = Locale(identifier: "ko_KR")
+        
+        alert.view.addSubview(datePicker)
+        
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .destructive, handler: { _ in
             let inputTitle = String((alert.textFields?[0].text)!)
+            let inputDueDate = datePicker.date.toString("yy.M.d")
+            
             if let inputTitle = alert.textFields?[0].text {
-                self.testData.append(Todo(title: inputTitle, isComplete: false, regDate: Date().toString("yy.M.d")))
-                
-                self.TodoListTableView.beginUpdates()
-                self.TodoListTableView.insertRows(at: [IndexPath(row: self.testData.count-1, section: 0)], with: .automatic)
-                self.TodoListTableView.endUpdates()
+                let selectedDate = datePicker.date
+                if selectedDate >= Calendar.current.startOfDay(for: Date()) {
+                    self.testData.append(Todo(title: inputTitle, isComplete: false, regDate: Date().toString("yy.M.d"), dueDate: inputDueDate))
+                    
+                    self.TodoListTableView.beginUpdates()
+                    self.TodoListTableView.insertRows(at: [IndexPath(row: self.testData.count-1, section: 0)], with: .automatic)
+                    self.TodoListTableView.endUpdates()
+                } else {
+                    self.showDateAlert()
+                }
             }
         }))
         alert.addAction(UIAlertAction(title: NSLocalizedString("CANCEL", comment: "Default action"), style: .default))
         
         self.present(alert, animated: true, completion: nil)
     }
-    
+    func showDateAlert() {
+        let alert = UIAlertController(title: "날짜 선택 오류", message: "오늘 이후의 날짜만 선택 가능합니다.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK: UITableViewDataSource
@@ -63,7 +86,8 @@ extension ViewController: UITableViewDataSource {
         
         cell.selectionStyle = .none
         cell.todoTitleLabel.text = self.testData[indexPath.row].title
-        cell.todoDateLabel.text = self.testData[indexPath.row].regDate
+        cell.todoDateLabel.text = "등록일: \(self.testData[indexPath.row].regDate)"
+        cell.todoDueDateLabel.text = "마감일: \(self.testData[indexPath.row].dueDate)"
         cell.todoCompleteButton.tag = indexPath.row
         
         cell.todoCompleteButton.addTarget(self, action: #selector(checkBoxButtonTapped(sender:)), for: .touchUpInside)
