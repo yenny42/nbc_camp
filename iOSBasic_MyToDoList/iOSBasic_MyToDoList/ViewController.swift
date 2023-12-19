@@ -29,19 +29,21 @@ class ViewController: UIViewController {
     @IBAction func AddTodoContents(_ sender: UIButton) {
         let alert = UIAlertController(title: "Add Todo", message: "추가할 내용을 입력해주세요.", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            let inputTitle = String((alert.textFields?[0].text)!)
-            
-            self.testData.append(Todo(title: inputTitle, isComplete: false, regDate: Date().toString("yy.M.d")))
-            self.TodoListTableView.reloadData()
-        }))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("CANCEL", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"Cancel\" alert occured.")
-        }))
         alert.addTextField(configurationHandler: {
             textField in
             textField.placeholder = "To do Contents"
         })
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .destructive, handler: { _ in
+            let inputTitle = String((alert.textFields?[0].text)!)
+            if let inputTitle = alert.textFields?[0].text {
+                self.testData.append(Todo(title: inputTitle, isComplete: false, regDate: Date().toString("yy.M.d")))
+                
+                self.TodoListTableView.beginUpdates()
+                self.TodoListTableView.insertRows(at: [IndexPath(row: self.testData.count-1, section: 0)], with: .automatic)
+                self.TodoListTableView.endUpdates()
+            }
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("CANCEL", comment: "Default action"), style: .default))
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -53,20 +55,19 @@ extension ViewController: UITableViewDataSource {
     
     // MARK: Cell 생성
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //    numberOfRowsInSection은 TableView에 표시할 행의 수를 return
         return testData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //    cellForRowAt은 Cell에 표시하기 위한 Cell을 만들어서 return
         let cell = TodoListTableView.dequeueReusableCell(withIdentifier: "TodoListCell", for: indexPath) as! ToDoListTableViewCell
+        
         cell.selectionStyle = .none
         cell.todoTitleLabel.text = self.testData[indexPath.row].title
-        
         cell.todoDateLabel.text = self.testData[indexPath.row].regDate
-        
         cell.todoCompleteButton.tag = indexPath.row
+        
         cell.todoCompleteButton.addTarget(self, action: #selector(checkBoxButtonTapped(sender:)), for: .touchUpInside)
+        
         return cell
     }
     
@@ -78,7 +79,10 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             self.testData.remove(at: indexPath.row)
+            
+            TodoListTableView.beginUpdates()
             TodoListTableView.deleteRows(at: [indexPath], with: .fade)
+            TodoListTableView.endUpdates()
         }
     }
     
@@ -98,7 +102,6 @@ extension ViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // table cell의 height
         return 70.0
     }
 }
