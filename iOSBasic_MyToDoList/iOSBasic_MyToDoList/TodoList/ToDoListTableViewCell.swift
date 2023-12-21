@@ -19,10 +19,12 @@ class ToDoListTableViewCell: UITableViewCell {
                 todoCompleteButton.tintColor = UIColor.systemRed
                 todoTitleLabel.textColor = UIColor.lightGray
                 todoDateLabel.textColor = UIColor.lightGray
+                todoDueDateLabel.textColor = UIColor.lightGray
             } else {
                 todoCompleteButton.tintColor = UIColor.lightGray
                 todoTitleLabel.textColor = UIColor.black
                 todoDateLabel.textColor = UIColor.black
+                todoDueDateLabel.textColor = UIColor.black
             }
         }
     }

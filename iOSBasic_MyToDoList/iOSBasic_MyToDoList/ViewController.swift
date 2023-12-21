@@ -4,8 +4,7 @@
 //
 //  Created by t2023-m0035 on 12/13/23.
 //
-
-// TODO: 마감일이 지난 것, 마감일이 지났는데 완료하지 못한 것은 어떻게 표현할지 고민
+// TODO: 휴지통, 글 수정
 
 import UIKit
 
@@ -16,11 +15,13 @@ struct Todo {
     var dueDate: String
 }
 
-class ViewController: UIViewController {
-    
+class ViewController: UIViewController, TodoAddDelegate {
     @IBOutlet weak var TodoListTableView: UITableView!
     
-    var testData: [Todo] = [Todo(title: "test title", isComplete: false, regDate: "23.12.17", dueDate: "23.12.18")]
+    let tempDeleteVC = TempDeleteVC()
+    
+    var testData: [Todo] = [Todo(title: "test title", isComplete: false, regDate: "23.12.17", dueDate: "23.12.18"),
+                            Todo(title: "test title", isComplete: false, regDate: "23.12.17", dueDate: "23.12.18")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,48 +30,34 @@ class ViewController: UIViewController {
         TodoListTableView.delegate = self
     }
     
-    @IBAction func AddTodoContents(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Add Todo", message: "추가할 내용을 입력해주세요.", preferredStyle: .alert)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addTodoVC = segue.destination as? AddTodoVC {
+            addTodoVC.delegate = self
+        }
+    }
+    
+    func sendData(data: Todo) {
+        testData.append(data)
         
-        alert.addTextField(configurationHandler: {
-            textField in
-            textField.placeholder = "To do Contents"
-        })
-        
-        // TODO: alert 내부 datepicker 모양, 위치 바꿔보기
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .compact
-        datePicker.locale = Locale(identifier: "ko_KR")
-        
-        alert.view.addSubview(datePicker)
-        
+        TodoListTableView.beginUpdates()
+        TodoListTableView.insertRows(at: [IndexPath(row: self.testData.count - 1, section: 0)], with: .automatic)
+        TodoListTableView.endUpdates()
+    }
+    
+    @IBAction func TappedAllClearButton(_ sender: Any) {
+        allClearButtonAlert()
+    }
+    
+    func allClearButtonAlert() {
+        let alert = UIAlertController(title: "전부 삭제하시겠습니까?", message: "복구가 불가능합니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .destructive, handler: { _ in
-            let inputTitle = String((alert.textFields?[0].text)!)
-            let inputDueDate = datePicker.date.toString("yy.M.d")
-            
-            if let inputTitle = alert.textFields?[0].text {
-                let selectedDate = datePicker.date
-                if selectedDate >= Calendar.current.startOfDay(for: Date()) {
-                    self.testData.append(Todo(title: inputTitle, isComplete: false, regDate: Date().toString("yy.M.d"), dueDate: inputDueDate))
-                    
-                    self.TodoListTableView.beginUpdates()
-                    self.TodoListTableView.insertRows(at: [IndexPath(row: self.testData.count-1, section: 0)], with: .automatic)
-                    self.TodoListTableView.endUpdates()
-                } else {
-                    self.showDateAlert()
-                }
-            }
+            self.testData.removeAll()
+            self.TodoListTableView.reloadData()
         }))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("CANCEL", comment: "Default action"), style: .default))
-        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("취소", comment: ""), style: .default))
         self.present(alert, animated: true, completion: nil)
     }
-    func showDateAlert() {
-        let alert = UIAlertController(title: "날짜 선택 오류", message: "오늘 이후의 날짜만 선택 가능합니다.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
+    
 }
 
 // MARK: UITableViewDataSource
@@ -100,6 +87,7 @@ extension ViewController: UITableViewDataSource {
         return true
     }
     
+    // MARK: Click delete of Swipe delete
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             self.testData.remove(at: indexPath.row)
@@ -118,7 +106,7 @@ extension ViewController: UITableViewDataSource {
         
         let index = sender.tag
         
-        !testData[index].isComplete ? (testData[index].isComplete = true) : (testData[index].isComplete = false)
+        testData[index].isComplete.toggle()
         cell.isComplete = testData[index].isComplete
     }
 }

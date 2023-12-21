@@ -10,8 +10,7 @@ import Foundation
 extension Date {
     // MARK: - 기본 & 짧은 날짜 표시
     public var basic: String {
-        return toString("yy.M.d")
-//        return toString("yyyy년 M월 d일")
+        return toString("yyyy년 M월 d일")
     }
     // MARK: - Date -> String
       public func toString(_ dateFormat: String) -> String {
