@@ -8,13 +8,6 @@
 
 import UIKit
 
-struct Todo {
-    var title: String
-    var isComplete: Bool
-    var regDate: String
-    var dueDate: String
-}
-
 class ViewController: UIViewController, TodoAddDelegate {
     @IBOutlet weak var TodoListTableView: UITableView!
     
