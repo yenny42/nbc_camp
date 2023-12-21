@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol TodoAddDelegate: AnyObject {
-    func sendData(data: Todo)
-}
-
 class AddTodoVC: UIViewController {
     @IBOutlet weak var todoTextField: UITextField!
     @IBOutlet weak var warningTitleLabel: UILabel!

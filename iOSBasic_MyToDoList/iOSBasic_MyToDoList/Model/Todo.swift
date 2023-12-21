@@ -13,3 +13,7 @@ struct Todo {
     var regDate: String
     var dueDate: String
 }
+
+protocol TodoAddDelegate: AnyObject {
+    func sendData(data: Todo)
+}
