@@ -18,8 +18,6 @@ struct Todo {
 class ViewController: UIViewController, TodoAddDelegate {
     @IBOutlet weak var TodoListTableView: UITableView!
     
-    let tempDeleteVC = TempDeleteVC()
-    
     var testData: [Todo] = [Todo(title: "test title", isComplete: false, regDate: "23.12.17", dueDate: "23.12.18"),
                             Todo(title: "test title", isComplete: false, regDate: "23.12.17", dueDate: "23.12.18")]
     
