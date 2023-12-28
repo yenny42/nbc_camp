@@ -6,6 +6,11 @@
 =============
 <br/>
 
+### 💡 5주차
+- <a href="https://github.com/NBCAMP-kiosk-team3/iOS" target="_blank">iOS 앱개발 입문 팀과제 - 키오스크 UI</a>
+
+<br/>
+
 ### 💡 4주차
 - <a href="https://github.com/yenny42/nbc_camp/tree/main/iOSBasic_MyToDoList" target="_blank">iOS 앱개발 입문 과제 - To do list</a>
 
