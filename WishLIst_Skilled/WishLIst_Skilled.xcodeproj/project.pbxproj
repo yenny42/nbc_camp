@@ -16,6 +16,7 @@
 		1B5241BC2B46C10200342185 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241BB2B46C10200342185 /* ProductView.swift */; };
 		1B5241BE2B46C84D00342185 /* WishListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241BD2B46C84D00342185 /* WishListVC.swift */; };
 		1B5241C02B46D02200342185 /* ProductButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241BF2B46D02200342185 /* ProductButtonView.swift */; };
+		1B5241C32B46DE9800342185 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241C22B46DE9800342185 /* Button.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		1B5241BB2B46C10200342185 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
 		1B5241BD2B46C84D00342185 /* WishListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListVC.swift; sourceTree = "<group>"; };
 		1B5241BF2B46D02200342185 /* ProductButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductButtonView.swift; sourceTree = "<group>"; };
+		1B5241C22B46DE9800342185 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 		1B5241B62B46A1AE00342185 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				1B5241C12B46DE8A00342185 /* Components */,
 				1B5241B82B46A1E400342185 /* Supports */,
 			);
 			path = Global;
@@ -114,6 +117,14 @@
 				1B5241BF2B46D02200342185 /* ProductButtonView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1B5241C12B46DE8A00342185 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1B5241C22B46DE9800342185 /* Button.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B5241C32B46DE9800342185 /* Button.swift in Sources */,
 				1B5241BE2B46C84D00342185 /* WishListVC.swift in Sources */,
 				1B5241BC2B46C10200342185 /* ProductView.swift in Sources */,
 				1B5241A72B46A18C00342185 /* ProductVC.swift in Sources */,

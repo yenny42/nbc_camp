@@ -33,7 +33,7 @@ class ProductVC: UIViewController {
 
 extension ProductVC {
     private func setUI() {
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .white
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         productView.translatesAutoresizingMaskIntoConstraints = false
@@ -47,11 +47,11 @@ extension ProductVC {
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
         ])
         
-        productView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.6).isActive = true
-        productButtonView.heightAnchor.constraint(equalToConstant: 0.4).isActive = true 
+        productView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.75).isActive = true
+        productButtonView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.25).isActive = true
     }
     
     private func createStackView() -> UIStackView {
