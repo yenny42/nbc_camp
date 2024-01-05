@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B1114432B47F2F800ECD277 /* WishListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1114422B47F2F800ECD277 /* WishListTableViewCell.swift */; };
 		1B5241A32B46A18C00342185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241A22B46A18C00342185 /* AppDelegate.swift */; };
 		1B5241A52B46A18C00342185 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241A42B46A18C00342185 /* SceneDelegate.swift */; };
 		1B5241A72B46A18C00342185 /* ProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241A62B46A18C00342185 /* ProductVC.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B1114422B47F2F800ECD277 /* WishListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListTableViewCell.swift; sourceTree = "<group>"; };
 		1B52419F2B46A18C00342185 /* WishLIst_Skilled.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WishLIst_Skilled.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B5241A22B46A18C00342185 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B5241A42B46A18C00342185 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				1B5241BB2B46C10200342185 /* ProductView.swift */,
 				1B5241BF2B46D02200342185 /* ProductButtonView.swift */,
+				1B1114422B47F2F800ECD277 /* WishListTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				1B5241BC2B46C10200342185 /* ProductView.swift in Sources */,
 				1B5241CD2B47B15700342185 /* ProductRequest.swift in Sources */,
 				1B5241A72B46A18C00342185 /* ProductVC.swift in Sources */,
+				1B1114432B47F2F800ECD277 /* WishListTableViewCell.swift in Sources */,
 				1B5241A32B46A18C00342185 /* AppDelegate.swift in Sources */,
 				1B5241C02B46D02200342185 /* ProductButtonView.swift in Sources */,
 				1B5241A52B46A18C00342185 /* SceneDelegate.swift in Sources */,
