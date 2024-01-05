@@ -17,7 +17,9 @@
 		1B5241BE2B46C84D00342185 /* WishListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241BD2B46C84D00342185 /* WishListVC.swift */; };
 		1B5241C02B46D02200342185 /* ProductButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241BF2B46D02200342185 /* ProductButtonView.swift */; };
 		1B5241C32B46DE9800342185 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241C22B46DE9800342185 /* Button.swift */; };
-		1B5241CA2B479F1600342185 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241C92B479F1600342185 /* Product.swift */; };
+		1B5241CA2B479F1600342185 /* ProductViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241C92B479F1600342185 /* ProductViewDelegate.swift */; };
+		1B5241CD2B47B15700342185 /* ProductRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241CC2B47B15700342185 /* ProductRequest.swift */; };
+		1B5241CF2B47CEDB00342185 /* ProductRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241CE2B47CEDB00342185 /* ProductRequestModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +35,9 @@
 		1B5241BD2B46C84D00342185 /* WishListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListVC.swift; sourceTree = "<group>"; };
 		1B5241BF2B46D02200342185 /* ProductButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductButtonView.swift; sourceTree = "<group>"; };
 		1B5241C22B46DE9800342185 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
-		1B5241C92B479F1600342185 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		1B5241C92B479F1600342185 /* ProductViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewDelegate.swift; sourceTree = "<group>"; };
+		1B5241CC2B47B15700342185 /* ProductRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRequest.swift; sourceTree = "<group>"; };
+		1B5241CE2B47CEDB00342185 /* ProductRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRequestModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,9 +90,10 @@
 			isa = PBXGroup;
 			children = (
 				1B5241A82B46A18C00342185 /* Main.storyboard */,
-				1B5241C82B479EEC00342185 /* Model */,
-				1B5241BA2B46A25200342185 /* View */,
 				1B5241B92B46A24500342185 /* ViewController */,
+				1B5241BA2B46A25200342185 /* View */,
+				1B5241C82B479EEC00342185 /* Model */,
+				1B5241CB2B47B0F800342185 /* Networking */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -133,9 +138,18 @@
 		1B5241C82B479EEC00342185 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1B5241C92B479F1600342185 /* Product.swift */,
+				1B5241C92B479F1600342185 /* ProductViewDelegate.swift */,
+				1B5241CE2B47CEDB00342185 /* ProductRequestModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1B5241CB2B47B0F800342185 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				1B5241CC2B47B15700342185 /* ProductRequest.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,9 +224,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B5241C32B46DE9800342185 /* Button.swift in Sources */,
-				1B5241CA2B479F1600342185 /* Product.swift in Sources */,
+				1B5241CA2B479F1600342185 /* ProductViewDelegate.swift in Sources */,
 				1B5241BE2B46C84D00342185 /* WishListVC.swift in Sources */,
+				1B5241CF2B47CEDB00342185 /* ProductRequestModel.swift in Sources */,
 				1B5241BC2B46C10200342185 /* ProductView.swift in Sources */,
+				1B5241CD2B47B15700342185 /* ProductRequest.swift in Sources */,
 				1B5241A72B46A18C00342185 /* ProductVC.swift in Sources */,
 				1B5241A32B46A18C00342185 /* AppDelegate.swift in Sources */,
 				1B5241C02B46D02200342185 /* ProductButtonView.swift in Sources */,

@@ -14,7 +14,6 @@ class ProductView: UIView {
     
     private let productImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .black
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -22,7 +21,6 @@ class ProductView: UIView {
     
     private let productBrand: UILabel = {
         let label = UILabel()
-        label.text = "brand"
         label.font = UIFont.boldSystemFont(ofSize: 0).withSize(14.0)
         label.textColor = .systemGray
         
@@ -31,7 +29,6 @@ class ProductView: UIView {
     
     private let productName: UILabel = {
         let label = UILabel()
-        label.text = "name"
         label.font = UIFont.boldSystemFont(ofSize: 20).withSize(24.0)
         
         return label
@@ -39,7 +36,6 @@ class ProductView: UIView {
     
     private let productPrice: UILabel = {
         let label = UILabel()
-        label.text = "price"
         label.font = UIFont.boldSystemFont(ofSize: 0).withSize(24.0)
         label.textAlignment = .right
         
@@ -48,7 +44,6 @@ class ProductView: UIView {
     
     private let productDiscription: UILabel = {
         let label = UILabel()
-        label.text = "Discription Discription Discription Discription Discription Discription Discription Discription Discription "
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         
@@ -59,13 +54,66 @@ class ProductView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        // 초기화 코드
+        SkeletonUI()
         setUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+// MARK: - Network Data
+
+extension ProductView {
+    func SkeletonUI() {
+        productBrand.text = "-"
+        productName.text = "-"
+        productPrice.text = "$ 0"
+        productDiscription.text = "-"
+        productImage.backgroundColor = .systemGray6
+    }
+    
+    func hideSkeletonView() {
+        productBrand.text = ""
+        productName.text = ""
+        productPrice.text = ""
+        productDiscription.text = ""
+    }
+    
+    func updateUIWithProduct(_ product: Product) {
+        productBrand.text = product.brand
+        productName.text = product.title
+        productPrice.text = "$ \(product.price)"
+        productDiscription.text = product.description
+
+        // if let 옵셔널 바인딩
+        // - 썸네일 url이 유효한지(nil인지 아닌지) 체크
+        if let thumbnailURL = URL(string: product.thumbnail) {
+            // 앱 전역에서 공유되는 URLSession을 사용하여 비동기 네트워크 작업
+            let task = URLSession.shared.dataTask(with: thumbnailURL) { (data, _, error) in
+                if let error = error {
+                    // 썸네일 url이 유효하지 않으면 출력되는 에러
+                    
+                    // localizedDescription
+                    // - 해당 에러에 대한 사용자 친화적인 설명 문자열을 반환
+                    print("Error loading thumbnail image: \(error.localizedDescription)")
+                    return
+                }
+                else if let imageData = data, let image = UIImage(data: imageData) {
+                    // 메인 스레드에서 UI 업데이트
+                    DispatchQueue.main.async {
+                        // 이미지가 조금 더 늦게 불러와져서 (api 요청해서 받아온 이미지 url로 다시 요청을 보내니까 아무래도 더 늦겠지..)
+                        // 이미지 통신이 끝나면 스켈레톤을 hide
+                        self.productImage.backgroundColor = .clear
+                        self.productImage.image = image
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
+
 }
 
 // MARK: - Extensions
@@ -103,7 +151,7 @@ extension ProductView {
         stackView.distribution = .fill
         stackView.spacing = 15
         
-        [productBrand, createProductName()].forEach {
+        [createProductName(), productName].forEach {
             stackView.addArrangedSubview($0)
         }
         
@@ -114,10 +162,10 @@ extension ProductView {
         let stackView = UIStackView()
         
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalCentering
         stackView.spacing = 0
         
-        [productName, productPrice].forEach {
+        [productBrand, productPrice].forEach {
             stackView.addArrangedSubview($0)
         }
         
