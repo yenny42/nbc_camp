@@ -17,6 +17,7 @@
 		1B5241BE2B46C84D00342185 /* WishListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241BD2B46C84D00342185 /* WishListVC.swift */; };
 		1B5241C02B46D02200342185 /* ProductButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241BF2B46D02200342185 /* ProductButtonView.swift */; };
 		1B5241C32B46DE9800342185 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241C22B46DE9800342185 /* Button.swift */; };
+		1B5241CA2B479F1600342185 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241C92B479F1600342185 /* Product.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		1B5241BD2B46C84D00342185 /* WishListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListVC.swift; sourceTree = "<group>"; };
 		1B5241BF2B46D02200342185 /* ProductButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductButtonView.swift; sourceTree = "<group>"; };
 		1B5241C22B46DE9800342185 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		1B5241C92B479F1600342185 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				1B5241A82B46A18C00342185 /* Main.storyboard */,
+				1B5241C82B479EEC00342185 /* Model */,
 				1B5241BA2B46A25200342185 /* View */,
 				1B5241B92B46A24500342185 /* ViewController */,
 			);
@@ -125,6 +128,14 @@
 				1B5241C22B46DE9800342185 /* Button.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		1B5241C82B479EEC00342185 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B5241C92B479F1600342185 /* Product.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B5241C32B46DE9800342185 /* Button.swift in Sources */,
+				1B5241CA2B479F1600342185 /* Product.swift in Sources */,
 				1B5241BE2B46C84D00342185 /* WishListVC.swift in Sources */,
 				1B5241BC2B46C10200342185 /* ProductView.swift in Sources */,
 				1B5241A72B46A18C00342185 /* ProductVC.swift in Sources */,
@@ -363,7 +375,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -391,7 +403,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

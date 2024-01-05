@@ -12,7 +12,7 @@ class ProductView: UIView {
     // MARK: - Properties
     // MARK: - UI Properties
     
-    let productImage: UIImageView = {
+    private let productImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .black
         imageView.contentMode = .scaleAspectFit
@@ -20,7 +20,7 @@ class ProductView: UIView {
         return imageView
     }()
     
-    let productBrand: UILabel = {
+    private let productBrand: UILabel = {
         let label = UILabel()
         label.text = "brand"
         label.font = UIFont.boldSystemFont(ofSize: 0).withSize(14.0)
@@ -29,7 +29,7 @@ class ProductView: UIView {
         return label
     }()
     
-    let productName: UILabel = {
+    private let productName: UILabel = {
         let label = UILabel()
         label.text = "name"
         label.font = UIFont.boldSystemFont(ofSize: 20).withSize(24.0)
@@ -37,7 +37,7 @@ class ProductView: UIView {
         return label
     }()
     
-    let productPrice: UILabel = {
+    private let productPrice: UILabel = {
         let label = UILabel()
         label.text = "price"
         label.font = UIFont.boldSystemFont(ofSize: 0).withSize(24.0)
@@ -46,7 +46,7 @@ class ProductView: UIView {
         return label
     }()
     
-    let productDiscription: UILabel = {
+    private let productDiscription: UILabel = {
         let label = UILabel()
         label.text = "Discription Discription Discription Discription Discription Discription Discription Discription Discription "
         label.numberOfLines = 0

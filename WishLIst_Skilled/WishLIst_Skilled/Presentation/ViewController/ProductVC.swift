@@ -15,18 +15,26 @@ class ProductVC: UIViewController {
     
     private lazy var stackView: UIStackView = { createStackView() }()
     
-    let productView = ProductView()
-    let productButtonView = ProductButtonView()
+    private let wishListVC = WishListVC()
+    private let productView = ProductView()
+    private let productButtonView = ProductButtonView()
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setDelegate()
         setUI()
         setLayout()
     }
     
+}
+
+extension ProductVC: ProductViewDelegate {
+    func didTapShowWishList() {
+        self.present(wishListVC, animated: true)
+    }
 }
 
 // MARK: - Extensions
@@ -52,6 +60,10 @@ extension ProductVC {
         
         productView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.75).isActive = true
         productButtonView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.25).isActive = true
+    }
+    
+    private func setDelegate() {
+        productButtonView.delegate = self
     }
     
     private func createStackView() -> UIStackView {
