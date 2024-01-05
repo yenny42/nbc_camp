@@ -8,5 +8,7 @@
 import Foundation
 
 protocol ProductViewDelegate: AnyObject {
+    func didTapAddWishListButton()
+    func didTapShowAnotherProduct()
     func didTapShowWishList()
 }

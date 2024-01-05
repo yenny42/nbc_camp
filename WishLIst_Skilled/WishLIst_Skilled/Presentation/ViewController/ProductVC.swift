@@ -11,8 +11,6 @@ class ProductVC: UIViewController {
     
     // MARK: - Properties
     
-    let productID: Int = Int.random(in: 1 ... 100)
-    
     // MARK: - UI Properties
     
     private lazy var stackView: UIStackView = { createStackView() }()
@@ -26,14 +24,16 @@ class ProductVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getAPIRequestData()
+        fetchInitialData()
         
         setDelegate()
         setUI()
         setLayout()
     }
     
-    func getAPIRequestData() {
+    // MARK: - Fetch Data
+    
+    func fetchInitialData() {
         // 뒤에 있는 클로저 = completion
         // - 비동기 작업이 끝난 후에 호출되는 완료 핸들러
         
@@ -48,7 +48,7 @@ class ProductVC: UIViewController {
         
         // [weak self]
         // - 해당 클로저가 self를 강한 참조로 캡처하지 않도록 하기 위한 표현
-        ProductRequests.decodeProduct(productID: productID) { result in
+        ProductRequests.decodeProduct { result in
             
             // 네트워크 요청에서 받은 결과를 메인 스레드에서 처리하기 위해 사용
             // - 네트워크 요청은 백그라운드 스레드에서 이루어짐
@@ -81,6 +81,14 @@ class ProductVC: UIViewController {
 // MARK: - ProductView Delegate Method
 
 extension ProductVC: ProductViewDelegate {
+    func didTapAddWishListButton() {
+        print("add core data")
+    }
+    
+    func didTapShowAnotherProduct() {
+        fetchInitialData()
+    }
+    
     func didTapShowWishList() {
         self.present(wishListVC, animated: true)
     }

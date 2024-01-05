@@ -33,6 +33,15 @@ class ProductButtonView: UIView {
     
     // MARK: - Button Action Method
     
+    @objc private func tapAddWishListButton() {
+        print("위시리스트 담기")
+        delegate?.didTapAddWishListButton()
+    }
+    
+    @objc private func tapShowAnotherProduct() {
+        delegate?.didTapShowAnotherProduct()
+    }
+    
     @objc private func tapShowWishList() {
         delegate?.didTapShowWishList()
     }
@@ -42,6 +51,8 @@ class ProductButtonView: UIView {
 
 extension ProductButtonView {
     private func setAddTarget() {
+        addWishListButton.addTarget(self, action: #selector(tapAddWishListButton), for: .touchUpInside)
+        showAnotherProduct.addTarget(self, action: #selector(tapShowAnotherProduct), for: .touchUpInside)
         showWishList.addTarget(self, action: #selector(tapShowWishList), for: .touchUpInside)
     }
     

@@ -30,6 +30,8 @@ class ProductView: UIView {
     private let productName: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20).withSize(24.0)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         
         return label
     }()
@@ -54,7 +56,6 @@ class ProductView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        SkeletonUI()
         setUI()
     }
     
@@ -120,6 +121,8 @@ extension ProductView {
 
 extension ProductView {
     private func setUI() {
+        SkeletonUI()
+        
         backgroundColor = .white
         
         let verticalStackView = UIStackView()

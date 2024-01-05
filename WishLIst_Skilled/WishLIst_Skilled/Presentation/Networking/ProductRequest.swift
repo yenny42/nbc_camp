@@ -13,7 +13,9 @@ class ProductRequests {
     // = 클래스의 인스턴스를 생성하지 않고도 호출할 수 있는 메서드나 프로퍼티를 정의
     // - 클래스 자체에서 직접 메서드를 호출할 수 있음
     // - 특정 인스턴스에 의존하지 않고 타입 자체에 속한다
-    static func decodeProduct(productID: Int, completion: @escaping (Result<Product, Error>) -> Void) {
+    static func decodeProduct(completion: @escaping (Result<Product, Error>) -> Void) {
+        
+        let productID: Int = Int.random(in: 1 ... 100)
         
         // if let
         // - 옵셔널 바인딩
