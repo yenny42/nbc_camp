@@ -36,7 +36,14 @@
 
 ## 디자인
 <img src="https://github.com/yenny42/nbc_camp/assets/107637741/114d34a3-80bc-4878-8e9b-8216a5f59d68" height="500"/>
-<!-- ![Simulator Screenshot - iPhone 15 Pro - 2024-01-05 at 19 47 47](https://github.com/yenny42/nbc_camp/assets/107637741/114d34a3-80bc-4878-8e9b-8216a5f59d68) -->
+<img src="https://github.com/yenny42/nbc_camp/assets/107637741/74fc4ab6-7da7-439e-bce6-70d5555ba40f" height="500"/>
+<img src="https://github.com/yenny42/nbc_camp/assets/107637741/f8f1b4b8-4445-4708-9c48-fa1bc23d60fc" height="500"/>
+<img src="https://github.com/yenny42/nbc_camp/assets/107637741/2c70d83f-82a7-4637-a5f7-2551af654d8f" height="500"/>
+<!-- ![Simulator Screenshot - iPhone 15 Pro - 2024-01-05 at 19 47 47](https://github.com/yenny42/nbc_camp/assets/107637741/114d34a3-80bc-4878-8e9b-8216a5f59d68) 
+![Simulator Screenshot - iPhone 15 Pro - 2024-01-06 at 17 05 53](https://github.com/yenny42/nbc_camp/assets/107637741/74fc4ab6-7da7-439e-bce6-70d5555ba40f)
+![Simulator Screenshot - iPhone 15 Pro - 2024-01-06 at 17 05 58](https://github.com/yenny42/nbc_camp/assets/107637741/f8f1b4b8-4445-4708-9c48-fa1bc23d60fc)
+![Simulator Screenshot - iPhone 15 Pro - 2024-01-06 at 17 06 40](https://github.com/yenny42/nbc_camp/assets/107637741/2c70d83f-82a7-4637-a5f7-2551af654d8f)
+-->
 
 <br/><br/>
 
