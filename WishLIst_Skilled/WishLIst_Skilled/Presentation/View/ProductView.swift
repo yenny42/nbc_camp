@@ -22,7 +22,6 @@ class ProductView: UIView {
     private let productBrand: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 0).withSize(14.0)
-        label.textColor = .systemGray
         
         return label
     }()
@@ -68,18 +67,42 @@ class ProductView: UIView {
 
 extension ProductView {
     func SkeletonUI() {
-        productBrand.text = "-"
-        productName.text = "-"
-        productPrice.text = "$ 0"
-        productDiscription.text = "-"
+        productBrand.backgroundColor = .systemGray5
+        productBrand.text = "productBrand"
+        productBrand.textColor = .clear
+        
+        productName.backgroundColor = .systemGray5
+        productName.text = "productName"
+        productName.textColor = .clear
+        
+        productPrice.backgroundColor = .systemGray5
+        productPrice.text = "1000"
+        productPrice.textColor = .clear
+        
+        
+        productDiscription.backgroundColor = .systemGray5
+        productDiscription.text = "productDiscription productDiscription productDiscription productDiscription productDiscription"
+        productDiscription.textColor = .clear
+        
         productImage.backgroundColor = .systemGray6
     }
     
     func hideSkeletonView() {
-        productBrand.text = ""
-        productName.text = ""
-        productPrice.text = ""
-        productDiscription.text = ""
+        productBrand.backgroundColor = .clear
+        productBrand.text = "productBrand"
+        productBrand.textColor = .systemGray
+        
+        productName.backgroundColor = .clear
+        productName.text = "productName"
+        productName.textColor = .black
+        
+        productPrice.backgroundColor = .clear
+        productPrice.text = "1000"
+        productPrice.textColor = .black
+        
+        productDiscription.backgroundColor = .clear
+        productDiscription.text = "productDiscription productDiscription productDiscription productDiscription productDiscription"
+        productDiscription.textColor = .black
     }
     
     func updateUIWithProduct(_ product: Product) {
