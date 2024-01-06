@@ -30,7 +30,6 @@ class WishListVC: UIViewController {
 
 extension WishListVC: WishListViewDelegate {
     func getWishListData(_ data: [WishList]) {
-        print(data)
         wishList = data
     }
 }
