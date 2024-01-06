@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import CoreData
 
 class ProductVC: UIViewController {
     
+    weak var delegate: WishListViewDelegate?
+    
     // MARK: - Properties
+    
+    var productData: Product?
+    var wishListData: [WishList]? = []
     
     // MARK: - UI Properties
     
@@ -25,7 +31,6 @@ class ProductVC: UIViewController {
         super.viewDidLoad()
         
         fetchInitialData()
-        
         setDelegate()
         setUI()
         setLayout()
@@ -67,6 +72,7 @@ class ProductVC: UIViewController {
                     case .success(let product):
                         // 메인 스레드에서 UI 업데이트 작업 (2)
                     self.productView.updateUIWithProduct(product)
+                    self.productData = product
                     
                     // 비동기 작업 실패
                     // = 디코딩 실패한 경우 출력되는 에러
@@ -78,11 +84,17 @@ class ProductVC: UIViewController {
     }
 }
 
-// MARK: - ProductView Delegate Method
+//MARK: - Delegate
 
 extension ProductVC: ProductViewDelegate {
+    
+    // MARK: ProductView Delegate Method
+    
     func didTapAddWishListButton() {
-        print("add core data")
+        actionAlert(in: self, title: "위시리스트 담기", message: "해당 상품을 추가하시겠습니까?") {
+            self.saveData(self.productData!)
+            actionAlert(in: self, title: "추가되었습니다.", message: "", cancelButton: false)
+        }
     }
     
     func didTapShowAnotherProduct() {
@@ -90,7 +102,57 @@ extension ProductVC: ProductViewDelegate {
     }
     
     func didTapShowWishList() {
+        readData()
+        delegate?.getWishListData(self.wishListData!)
         self.present(wishListVC, animated: true)
+    }
+
+    // MARK: Core Data Method
+    
+    var persistentContainer: NSPersistentContainer? {
+        (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+    }
+    
+    // Data Create
+    func saveData(_ wish: Product) {
+        guard let context = self.persistentContainer?.viewContext else { return }
+        
+        let newWish = WishList(context: context)
+        
+        newWish.id = UUID()
+        newWish.productId = Int64(wish.id)
+        newWish.name = wish.title
+        newWish.desc = wish.description
+        newWish.price = Int64(wish.price)
+        newWish.brand = wish.brand
+        newWish.thumbnail = wish.thumbnail
+        
+        try? context.save()
+    }
+    
+    // Data Read
+    func readData() {
+        guard let context = self.persistentContainer?.viewContext else { return }
+        
+        let request = WishList.fetchRequest()
+        let wishList = try? context.fetch(request)
+        
+        self.wishListData = wishList
+    }
+    
+    // Data All Delete
+    func deleteAllData() {
+        guard let context = self.persistentContainer?.viewContext else { return }
+
+        let request = WishList.fetchRequest()
+
+        guard let allWishList = try? context.fetch(request) else { return }
+
+        for wish in allWishList {
+            context.delete(wish)
+        }
+
+        try? context.save()
     }
 }
 
@@ -120,6 +182,7 @@ extension ProductVC {
     }
     
     private func setDelegate() {
+        self.delegate = wishListVC
         productButtonView.delegate = self
     }
     

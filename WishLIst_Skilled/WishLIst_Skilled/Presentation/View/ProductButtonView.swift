@@ -34,7 +34,6 @@ class ProductButtonView: UIView {
     // MARK: - Button Action Method
     
     @objc private func tapAddWishListButton() {
-        print("위시리스트 담기")
         delegate?.didTapAddWishListButton()
     }
     

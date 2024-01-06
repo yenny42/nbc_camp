@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  WishLIst_Skilled
 //
-//  Created by t2023-m0035 on 1/4/24.
+//  Created by t2023-m0035 on 1/6/24.
 //
 
 import UIKit

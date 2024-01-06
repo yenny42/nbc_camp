@@ -7,24 +7,32 @@
 
 import UIKit
 
+protocol WishListViewDelegate: AnyObject {
+    func getWishListData(_ data: [WishList])
+}
+
 class WishListVC: UIViewController {
     
     // MARK: - Properties
     
-    let data = ["항목 1", "항목 2", "항목 3", "항목 4", "항목 5"]
-    
-    // MARK: - UI Properties
-    
+    var wishList: [WishList] = []
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setDelegate()
         setUI()
     }
-    
+}
+
+// MARK: - Delegate
+
+extension WishListVC: WishListViewDelegate {
+    func getWishListData(_ data: [WishList]) {
+        print(data)
+        wishList = data
+    }
 }
 
 // MARK: - Extensions
@@ -40,6 +48,7 @@ extension WishListVC {
         
         wishListTable.backgroundColor = .white
         wishListTable.register(WishListTableViewCell.self, forCellReuseIdentifier: WishListTableViewCell.identifier)
+        wishListTable.rowHeight = 70.0
         
         view.addSubview(wishListTable)
         
@@ -56,13 +65,16 @@ extension WishListVC {
 
 extension WishListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return wishList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WishListTableViewCell.identifier, for: indexPath) as! WishListTableViewCell
+        cell.selectionStyle = .none
         
-        cell.productName.text = data[indexPath.row]
+        cell.productBrand.text = wishList[indexPath.row].brand
+        cell.productName.text = wishList[indexPath.row].name
+        cell.productPrice.text = "$ \(wishList[indexPath.row].price)"
         
         return cell
     }

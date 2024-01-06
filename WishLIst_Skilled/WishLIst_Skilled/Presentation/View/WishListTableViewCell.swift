@@ -10,11 +10,21 @@ import UIKit
 class WishListTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-    // MARK: - UI Properties
     
     static let identifier = "WishListCellIdentifier"
     
+    // MARK: - UI Properties
+    
     let productName = UILabel()
+    let productBrand: UILabel = {
+        let label = UILabel()
+        
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .systemGray
+        
+        return label
+    }()
+    let productPrice = UILabel()
     
     // MARK: - Life Cycle
     
@@ -44,12 +54,29 @@ class WishListTableViewCell: UITableViewCell {
 
 extension WishListTableViewCell {
     private func setUI() {
-        contentView.addSubview(productName)
+        [productBrand, productName, productPrice].forEach {
+            contentView.addSubview($0)
+        }
         
+        // brand
+        productBrand.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            productBrand.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            productBrand.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+        ])
+        
+        // name
         productName.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            productName.topAnchor.constraint(equalTo: contentView.topAnchor),
-            productName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            productName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            productName.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15)
+        ])
+        
+        // price
+        productPrice.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            productPrice.leadingAnchor.constraint(equalTo: productName.trailingAnchor, constant: 20),
+            productPrice.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15)
         ])
     }
 }
