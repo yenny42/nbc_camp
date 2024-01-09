@@ -9,14 +9,20 @@ import UIKit
 
 class TodoListVC: UIViewController {
     
+    // MARK: - UI Properties
+    
     let todoTableView = TodoTableView()
-
+    
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUI()
     }
 }
+
+// MARK: - Extensions
 
 extension TodoListVC {
     private func setUI() {

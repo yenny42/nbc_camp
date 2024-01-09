@@ -16,6 +16,13 @@
 		1B11147A2B4CDF2900ECD277 /* TodoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1114792B4CDF2900ECD277 /* TodoTableView.swift */; };
 		1B11147C2B4CE40C00ECD277 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B11147B2B4CE40C00ECD277 /* HomeVC.swift */; };
 		1B11147E2B4CE75600ECD277 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B11147D2B4CE75600ECD277 /* HomeView.swift */; };
+		1B1114832B4CFCE500ECD277 /* RandomDogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1114822B4CFCE500ECD277 /* RandomDogView.swift */; };
+		1B1114852B4D0A3A00ECD277 /* RandomDogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1114842B4D0A3A00ECD277 /* RandomDogVC.swift */; };
+		1B1114882B4D0B0000ECD277 /* RandomDogRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1114872B4D0B0000ECD277 /* RandomDogRequest.swift */; };
+		1B11148A2B4D0B7F00ECD277 /* RandomDogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1114892B4D0B7F00ECD277 /* RandomDogModel.swift */; };
+		1B11148D2B4D0D1500ECD277 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B11148C2B4D0D1500ECD277 /* ImageLoader.swift */; };
+		1B1114912B4D193200ECD277 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 1B1114902B4D193200ECD277 /* Gifu */; };
+		1B1114952B4D1BE700ECD277 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1B1114942B4D1BE700ECD277 /* loading.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +37,12 @@
 		1B1114792B4CDF2900ECD277 /* TodoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableView.swift; sourceTree = "<group>"; };
 		1B11147B2B4CE40C00ECD277 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		1B11147D2B4CE75600ECD277 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		1B1114822B4CFCE500ECD277 /* RandomDogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDogView.swift; sourceTree = "<group>"; };
+		1B1114842B4D0A3A00ECD277 /* RandomDogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDogVC.swift; sourceTree = "<group>"; };
+		1B1114872B4D0B0000ECD277 /* RandomDogRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDogRequest.swift; sourceTree = "<group>"; };
+		1B1114892B4D0B7F00ECD277 /* RandomDogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDogModel.swift; sourceTree = "<group>"; };
+		1B11148C2B4D0D1500ECD277 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		1B1114942B4D1BE700ECD277 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B1114912B4D193200ECD277 /* Gifu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +86,7 @@
 		1B1114712B4C469500ECD277 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				1B11148B2B4D0D0700ECD277 /* Utilites */,
 				1B1114732B4C46AA00ECD277 /* Supports */,
 			);
 			path = Global;
@@ -81,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				1B1114622B4C455F00ECD277 /* Main.storyboard */,
+				1B1114862B4D0AF100ECD277 /* Networking */,
 				1B1114762B4C46E400ECD277 /* Models */,
 				1B1114752B4C46DD00ECD277 /* Views */,
 				1B1114742B4C46BD00ECD277 /* ViewControllers */,
@@ -93,6 +109,7 @@
 			children = (
 				1B11145C2B4C455F00ECD277 /* AppDelegate.swift */,
 				1B11145E2B4C455F00ECD277 /* SceneDelegate.swift */,
+				1B1114942B4D1BE700ECD277 /* loading.gif */,
 				1B1114652B4C456100ECD277 /* Assets.xcassets */,
 				1B1114672B4C456100ECD277 /* LaunchScreen.storyboard */,
 			);
@@ -102,8 +119,9 @@
 		1B1114742B4C46BD00ECD277 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1B1114602B4C455F00ECD277 /* TodoListVC.swift */,
 				1B11147B2B4CE40C00ECD277 /* HomeVC.swift */,
+				1B1114602B4C455F00ECD277 /* TodoListVC.swift */,
+				1B1114842B4D0A3A00ECD277 /* RandomDogVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -113,6 +131,7 @@
 			children = (
 				1B1114792B4CDF2900ECD277 /* TodoTableView.swift */,
 				1B11147D2B4CE75600ECD277 /* HomeView.swift */,
+				1B1114822B4CFCE500ECD277 /* RandomDogView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -120,8 +139,25 @@
 		1B1114762B4C46E400ECD277 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1B1114892B4D0B7F00ECD277 /* RandomDogModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1B1114862B4D0AF100ECD277 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				1B1114872B4D0B0000ECD277 /* RandomDogRequest.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		1B11148B2B4D0D0700ECD277 /* Utilites */ = {
+			isa = PBXGroup;
+			children = (
+				1B11148C2B4D0D1500ECD277 /* ImageLoader.swift */,
+			);
+			path = Utilites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +177,7 @@
 			);
 			name = Skilled_MyTodoList;
 			packageProductDependencies = (
+				1B1114902B4D193200ECD277 /* Gifu */,
 			);
 			productName = Skilled_MyTodoList;
 			productReference = 1B1114592B4C455F00ECD277 /* Skilled_MyTodoList.app */;
@@ -188,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B1114692B4C456100ECD277 /* LaunchScreen.storyboard in Resources */,
+				1B1114952B4D1BE700ECD277 /* loading.gif in Resources */,
 				1B1114662B4C456100ECD277 /* Assets.xcassets in Resources */,
 				1B1114642B4C455F00ECD277 /* Main.storyboard in Resources */,
 			);
@@ -200,10 +238,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B1114852B4D0A3A00ECD277 /* RandomDogVC.swift in Sources */,
+				1B1114832B4CFCE500ECD277 /* RandomDogView.swift in Sources */,
 				1B1114612B4C455F00ECD277 /* TodoListVC.swift in Sources */,
+				1B1114882B4D0B0000ECD277 /* RandomDogRequest.swift in Sources */,
 				1B11147C2B4CE40C00ECD277 /* HomeVC.swift in Sources */,
+				1B11148D2B4D0D1500ECD277 /* ImageLoader.swift in Sources */,
 				1B11145D2B4C455F00ECD277 /* AppDelegate.swift in Sources */,
 				1B11147E2B4CE75600ECD277 /* HomeView.swift in Sources */,
+				1B11148A2B4D0B7F00ECD277 /* RandomDogModel.swift in Sources */,
 				1B11145F2B4C455F00ECD277 /* SceneDelegate.swift in Sources */,
 				1B11147A2B4CDF2900ECD277 /* TodoTableView.swift in Sources */,
 			);
@@ -439,6 +482,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1B1114902B4D193200ECD277 /* Gifu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B11147F2B4CF1AA00ECD277 /* XCRemoteSwiftPackageReference "Gifu" */;
+			productName = Gifu;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1B1114512B4C455F00ECD277 /* Project object */;
 }

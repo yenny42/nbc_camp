@@ -9,6 +9,8 @@ import UIKit
 
 class TodoTableView: UIView {
     
+    // MARK: - UI Properties
+    
     private let title: UILabel = {
         let label = UILabel()
         label.text = "To Do List"
@@ -19,7 +21,9 @@ class TodoTableView: UIView {
     }()
     
     private let tableView: UITableView = UITableView()
-
+    
+    // MARK: - Life Cycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
      
@@ -33,13 +37,15 @@ class TodoTableView: UIView {
     
 }
 
+// MARK: - Extensions
+
 extension TodoTableView {
     private func setUI() {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
         
-        [title, tableView].forEach { stackView.addArrangedSubview($0) }
+        [tableView].forEach { stackView.addArrangedSubview($0) }
         
         self.addSubview(stackView)
         
@@ -52,10 +58,12 @@ extension TodoTableView {
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
         ])
         
-        title.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.07).isActive = true
-        tableView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.93).isActive = true
+//        title.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.07).isActive = true
+        tableView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 1).isActive = true
     }
 }
+
+// MARK: - UITableView Settings
 
 extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
     private func setDelegate() {

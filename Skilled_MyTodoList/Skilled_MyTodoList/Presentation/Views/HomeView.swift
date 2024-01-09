@@ -9,6 +9,8 @@ import UIKit
 
 class HomeView: UIView {
     
+    // MARK: - UI Properties
+    
     let mainImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -19,7 +21,7 @@ class HomeView: UIView {
     
     let goButton: UIButton = {
         let button = UIButton()
-        button.setTitle("할 일 목록보기", for: .normal)
+        button.setTitle("🖊 할 일 목록보기", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         
         return button
@@ -27,11 +29,21 @@ class HomeView: UIView {
     
     let showButton: UIButton = {
         let button = UIButton()
-        button.setTitle("완료한 일 보기", for: .normal)
-        button.setTitleColor(.systemPink, for: .normal)
+        button.setTitle("✅ 완료한 일 보기", for: .normal)
+        button.setTitleColor(.systemGreen, for: .normal)
         
         return button
     }()
+    
+    let showDogImage: UIButton = {
+        let button = UIButton()
+        button.setTitle("🐾 힘내라멍", for: .normal)
+        button.setTitleColor(.brown, for: .normal)
+        
+        return button
+    }()
+    
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,20 +54,18 @@ class HomeView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
+// MARK: - Extensions
+
 extension HomeView {
-    
     private func setUI() {
-        setMainImage()
-        
         let stackView = UIStackView()
         
         stackView.axis = .vertical
         stackView.distribution = .fill
         
-        [mainImage, goButton, showButton].forEach { stackView.addArrangedSubview($0) }
+        [mainImage, goButton, showButton, showDogImage].forEach { stackView.addArrangedSubview($0) }
         
         self.addSubview(stackView)
         
@@ -63,32 +73,16 @@ extension HomeView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 100),
+            stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 60),
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -60)
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -150)
         ])
         
-        mainImage.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.6).isActive = true
-        goButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.2).isActive = true
-        showButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.2).isActive = true
+        mainImage.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.7).isActive = true
+        goButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
+        showButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
+        showDogImage.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
     }
     
-    private func setMainImage() {
-        if let imageURL = URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg") {
-            let task = URLSession.shared.dataTask(with: imageURL) { (data, _, error) in
-                if let error = error {
-                    print("Error loading thumbnail image: \(error.localizedDescription)")
-                    return
-                }
-                else if let imageData = data, let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        self.mainImage.backgroundColor = .clear
-                        self.mainImage.image = image
-                    }
-                }
-            }
-            task.resume()
-        }
-    }
 }
