@@ -66,21 +66,6 @@ extension RandomDogVC {
     }
     
     private func setDogImage(_ url: String) {
-        if let imageURL = URL(string: url) {
-            let task = URLSession.shared.dataTask(with: imageURL) { (data, _, error) in
-                if let error = error {
-                    print("Error loading image: \(error.localizedDescription)")
-                    return
-                }
-                else if let imageData = data, let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        self.randomDogView.gifImageView.stopAnimatingGIF()
-                        self.randomDogView.dogImage.backgroundColor = .clear
-                        self.randomDogView.dogImage.image = image
-                    }
-                }
-            }
-            task.resume()
-        }
+        ImageLoader.loadImage(from: url, into: self.randomDogView.dogImage)
     }
 }

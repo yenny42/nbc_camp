@@ -61,20 +61,6 @@ extension HomeVC {
     }
     
     private func setMainImage() {
-        if let imageURL = URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg") {
-            let task = URLSession.shared.dataTask(with: imageURL) { (data, _, error) in
-                if let error = error {
-                    print("Error loading image: \(error.localizedDescription)")
-                    return
-                }
-                else if let imageData = data, let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        self.homeView.mainImage.backgroundColor = .clear
-                        self.homeView.mainImage.image = image
-                    }
-                }
-            }
-            task.resume()
-        }
+        ImageLoader.loadImage(from: "https://spartacodingclub.kr/css/images/scc-og.jpg", into: self.homeView.mainImage)
     }
 }
