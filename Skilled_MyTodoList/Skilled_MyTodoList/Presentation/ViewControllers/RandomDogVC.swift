@@ -66,6 +66,8 @@ extension RandomDogVC {
     }
     
     private func setDogImage(_ url: String) {
-        ImageLoader.loadImage(from: url, into: self.randomDogView.dogImage)
+        ImageLoader.loadImage(from: url, into: self.randomDogView.dogImage) {
+            self.randomDogView.gifImageView.stopAnimatingGIF()
+        }
     }
 }

@@ -9,6 +9,11 @@ import UIKit
 
 class TodoListVC: UIViewController {
     
+    // MARK: - Properties
+    
+    var todoCategory: [String] = []
+    var todoList: [TodoData] = []
+    
     // MARK: - UI Properties
     
     let todoTableView = TodoTableView()
@@ -19,6 +24,36 @@ class TodoListVC: UIViewController {
         super.viewDidLoad()
         
         setUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadAllTodoData()
+        
+        self.todoTableView.setTodoDataList(todoList)
+        self.todoTableView.setTodoCategory(todoCategory)
+    }
+    
+    func saveTodoData(_ data: TodoData) {
+        let encoder = JSONEncoder()
+
+        if let encoded = try? encoder.encode(data) {
+            UserDefaults.standard.setValue(encoded, forKey: String(describing: UUID()))
+        }
+    }
+    
+    func loadAllTodoData() {
+        let allUserDefaults = UserDefaults.standard.dictionaryRepresentation()
+
+        for (key, _) in allUserDefaults {
+            if let savedData = UserDefaults.standard.object(forKey: key) as? Data {
+                let decoder = JSONDecoder()
+                if let savedObject = try? decoder.decode(TodoData.self, from: savedData) {
+                    todoCategory.append(savedObject.category)
+                    todoList.append(savedObject)
+                }
+            }
+        }
+
     }
 }
 

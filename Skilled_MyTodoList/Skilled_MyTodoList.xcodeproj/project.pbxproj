@@ -23,6 +23,7 @@
 		1B11148D2B4D0D1500ECD277 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B11148C2B4D0D1500ECD277 /* ImageLoader.swift */; };
 		1B1114912B4D193200ECD277 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 1B1114902B4D193200ECD277 /* Gifu */; };
 		1B1114952B4D1BE700ECD277 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1B1114942B4D1BE700ECD277 /* loading.gif */; };
+		1B1114972B4D279400ECD277 /* TodoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1114962B4D279400ECD277 /* TodoDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		1B1114892B4D0B7F00ECD277 /* RandomDogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDogModel.swift; sourceTree = "<group>"; };
 		1B11148C2B4D0D1500ECD277 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		1B1114942B4D1BE700ECD277 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		1B1114962B4D279400ECD277 /* TodoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +88,7 @@
 		1B1114712B4C469500ECD277 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				1B11148B2B4D0D0700ECD277 /* Utilites */,
+				1B11148B2B4D0D0700ECD277 /* Utilities */,
 				1B1114732B4C46AA00ECD277 /* Supports */,
 			);
 			path = Global;
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				1B1114892B4D0B7F00ECD277 /* RandomDogModel.swift */,
+				1B1114962B4D279400ECD277 /* TodoDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -152,12 +155,12 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		1B11148B2B4D0D0700ECD277 /* Utilites */ = {
+		1B11148B2B4D0D0700ECD277 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				1B11148C2B4D0D1500ECD277 /* ImageLoader.swift */,
 			);
-			path = Utilites;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +248,7 @@
 				1B11147C2B4CE40C00ECD277 /* HomeVC.swift in Sources */,
 				1B11148D2B4D0D1500ECD277 /* ImageLoader.swift in Sources */,
 				1B11145D2B4C455F00ECD277 /* AppDelegate.swift in Sources */,
+				1B1114972B4D279400ECD277 /* TodoDataModel.swift in Sources */,
 				1B11147E2B4CE75600ECD277 /* HomeView.swift in Sources */,
 				1B11148A2B4D0B7F00ECD277 /* RandomDogModel.swift in Sources */,
 				1B11145F2B4C455F00ECD277 /* SceneDelegate.swift in Sources */,

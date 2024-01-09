@@ -9,6 +9,11 @@ import UIKit
 
 class TodoTableView: UIView {
     
+    // MARK: - Properties
+    
+    var dataCategory: [String] = []
+    var dataList: [TodoData] = []
+    
     // MARK: - UI Properties
     
     private let title: UILabel = {
@@ -33,6 +38,15 @@ class TodoTableView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setTodoDataList(_ data: [TodoData]) {
+        dataList = data
+//        print(dataList)
+    }
+    
+    func setTodoCategory(_ data: [String]) {
+        dataCategory = Set(data).sorted()
     }
     
 }
@@ -74,42 +88,50 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return dataCategory.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else if section == 1 {
-            return 2
-        } else {
-            return 3
-        }
+        let category = dataCategory[section]
+        return dataList.filter { $0.category == category }.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.selectionStyle = .none
         
-        if indexPath.section == 0 {
-            cell.textLabel?.text = "test"
-            
-            return cell
-            
-        } else if indexPath.section == 1 {
-            cell.textLabel?.text = "test2"
-            
-            return cell
-            
+        let category = dataCategory[indexPath.section]
+        let categoryItems = dataList.filter { $0.category == category }
+        
+        let todoItem = categoryItems[indexPath.row]
+        
+        if todoItem.isCompleted {
+            cell.textLabel?.text = todoItem.title
+            cell.accessoryType = .checkmark
         } else {
-            cell.textLabel?.text = "test3"
-            
-            return cell
+            cell.textLabel?.text = todoItem.title
+            cell.accessoryType = .disclosureIndicator
         }
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "section \(section+1)"
+        return dataCategory[section]
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editAction = UIContextualAction(style: .normal, title: "수정") { (_, _, completionHandler) in
+            print("수정 버튼 눌림 - section: \(indexPath.section), row: \(indexPath.row)")
+            
+            completionHandler(true)
+        }
+        
+        editAction.backgroundColor = .systemBlue
+        editAction.image = UIImage(systemName: "pencil")
+        
+        let configuration = UISwipeActionsConfiguration(actions: [editAction])
+        return configuration
+    }
+
 }

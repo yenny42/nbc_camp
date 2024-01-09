@@ -20,7 +20,6 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setAddTarget()
         setUI()
     }
 }
@@ -46,9 +45,10 @@ extension HomeVC {
     }
     
     private func setUI() {
+        setAddTarget()
         setMainImage()
-        view.backgroundColor = .white
         
+        view.backgroundColor = .white
         view.addSubview(homeView)
         
         homeView.translatesAutoresizingMaskIntoConstraints = false
