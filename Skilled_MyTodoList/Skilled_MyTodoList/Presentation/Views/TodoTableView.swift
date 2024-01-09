@@ -16,11 +16,11 @@ class TodoTableView: UIView {
     
     // MARK: - UI Properties
     
-    private let title: UILabel = {
+    private let emptyDataTable: UILabel = {
         let label = UILabel()
-        label.text = "To Do List"
-        label.font = UIFont.systemFont(ofSize: 25)
+        label.text = "작성된 Todo가 없습니다."
         label.textAlignment = .center
+        label.textColor = .systemGray
         
         return label
     }()
