@@ -106,7 +106,7 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
         let todoItem = categoryItems[indexPath.row]
         
         if todoItem.isCompleted {
-            cell.textLabel?.text = todoItem.title
+            cell.textLabel?.attributedText = todoItem.title.strikeThrough()
             cell.accessoryType = .checkmark
         } else {
             cell.textLabel?.text = todoItem.title
