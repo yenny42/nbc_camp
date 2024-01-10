@@ -130,7 +130,6 @@ extension CompletedListView: UITableViewDelegate, UITableViewDataSource {
             self.datas[category]?.remove(at: indexPath.row)
             self.dataList = self.datas.flatMap { $0.value }
             
-            print(self.dataList)
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
