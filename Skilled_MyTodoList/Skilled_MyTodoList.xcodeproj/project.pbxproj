@@ -96,6 +96,7 @@
 		1B1114712B4C469500ECD277 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				1BA4DFBC2B4EB32E00872058 /* App */,
 				1BA4DFB32B4D630500872058 /* Extensions */,
 				1B11148B2B4D0D0700ECD277 /* Utilities */,
 				1B1114732B4C46AA00ECD277 /* Supports */,
@@ -118,8 +119,6 @@
 		1B1114732B4C46AA00ECD277 /* Supports */ = {
 			isa = PBXGroup;
 			children = (
-				1B11145C2B4C455F00ECD277 /* AppDelegate.swift */,
-				1B11145E2B4C455F00ECD277 /* SceneDelegate.swift */,
 				1B1114942B4D1BE700ECD277 /* loading.gif */,
 				1B1114652B4C456100ECD277 /* Assets.xcassets */,
 				1B1114672B4C456100ECD277 /* LaunchScreen.storyboard */,
@@ -181,6 +180,15 @@
 				1BA4DFB42B4D631700872058 /* String+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1BA4DFBC2B4EB32E00872058 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1B11145C2B4C455F00ECD277 /* AppDelegate.swift */,
+				1B11145E2B4C455F00ECD277 /* SceneDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
