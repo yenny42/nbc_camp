@@ -80,3 +80,4 @@
 - **RandomDogRequest**:
   - 랜덤 개 이미지를 서버에서 가져오기 위한 네트워크 요청 클래스
   - URLSession
+
