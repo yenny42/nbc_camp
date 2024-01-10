@@ -12,7 +12,6 @@ struct TodoData: Codable {
     var title: String
     var isCompleted: Bool
     
-    
     // MARK: - CRUD Methods
     
     static func saveTodoData(_ data: TodoData) {
