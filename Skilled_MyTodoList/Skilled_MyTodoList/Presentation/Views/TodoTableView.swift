@@ -85,20 +85,14 @@ extension TodoTableView {
 
 extension TodoTableView: TodoListDelegate {
     func didTapSwitch(isOn: Bool, indexPath: IndexPath) {
-        print("isOn: \(isOn)  indexPath: \(indexPath)")
-//        print(datas)
         let category = dataCategory[indexPath.section]
         let selectedData = datas[category]
         var updatedData = selectedData![indexPath.row]
         updatedData.0.isCompleted = isOn
-        print(selectedData![indexPath.row])
         
         TodoData.updateTodoData(value: updatedData.0, forKey: updatedData.key)
         
-        // 갱신된 데이터로 dataList 업데이트
         datas[category]![indexPath.row] = (updatedData.0, key: updatedData.key)
-        
-        // 테이블뷰 셀 업데이트
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
@@ -158,7 +152,23 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
-            self.deleteRow(at: indexPath)
+            let category = self.dataCategory[indexPath.section]
+            
+            // 유저디폴트에서 삭제
+            let selectedData = self.datas[category]
+            if let deletedData = selectedData?[indexPath.row] {
+                TodoData.removeTodoData(forKey: deletedData.key)
+            }
+            
+            // dataList에서 삭제
+            self.datas[category]?.remove(at: indexPath.row)
+            self.dataList = self.datas.flatMap { $0.value }
+            
+            print(self.dataList)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+            
             completionHandler(true)
         }
 
@@ -167,19 +177,6 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
 
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
-    }
-    
-    private func deleteRow(at indexPath: IndexPath) {
-        let category = dataCategory[indexPath.section]
-        
-        if var sectionData = datas[category] {
-            let deletedItem = sectionData.remove(at: indexPath.row)
-            datas[category] = sectionData
-
-            TodoData.removeUserDefaults(forKey: deletedItem.key)
-            
-            tableView.reloadData()
-        }
     }
     
 }

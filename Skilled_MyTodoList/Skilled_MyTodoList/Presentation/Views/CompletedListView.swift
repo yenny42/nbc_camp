@@ -11,8 +11,14 @@ class CompletedListView: UIView {
     
     var dataCategory: [String] = []
     var dataList: [(TodoData, key: String)] = []
+    var datas: [String: [(TodoData, key: String)]] = [:]
     
-    let tableView = UITableView()
+    private let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.rowHeight = 44
+        
+        return tableView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,12 +37,21 @@ class CompletedListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setTodoDataList(_ data: [(TodoData, key: String)]) {
+    func setTodoData(_ data: [(TodoData, key: String)], _ category: [String]) {
         dataList = data
-    }
-    
-    func setTodoCategory(_ data: [String]) {
-        dataCategory = Set(data).sorted()
+        dataCategory = Set(category.map { $0.lowercased() }).sorted()
+        
+        var groupedData: [String: [(TodoData, key: String)]] = [:]
+        
+        for category in dataCategory {
+            let sectionData = dataList.filter { $0.0.category == category }
+            groupedData[category] = sectionData
+        }
+        
+        dataList = groupedData.flatMap { $0.value }
+        datas = groupedData
+        
+        tableView.reloadData()
     }
 }
 
@@ -102,16 +117,31 @@ extension CompletedListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let editAction = UIContextualAction(style: .normal, title: "삭제") { (_, _, completionHandler) in
-            print("삭제 버튼 눌림 - section: \(indexPath.section), row: \(indexPath.row)")
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
+            let category = self.dataCategory[indexPath.section]
+            
+            // 유저디폴트에서 삭제
+            let selectedData = self.datas[category]
+            if let deletedData = selectedData?[indexPath.row] {
+                TodoData.removeTodoData(forKey: deletedData.key)
+            }
+            
+            // dataList에서 삭제
+            self.datas[category]?.remove(at: indexPath.row)
+            self.dataList = self.datas.flatMap { $0.value }
+            
+            print(self.dataList)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
             
             completionHandler(true)
         }
-        
-        editAction.backgroundColor = .systemRed
-        editAction.image = UIImage(systemName: "trash")
-        
-        let configuration = UISwipeActionsConfiguration(actions: [editAction])
+
+        deleteAction.backgroundColor = .systemRed
+        deleteAction.image = UIImage(systemName: "trash")
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
 }

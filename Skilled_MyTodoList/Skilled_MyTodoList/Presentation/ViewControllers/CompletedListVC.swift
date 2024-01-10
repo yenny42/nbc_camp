@@ -30,6 +30,7 @@ class CompletedListVC: UIViewController {
     
     func loadData() {
         let loadData = TodoData.loadAllData()
+        
         var category: [String] = []
         var value: [(TodoData, key: String)] = []
         
@@ -39,8 +40,8 @@ class CompletedListVC: UIViewController {
                 value.append(data)
             }
         }
-        self.completedListView.setTodoCategory(category)
-        self.completedListView.setTodoDataList(loadData)
+        
+        self.completedListView.setTodoData(value, category)
     }
 }
 

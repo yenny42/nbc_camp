@@ -56,7 +56,7 @@ struct TodoData: Codable {
         }
     }
     
-    static func removeUserDefaults(forKey key: String) {
+    static func removeTodoData(forKey key: String) {
         UserDefaults.standard.removeObject(forKey: key)
     }
 }

@@ -34,11 +34,13 @@ class TodoListVC: UIViewController {
     
     func loadData() {
         let loadData = TodoData.loadAllData()
+        
         var category: [String] = []
     
         for data in loadData {
             category.append(data.0.category)
         }
+        
         self.todoTableView.setTodoData(loadData, category)
     }
     
