@@ -15,7 +15,7 @@ class HomeVC: UIViewController {
     
     let homeView = HomeView()
     let todoListVC = TodoListVC()
-    let todoTableViewCell = TodoTableViewCell()
+    let todoTableView = TodoTableView()
     let completedListVC = CompletedListVC()
     let randomDogVC = RandomDogVC()
     
@@ -23,7 +23,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        removeAllUserDefaults()
+        
         setUI()
     }
 }
@@ -47,9 +47,6 @@ extension HomeVC {
 // MARK: - UserDefaults CRUD
 
 extension HomeVC {
-    
-
-    
     func updateTodoData(value: TodoData, forKey key: String) {
         // 기존 TodoData 불러오기
         if let savedData = UserDefaults.standard.object(forKey: key) as? Data {
@@ -67,16 +64,6 @@ extension HomeVC {
                 }
             }
         }
-    }
-    
-    func removeAllUserDefaults() {
-        if let appDomain = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: appDomain)
-        }
-    }
-    
-    func removeUserDefaults(forKey key: String) {
-        UserDefaults.standard.removeObject(forKey: key)
     }
 }
 

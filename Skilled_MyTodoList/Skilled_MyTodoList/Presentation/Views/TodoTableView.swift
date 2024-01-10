@@ -146,11 +146,29 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
+            self.deleteRow(at: indexPath)
+            completionHandler(true)
+        }
+
+        deleteAction.backgroundColor = .systemRed
+        deleteAction.image = UIImage(systemName: "trash")
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+    
+    private func deleteRow(at indexPath: IndexPath) {
         let category = dataCategory[indexPath.section]
-        if let sectionData = test[category] {
-            let selectedData = sectionData[indexPath.row]
-            print("Selected Data: \(selectedData)")
+        
+        if var sectionData = test[category] {
+            let deletedItem = sectionData.remove(at: indexPath.row)
+            test[category] = sectionData
+
+            TodoData.removeUserDefaults(forKey: deletedItem.key)
+            
+            tableView.reloadData()
         }
     }
     

@@ -34,7 +34,6 @@ class TodoTableViewCell: UITableViewCell {
     }
     
     @objc private func tapSwitch() {
-        print(isCompleted.isOn)
     }
 }
 
