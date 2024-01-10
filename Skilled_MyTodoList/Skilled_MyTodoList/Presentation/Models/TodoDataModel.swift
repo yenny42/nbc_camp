@@ -19,7 +19,7 @@ struct TodoData: Codable {
         let encoder = JSONEncoder()
 
         if let encoded = try? encoder.encode(data) {
-            UserDefaults.standard.setValue(encoded, forKey: String(describing: UUID()))
+            UserDefaults.standard.set(encoded, forKey: String(describing: UUID()))
         }
     }
     
@@ -46,6 +46,14 @@ struct TodoData: Codable {
         }
         
         return value
+    }
+    
+    static func updateTodoData(value: TodoData, forKey key: String) {
+        let encoder = JSONEncoder()
+
+        if let encoded = try? encoder.encode(value) {
+            UserDefaults.standard.set(encoded, forKey: key)
+        }
     }
     
     static func removeUserDefaults(forKey key: String) {

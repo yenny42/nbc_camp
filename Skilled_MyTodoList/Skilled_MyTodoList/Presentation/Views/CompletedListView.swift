@@ -18,6 +18,7 @@ class CompletedListView: UIView {
         super.init(frame: frame)
      
         setDelegate()
+        setUI()
     }
     
     override func layoutSubviews() {

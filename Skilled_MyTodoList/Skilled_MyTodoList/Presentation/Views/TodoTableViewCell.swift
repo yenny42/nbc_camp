@@ -7,11 +7,18 @@
 
 import UIKit
 
+protocol TodoListDelegate: AnyObject {
+    func didTapSwitch(isOn: Bool, indexPath: IndexPath)
+}
+
 class TodoTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
     static let identifier = "TodoCellIdentifier"
+    
+    weak var delegate: TodoListDelegate?
+    var indexPath: IndexPath?
     
     // MARK: - UI Properties
     
@@ -34,6 +41,9 @@ class TodoTableViewCell: UITableViewCell {
     }
     
     @objc private func tapSwitch() {
+        if let indexPath = indexPath {
+            delegate?.didTapSwitch(isOn: isCompleted.isOn, indexPath: indexPath)
+        }
     }
 }
 
