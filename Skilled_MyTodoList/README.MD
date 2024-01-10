@@ -26,7 +26,7 @@
 
 <br/>
 
-### Model (데이터 모델)
+### Model
 - **TodoData**:
   - Todo 데이터 구조체
   - 프로퍼티: `category`, `title`, `isCompleted`
@@ -37,7 +37,7 @@
 
 <br/>
 
-### View (사용자 인터페이스)
+### View
 - **HomeView**:
   - 홈 화면 스택 뷰
   - 서브뷰: `mainImage`, `showTodoListButton`, `showCompletedListButton`, `showDogImage`
@@ -56,7 +56,7 @@
 
 <br/>
 
-### Controller (비즈니스 로직 및 상태 관리)
+### Controller
 - **HomeVC**:
   - 홈 화면 뷰 컨트롤러
   - 서브뷰 : `TodoListVC`, `CompletedListVC`, `RandomDogVC`
