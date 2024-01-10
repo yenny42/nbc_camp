@@ -27,7 +27,7 @@ class HomeView: UIView {
         return button
     }()
     
-    let showButton: UIButton = {
+    let showCompletedListButton: UIButton = {
         let button = UIButton()
         button.setTitle("✅ 완료한 일 보기", for: .normal)
         button.setTitleColor(.systemGreen, for: .normal)
@@ -65,10 +65,9 @@ extension HomeView {
         stackView.axis = .vertical
         stackView.distribution = .fill
         
-        [mainImage, goButton, showButton, showDogImage].forEach { stackView.addArrangedSubview($0) }
+        [mainImage, goButton, showCompletedListButton, showDogImage].forEach { stackView.addArrangedSubview($0) }
         
         self.addSubview(stackView)
-        
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -81,7 +80,7 @@ extension HomeView {
         
         mainImage.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.7).isActive = true
         goButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
-        showButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
+        showCompletedListButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
         showDogImage.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
     }
     

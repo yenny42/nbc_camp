@@ -84,7 +84,7 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.identifier)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -97,7 +97,7 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: TodoTableViewCell.identifier, for: indexPath) as! TodoTableViewCell
         cell.selectionStyle = .none
         
         let category = dataCategory[indexPath.section]
@@ -107,10 +107,10 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
         
         if todoItem.isCompleted {
             cell.textLabel?.attributedText = todoItem.title.strikeThrough()
-            cell.accessoryType = .checkmark
+            cell.isCompleted.isOn = true
         } else {
             cell.textLabel?.text = todoItem.title
-            cell.accessoryType = .disclosureIndicator
+            cell.isCompleted.isOn = false
         }
         
         return cell
@@ -121,14 +121,14 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let editAction = UIContextualAction(style: .normal, title: "수정") { (_, _, completionHandler) in
-            print("수정 버튼 눌림 - section: \(indexPath.section), row: \(indexPath.row)")
+        let editAction = UIContextualAction(style: .normal, title: "삭제") { (_, _, completionHandler) in
+            print("삭제 버튼 눌림 - section: \(indexPath.section), row: \(indexPath.row)")
             
             completionHandler(true)
         }
         
-        editAction.backgroundColor = .systemBlue
-        editAction.image = UIImage(systemName: "pencil")
+        editAction.backgroundColor = .systemRed
+        editAction.image = UIImage(systemName: "trash")
         
         let configuration = UISwipeActionsConfiguration(actions: [editAction])
         return configuration

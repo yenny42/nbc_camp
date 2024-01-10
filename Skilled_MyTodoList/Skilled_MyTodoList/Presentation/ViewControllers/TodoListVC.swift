@@ -33,14 +33,6 @@ class TodoListVC: UIViewController {
         self.todoTableView.setTodoCategory(todoCategory)
     }
     
-    func saveTodoData(_ data: TodoData) {
-        let encoder = JSONEncoder()
-
-        if let encoded = try? encoder.encode(data) {
-            UserDefaults.standard.setValue(encoded, forKey: String(describing: UUID()))
-        }
-    }
-    
     func loadAllTodoData() {
         let allUserDefaults = UserDefaults.standard.dictionaryRepresentation()
 
@@ -53,7 +45,6 @@ class TodoListVC: UIViewController {
                 }
             }
         }
-
     }
 }
 

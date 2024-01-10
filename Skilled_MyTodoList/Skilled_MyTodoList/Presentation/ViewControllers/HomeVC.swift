@@ -9,10 +9,13 @@ import UIKit
 
 class HomeVC: UIViewController {
     
+    var dataList: [TodoData] = []
+    
     // MARK: - UI Properties
     
-    let todoListVC = TodoListVC()
     let homeView = HomeView()
+    let todoListVC = TodoListVC()
+    let completedListVC = CompletedListVC()
     let randomDogVC = RandomDogVC()
     
     // MARK: - Life Cycle
@@ -31,8 +34,24 @@ extension HomeVC {
         self.navigationController?.pushViewController(todoListVC, animated: true)
     }
     
+    @objc private func didTapShowCompletedButton() {
+        self.navigationController?.pushViewController(completedListVC, animated: true)
+    }
+    
     @objc private func didTapShowRandomDogImageButton() {
         self.present(randomDogVC, animated: true)
+    }
+}
+
+// MARK: - UserDefaults CRUD
+
+extension HomeVC {
+    func saveTodoData(_ data: TodoData) {
+        let encoder = JSONEncoder()
+
+        if let encoded = try? encoder.encode(data) {
+            UserDefaults.standard.setValue(encoded, forKey: String(describing: UUID()))
+        }
     }
 }
 
@@ -41,6 +60,7 @@ extension HomeVC {
 extension HomeVC {
     private func setAddTarget() {
         homeView.goButton.addTarget(self, action: #selector(didTapShowTodoButton), for: .touchUpInside)
+        homeView.showCompletedListButton.addTarget(self, action: #selector(didTapShowCompletedButton), for: .touchUpInside)
         homeView.showDogImage.addTarget(self, action: #selector(didTapShowRandomDogImageButton), for: .touchUpInside)
     }
     
