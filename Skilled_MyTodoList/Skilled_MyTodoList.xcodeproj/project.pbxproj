@@ -141,10 +141,10 @@
 		1B1114752B4C46DD00ECD277 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B11147D2B4CE75600ECD277 /* HomeView.swift */,
 				1B1114792B4CDF2900ECD277 /* TodoTableView.swift */,
 				1BA4DFB82B4E24DD00872058 /* TodoTableViewCell.swift */,
 				1BA4DFBA2B4E35A400872058 /* CompletedListView.swift */,
-				1B11147D2B4CE75600ECD277 /* HomeView.swift */,
 				1B1114822B4CFCE500ECD277 /* RandomDogView.swift */,
 			);
 			path = Views;

@@ -71,7 +71,7 @@ extension HomeVC {
 
 extension HomeVC {
     private func setAddTarget() {
-        homeView.goButton.addTarget(self, action: #selector(didTapShowTodoButton), for: .touchUpInside)
+        homeView.showTodoListButton.addTarget(self, action: #selector(didTapShowTodoButton), for: .touchUpInside)
         homeView.showCompletedListButton.addTarget(self, action: #selector(didTapShowCompletedButton), for: .touchUpInside)
         homeView.showDogImage.addTarget(self, action: #selector(didTapShowRandomDogImageButton), for: .touchUpInside)
     }
