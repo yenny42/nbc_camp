@@ -36,9 +36,9 @@ class TodoTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
+    
+    // MARK: Delegate Method
     
     @objc private func tapSwitch() {
         if let indexPath = indexPath {
@@ -51,9 +51,7 @@ extension TodoTableViewCell {
     private func setUI() {
         isCompleted.addTarget(self, action: #selector(tapSwitch), for: .valueChanged)
         
-        [isCompleted].forEach {
-            contentView.addSubview($0)
-        }
+        contentView.addSubview(isCompleted)
         
         isCompleted.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

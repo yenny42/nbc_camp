@@ -9,9 +9,13 @@ import UIKit
 
 class CompletedListView: UIView {
     
+    // MARK: - Properties
+    
     var dataCategory: [String] = []
     var dataList: [(TodoData, key: String)] = []
     var datas: [String: [(TodoData, key: String)]] = [:]
+    
+    // MARK: - UI Properties
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -19,6 +23,8 @@ class CompletedListView: UIView {
         
         return tableView
     }()
+    
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,6 +43,8 @@ class CompletedListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Data Setting
+
     func setTodoData(_ data: [(TodoData, key: String)], _ category: [String]) {
         dataList = data
         dataCategory = Set(category.map { $0.lowercased() }).sorted()
@@ -54,6 +62,8 @@ class CompletedListView: UIView {
         tableView.reloadData()
     }
 }
+
+// MARK: - Extensions
 
 extension CompletedListView {
     private func setUI() {
@@ -78,6 +88,8 @@ extension CompletedListView {
     }
 }
 
+// MARK: - TableView Setting Extensions
+
 extension CompletedListView: UITableViewDelegate, UITableViewDataSource {
     private func setDelegate() {
         tableView.dataSource = self
@@ -86,13 +98,21 @@ extension CompletedListView: UITableViewDelegate, UITableViewDataSource {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CompletedCell")
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return dataCategory.count
+    // MARK: Section
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dataCategory[section]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let category = dataCategory[section]
         return dataList.filter { $0.0.category == category }.count
+    }
+    
+    // MARK: Cell
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dataCategory.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,21 +132,16 @@ extension CompletedListView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dataCategory[section]
-    }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
             let category = self.dataCategory[indexPath.section]
             
-            // 유저디폴트에서 삭제
             let selectedData = self.datas[category]
             if let deletedData = selectedData?[indexPath.row] {
                 TodoData.removeTodoData(forKey: deletedData.key)
             }
             
-            // dataList에서 삭제
             self.datas[category]?.remove(at: indexPath.row)
             self.dataList = self.datas.flatMap { $0.value }
             

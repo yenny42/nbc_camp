@@ -50,7 +50,6 @@ extension RandomDogVC {
 }
 
 extension RandomDogVC {
-    
     func fetchRandomDog() {
         RandomDogRequest.decodeRandomDog { result in
             DispatchQueue.main.async {

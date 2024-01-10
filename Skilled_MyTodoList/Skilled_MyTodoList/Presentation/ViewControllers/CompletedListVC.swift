@@ -14,6 +14,8 @@ class CompletedListVC: UIViewController {
     var todoCategory: [String] = []
     var todoList: [(TodoData, key: String)] = []
     
+    // MARK: - UI Properties
+    
     let completedListView = CompletedListView()
     
     // MARK: - Life Cycle
@@ -45,9 +47,11 @@ class CompletedListVC: UIViewController {
     }
 }
 
+// MARK: - Extensions
+
 extension CompletedListVC {
     private func setUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         
         navigationItem.title = "⭐ 완료한 일 ⭐"
         

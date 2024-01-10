@@ -42,6 +42,8 @@ class TodoTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Data Setting
+
     func setTodoData(_ data: [(TodoData, key: String)], _ category: [String]) {
         dataList = data
         dataCategory = Set(category.map { $0.lowercased() }).sorted()
@@ -97,8 +99,6 @@ extension TodoTableView: TodoListDelegate {
     }
 }
 
-
-
 // MARK: - UITableView Settings
 
 extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
@@ -109,8 +109,7 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
         tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.identifier)
     }
     
-    
-    // MARK: - Section
+    // MARK: Section
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataCategory.count
@@ -120,7 +119,7 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
         return dataCategory[section]
     }
     
-    // MARK: - Row Cell
+    // MARK: Cell
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let category = dataCategory[section]
@@ -154,13 +153,11 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
             let category = self.dataCategory[indexPath.section]
             
-            // 유저디폴트에서 삭제
             let selectedData = self.datas[category]
             if let deletedData = selectedData?[indexPath.row] {
                 TodoData.removeTodoData(forKey: deletedData.key)
             }
             
-            // dataList에서 삭제
             self.datas[category]?.remove(at: indexPath.row)
             self.dataList = self.datas.flatMap { $0.value }
             

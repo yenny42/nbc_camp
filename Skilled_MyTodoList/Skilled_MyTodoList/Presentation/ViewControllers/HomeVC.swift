@@ -9,13 +9,14 @@ import UIKit
 
 class HomeVC: UIViewController {
     
+    // MARK: - Properties
+    
     var dataList: [TodoData] = []
     
     // MARK: - UI Properties
     
     let homeView = HomeView()
     let todoListVC = TodoListVC()
-    let todoTableView = TodoTableView()
     let completedListVC = CompletedListVC()
     let randomDogVC = RandomDogVC()
     
