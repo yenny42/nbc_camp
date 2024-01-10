@@ -13,7 +13,7 @@ class TodoTableView: UIView {
     
     var dataCategory: [String] = []
     var dataList: [(TodoData, key: String)] = []
-    var test: [String: [(TodoData, key: String)]] = [:]
+    var datas: [String: [(TodoData, key: String)]] = [:]
     
     // MARK: - UI Properties
     
@@ -42,37 +42,24 @@ class TodoTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Data Setting
+
     func setTodoData(_ data: [(TodoData, key: String)], _ category: [String]) {
         dataList = data
         dataCategory = Set(category.map { $0.lowercased() }).sorted()
         
-        
-        // 섹션별로 데이터를 그룹화하는 딕셔너리
         var groupedData: [String: [(TodoData, key: String)]] = [:]
         
         for category in dataCategory {
-            // 해당 카테고리에 속하는 데이터 필터링
             let sectionData = dataList.filter { $0.0.category == category }
             groupedData[category] = sectionData
         }
         
-        // 딕셔너리의 값을 통합하여 테이블 뷰에 표시될 데이터 설정
         dataList = groupedData.flatMap { $0.value }
-        
-        // 디버깅을 위한 출력
-        print(dataList)
-        print(dataCategory)
-        print("====================")
-        //        for (category, sectionData) in groupedData {
-        //            print("\(category): \(sectionData)")
-        //        }
-        test = groupedData
-        print(test)
-        
+        datas = groupedData
         
         tableView.reloadData()
     }
-    
 }
 
 // MARK: - Extensions
@@ -98,6 +85,20 @@ extension TodoTableView {
     }
 }
 
+extension TodoTableView: TodoListDelegate {
+    func didTapSwitch(isOn: Bool, indexPath: IndexPath) {
+        let category = dataCategory[indexPath.section]
+        let selectedData = datas[category]
+        var updatedData = selectedData![indexPath.row]
+        updatedData.0.isCompleted = isOn
+        
+        TodoData.updateTodoData(value: updatedData.0, forKey: updatedData.key)
+        
+        datas[category]![indexPath.row] = (updatedData.0, key: updatedData.key)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+}
+
 // MARK: - UITableView Settings
 
 extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
@@ -108,8 +109,7 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
         tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.identifier)
     }
     
-    
-    // MARK: - Section
+    // MARK: Section
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataCategory.count
@@ -119,19 +119,21 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
         return dataCategory[section]
     }
     
-    // MARK: - Row Cell
+    // MARK: Cell
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let category = dataCategory[section]
-        return test[category]?.count ?? 0
+        return datas[category]?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TodoTableViewCell.identifier, for: indexPath) as! TodoTableViewCell
         cell.selectionStyle = .none
+        cell.delegate = self
+        cell.indexPath = indexPath
         
         let category = dataCategory[indexPath.section]
-        if let sectionData = test[category] {
+        if let sectionData = datas[category] {
             let todoItem = sectionData[indexPath.row]
             
             cell.textLabel?.text = todoItem.0.title
@@ -139,6 +141,7 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.textColor = .systemGray2
                 cell.isCompleted.isOn = true
             } else {
+                cell.textLabel?.textColor = .black
                 cell.isCompleted.isOn = false
             }
         }
@@ -148,7 +151,20 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
-            self.deleteRow(at: indexPath)
+            let category = self.dataCategory[indexPath.section]
+            
+            let selectedData = self.datas[category]
+            if let deletedData = selectedData?[indexPath.row] {
+                TodoData.removeTodoData(forKey: deletedData.key)
+            }
+            
+            self.datas[category]?.remove(at: indexPath.row)
+            self.dataList = self.datas.flatMap { $0.value }
+            
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+            
             completionHandler(true)
         }
 
@@ -157,19 +173,6 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
 
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
-    }
-    
-    private func deleteRow(at indexPath: IndexPath) {
-        let category = dataCategory[indexPath.section]
-        
-        if var sectionData = test[category] {
-            let deletedItem = sectionData.remove(at: indexPath.row)
-            test[category] = sectionData
-
-            TodoData.removeUserDefaults(forKey: deletedItem.key)
-            
-            tableView.reloadData()
-        }
     }
     
 }

@@ -19,7 +19,7 @@ class HomeView: UIView {
         return imageView
     }()
     
-    let goButton: UIButton = {
+    let showTodoListButton: UIButton = {
         let button = UIButton()
         button.setTitle("🖊 할 일 목록보기", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
@@ -65,7 +65,7 @@ extension HomeView {
         stackView.axis = .vertical
         stackView.distribution = .fill
         
-        [mainImage, goButton, showCompletedListButton, showDogImage].forEach { stackView.addArrangedSubview($0) }
+        [mainImage, showTodoListButton, showCompletedListButton, showDogImage].forEach { stackView.addArrangedSubview($0) }
         
         self.addSubview(stackView)
         
@@ -79,7 +79,7 @@ extension HomeView {
         ])
         
         mainImage.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.7).isActive = true
-        goButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
+        showTodoListButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
         showCompletedListButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
         showDogImage.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
     }

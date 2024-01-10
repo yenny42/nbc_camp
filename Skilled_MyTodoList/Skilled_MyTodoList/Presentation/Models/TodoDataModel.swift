@@ -12,14 +12,13 @@ struct TodoData: Codable {
     var title: String
     var isCompleted: Bool
     
-    
     // MARK: - CRUD Methods
     
     static func saveTodoData(_ data: TodoData) {
         let encoder = JSONEncoder()
 
         if let encoded = try? encoder.encode(data) {
-            UserDefaults.standard.setValue(encoded, forKey: String(describing: UUID()))
+            UserDefaults.standard.set(encoded, forKey: String(describing: UUID()))
         }
     }
     
@@ -48,7 +47,15 @@ struct TodoData: Codable {
         return value
     }
     
-    static func removeUserDefaults(forKey key: String) {
+    static func updateTodoData(value: TodoData, forKey key: String) {
+        let encoder = JSONEncoder()
+
+        if let encoded = try? encoder.encode(value) {
+            UserDefaults.standard.set(encoded, forKey: key)
+        }
+    }
+    
+    static func removeTodoData(forKey key: String) {
         UserDefaults.standard.removeObject(forKey: key)
     }
 }

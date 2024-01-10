@@ -34,15 +34,20 @@ class TodoListVC: UIViewController {
     
     func loadData() {
         let loadData = TodoData.loadAllData()
+        
         var category: [String] = []
     
         for data in loadData {
             category.append(data.0.category)
         }
+        
         self.todoTableView.setTodoData(loadData, category)
     }
-    
-    
+}
+
+// MARK: - Extensions
+
+extension TodoListVC {
     @objc private func addButtonTapped() {
         let alert = UIAlertController(title: "To Do", message: "할 일을 추가하세요.", preferredStyle: .alert)
         
@@ -65,8 +70,6 @@ class TodoListVC: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 }
-
-// MARK: - Extensions
 
 extension TodoListVC {
     private func setUI() {

@@ -10,9 +10,11 @@ import Gifu
 
 class RandomDogView: UIView {
     
-    // MARK: - UI Properties
+    // MARK: - Properties
     
     let gifImageView = GIFImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+    
+    // MARK: - UI Properties
     
     let dogImage: UIImageView = {
         let imageView = UIImageView()
@@ -54,7 +56,6 @@ extension RandomDogView {
     }
     
     func setLoading() {
-        
         gifImageView.animate(withGIFNamed: "loading")
         
         self.backgroundColor = .white

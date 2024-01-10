@@ -9,13 +9,14 @@ import UIKit
 
 class HomeVC: UIViewController {
     
+    // MARK: - Properties
+    
     var dataList: [TodoData] = []
     
     // MARK: - UI Properties
     
     let homeView = HomeView()
     let todoListVC = TodoListVC()
-    let todoTableView = TodoTableView()
     let completedListVC = CompletedListVC()
     let randomDogVC = RandomDogVC()
     
@@ -71,7 +72,7 @@ extension HomeVC {
 
 extension HomeVC {
     private func setAddTarget() {
-        homeView.goButton.addTarget(self, action: #selector(didTapShowTodoButton), for: .touchUpInside)
+        homeView.showTodoListButton.addTarget(self, action: #selector(didTapShowTodoButton), for: .touchUpInside)
         homeView.showCompletedListButton.addTarget(self, action: #selector(didTapShowCompletedButton), for: .touchUpInside)
         homeView.showDogImage.addTarget(self, action: #selector(didTapShowRandomDogImageButton), for: .touchUpInside)
     }
