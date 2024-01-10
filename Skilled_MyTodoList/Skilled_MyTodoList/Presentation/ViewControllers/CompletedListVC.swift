@@ -12,109 +12,55 @@ class CompletedListVC: UIViewController {
     // MARK: - Properties
     
     var todoCategory: [String] = []
-    var todoList: [TodoData] = []
+    var todoList: [(TodoData, key: String)] = []
     
-    let tableView = UITableView()
+    let completedListView = CompletedListView()
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadAllTodoData()
-        setDelegate()
         setUI()
-     }
+    }
     
-    func loadAllTodoData() {
-        let allUserDefaults = UserDefaults.standard.dictionaryRepresentation()
+    override func viewWillAppear(_ animated: Bool) {
+        loadData()
+    }
+    
+    func loadData() {
+        let loadData = TodoData.loadAllData()
         var category: [String] = []
-
-        for (key, _) in allUserDefaults {
-            if let savedData = UserDefaults.standard.object(forKey: key) as? Data {
-                let decoder = JSONDecoder()
-                if let savedObject = try? decoder.decode(TodoData.self, from: savedData) {
-//                    todoCategory.append(savedObject.category)
-//                    todoList.append(savedObject)
-                    
-                    if savedObject.isCompleted == true {
-                        print(savedObject)
-                        category.append(savedObject.category)
-                        todoList.append(savedObject)
-                    }
-                }
+        var value: [(TodoData, key: String)] = []
+        
+        for data in loadData {
+            if data.0.isCompleted == true {
+                category.append(data.0.category)
+                value.append(data)
             }
         }
-        todoCategory = Set(category).sorted()
+        self.completedListView.setTodoCategory(category)
+        self.completedListView.setTodoDataList(loadData)
     }
 }
 
 extension CompletedListVC {
     private func setUI() {
         view.backgroundColor = .white
-        view.addSubview(tableView)
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        navigationItem.title = "⭐ 완료한 일 ⭐"
+        
+        view.addSubview(completedListView)
+        
+        completedListView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            completedListView.topAnchor.constraint(equalTo: view.topAnchor),
+            completedListView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            completedListView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            completedListView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
 
 
-extension CompletedListVC: UITableViewDelegate, UITableViewDataSource {
-    private func setDelegate() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CompletedCell")
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return todoCategory.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let category = todoCategory[section]
-        return todoList.filter { $0.category == category }.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CompletedCell", for: indexPath)
-        cell.selectionStyle = .none
-        
-        let category = todoCategory[indexPath.section]
-        let categoryItems = todoList.filter { $0.category == category }
-        
-        let todoItem = categoryItems[indexPath.row]
-        
-        if todoItem.isCompleted {
-            cell.textLabel?.text = todoItem.title
-            cell.accessoryType = .checkmark
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return todoCategory[section]
-    }
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let editAction = UIContextualAction(style: .normal, title: "삭제") { (_, _, completionHandler) in
-            print("삭제 버튼 눌림 - section: \(indexPath.section), row: \(indexPath.row)")
-            
-            completionHandler(true)
-        }
-        
-        editAction.backgroundColor = .systemRed
-        editAction.image = UIImage(systemName: "trash")
-        
-        let configuration = UISwipeActionsConfiguration(actions: [editAction])
-        return configuration
-    }
-}

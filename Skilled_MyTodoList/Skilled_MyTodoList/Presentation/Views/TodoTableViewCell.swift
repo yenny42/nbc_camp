@@ -17,11 +17,6 @@ class TodoTableViewCell: UITableViewCell {
     
     let isCompleted = UISwitch()
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -38,10 +33,15 @@ class TodoTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @objc private func tapSwitch() {
+        print(isCompleted.isOn)
+    }
 }
 
 extension TodoTableViewCell {
     private func setUI() {
+        isCompleted.addTarget(self, action: #selector(tapSwitch), for: .valueChanged)
+        
         [isCompleted].forEach {
             contentView.addSubview($0)
         }

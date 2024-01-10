@@ -15,6 +15,7 @@ class HomeVC: UIViewController {
     
     let homeView = HomeView()
     let todoListVC = TodoListVC()
+    let todoTableViewCell = TodoTableViewCell()
     let completedListVC = CompletedListVC()
     let randomDogVC = RandomDogVC()
     
@@ -22,7 +23,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        removeAllUserDefaults()
         setUI()
     }
 }
@@ -46,12 +47,36 @@ extension HomeVC {
 // MARK: - UserDefaults CRUD
 
 extension HomeVC {
-    func saveTodoData(_ data: TodoData) {
-        let encoder = JSONEncoder()
+    
 
-        if let encoded = try? encoder.encode(data) {
-            UserDefaults.standard.setValue(encoded, forKey: String(describing: UUID()))
+    
+    func updateTodoData(value: TodoData, forKey key: String) {
+        // 기존 TodoData 불러오기
+        if let savedData = UserDefaults.standard.object(forKey: key) as? Data {
+            let decoder = JSONDecoder()
+            if var existingTodoData = try? decoder.decode(TodoData.self, from: savedData) {
+                // 기존 TodoData 수정
+                existingTodoData.category = value.category
+                existingTodoData.title = value.title
+                existingTodoData.isCompleted = value.isCompleted
+
+                // 수정된 TodoData 저장
+                let encoder = JSONEncoder()
+                if let updatedData = try? encoder.encode(existingTodoData) {
+                    UserDefaults.standard.set(updatedData, forKey: key)
+                }
+            }
         }
+    }
+    
+    func removeAllUserDefaults() {
+        if let appDomain = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        }
+    }
+    
+    func removeUserDefaults(forKey key: String) {
+        UserDefaults.standard.removeObject(forKey: key)
     }
 }
 

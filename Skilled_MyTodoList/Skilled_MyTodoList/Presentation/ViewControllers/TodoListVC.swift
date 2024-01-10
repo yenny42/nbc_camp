@@ -9,14 +9,16 @@ import UIKit
 
 class TodoListVC: UIViewController {
     
-    // MARK: - Properties
-    
-    var todoCategory: [String] = []
-    var todoList: [TodoData] = []
-    
     // MARK: - UI Properties
     
     let todoTableView = TodoTableView()
+    
+    lazy var addButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        button.tag = 1
+        
+        return button
+    }()
     
     // MARK: - Life Cycle
     
@@ -27,24 +29,40 @@ class TodoListVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadAllTodoData()
-        
-        self.todoTableView.setTodoDataList(todoList)
-        self.todoTableView.setTodoCategory(todoCategory)
+        loadData()
     }
     
-    func loadAllTodoData() {
-        let allUserDefaults = UserDefaults.standard.dictionaryRepresentation()
-
-        for (key, _) in allUserDefaults {
-            if let savedData = UserDefaults.standard.object(forKey: key) as? Data {
-                let decoder = JSONDecoder()
-                if let savedObject = try? decoder.decode(TodoData.self, from: savedData) {
-                    todoCategory.append(savedObject.category)
-                    todoList.append(savedObject)
-                }
-            }
+    func loadData() {
+        let loadData = TodoData.loadAllData()
+        var category: [String] = []
+    
+        for data in loadData {
+            category.append(data.0.category)
         }
+        self.todoTableView.setTodoData(loadData, category)
+    }
+    
+    
+    @objc private func addButtonTapped() {
+        let alert = UIAlertController(title: "To Do", message: "할 일을 추가하세요.", preferredStyle: .alert)
+        
+        alert.addTextField() { (textField) in
+            textField.placeholder = "카테고리를 입력해주세요"
+        }
+        alert.addTextField() { (textField) in
+            textField.placeholder = "할 일을 입력해주세요"
+        }
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("CANCEL", comment: "cancel action"), style: .destructive))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            let category = alert.textFields?[0].text
+            let title = alert.textFields?[1].text
+            
+            TodoData.saveTodoData(TodoData(category: category!, title: title!, isCompleted: false))
+            self.loadData()
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -53,6 +71,10 @@ class TodoListVC: UIViewController {
 extension TodoListVC {
     private func setUI() {
         view.backgroundColor = .white
+        
+        navigationItem.rightBarButtonItem = addButton
+        navigationItem.title = "👻 할 일 목록 👻"
+        
         view.addSubview(todoTableView)
         
         todoTableView.translatesAutoresizingMaskIntoConstraints = false
