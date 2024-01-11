@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompletedListVC: UIViewController {
+final class CompletedListVC: UIViewController {
     
     // MARK: - Properties
     
@@ -27,23 +27,23 @@ class CompletedListVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         loadData()
     }
     
     func loadData() {
         let loadData = TodoData.loadAllData()
         
-        var category: [String] = []
         var value: [(TodoData, key: String)] = []
         
         for data in loadData {
             if data.0.isCompleted == true {
-                category.append(data.0.category)
                 value.append(data)
             }
         }
         
-        self.completedListView.setTodoData(value, category)
+        self.completedListView.setTodoData(value)
     }
 }
 
@@ -67,5 +67,3 @@ extension CompletedListVC {
         ])
     }
 }
-
-

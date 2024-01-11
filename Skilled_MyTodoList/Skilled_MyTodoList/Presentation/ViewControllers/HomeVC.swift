@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
+final class HomeVC: UIViewController {
     
     // MARK: - Properties
     
@@ -45,29 +45,6 @@ extension HomeVC {
     }
 }
 
-// MARK: - UserDefaults CRUD
-
-extension HomeVC {
-    func updateTodoData(value: TodoData, forKey key: String) {
-        // 기존 TodoData 불러오기
-        if let savedData = UserDefaults.standard.object(forKey: key) as? Data {
-            let decoder = JSONDecoder()
-            if var existingTodoData = try? decoder.decode(TodoData.self, from: savedData) {
-                // 기존 TodoData 수정
-                existingTodoData.category = value.category
-                existingTodoData.title = value.title
-                existingTodoData.isCompleted = value.isCompleted
-
-                // 수정된 TodoData 저장
-                let encoder = JSONEncoder()
-                if let updatedData = try? encoder.encode(existingTodoData) {
-                    UserDefaults.standard.set(updatedData, forKey: key)
-                }
-            }
-        }
-    }
-}
-
 // MARK: - Extensions
 
 extension HomeVC {
@@ -94,6 +71,8 @@ extension HomeVC {
     }
     
     private func setMainImage() {
-        ImageLoader.loadImage(from: "https://spartacodingclub.kr/css/images/scc-og.jpg", into: self.homeView.mainImage)
+        ImageLoader.loadImage(from: "https://spartacodingclub.kr/css/images/scc-og.jpg", into: self.homeView.mainImage) {
+            self.homeView.gifImageView.removeFromSuperview()
+        }
     }
 }

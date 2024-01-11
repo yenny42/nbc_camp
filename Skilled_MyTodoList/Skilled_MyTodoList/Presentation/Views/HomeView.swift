@@ -6,15 +6,19 @@
 //
 
 import UIKit
+import Gifu
 
-class HomeView: UIView {
+final class HomeView: UIView {
+    
+    // MARK: - Properties
+    
+    let gifImageView = GIFImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
     
     // MARK: - UI Properties
     
     let mainImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .systemGray
         
         return imageView
     }()
@@ -48,6 +52,7 @@ class HomeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setLoading()
         setUI()
     }
     
@@ -84,4 +89,21 @@ extension HomeView {
         showDogImage.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
     }
     
+    func setLoading() {
+        gifImageView.animate(withGIFNamed: "loading")
+        
+        self.backgroundColor = .white
+        
+        self.addSubview(gifImageView)
+        
+        gifImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            gifImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            gifImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
+        
+        gifImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        gifImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    }
 }

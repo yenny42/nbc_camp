@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImageLoader {
+final class ImageLoader {
     static func loadImage(from url: String, into imageView: UIImageView, completion: (() -> Void)? = nil) {
         if let imageURL = URL(string: url) {
             let task = URLSession.shared.dataTask(with: imageURL) { (data, _, error) in

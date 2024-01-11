@@ -7,12 +7,11 @@
 
 import UIKit
 
-class CompletedListView: UIView {
+final class CompletedListView: UIView {
     
     // MARK: - Properties
     
     var dataCategory: [String] = []
-    var dataList: [(TodoData, key: String)] = []
     var datas: [String: [(TodoData, key: String)]] = [:]
     
     // MARK: - UI Properties
@@ -33,30 +32,22 @@ class CompletedListView: UIView {
         setUI()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        setUI()
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: Data Setting
 
-    func setTodoData(_ data: [(TodoData, key: String)], _ category: [String]) {
-        dataList = data
-        dataCategory = Set(category.map { $0.lowercased() }).sorted()
-        
+    func setTodoData(_ data: [(TodoData, key: String)]) {
         var groupedData: [String: [(TodoData, key: String)]] = [:]
         
+        dataCategory = Set(data.map { $0.0.category }).sorted()
+        
         for category in dataCategory {
-            let sectionData = dataList.filter { $0.0.category == category }
+            let sectionData = data.filter { $0.0.category == category }
             groupedData[category] = sectionData
         }
         
-        dataList = groupedData.flatMap { $0.value }
         datas = groupedData
         
         tableView.reloadData()
@@ -67,24 +58,16 @@ class CompletedListView: UIView {
 
 extension CompletedListView {
     private func setUI() {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fill
+        self.addSubview(tableView)
         
-        stackView.addArrangedSubview(tableView)
-        
-        self.addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 50),
-            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
+            tableView.topAnchor.constraint(equalTo: self.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
-        
-        tableView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 1).isActive = true
     }
 }
 
@@ -106,7 +89,7 @@ extension CompletedListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let category = dataCategory[section]
-        return dataList.filter { $0.0.category == category }.count
+        return datas[category]?.count ?? 0
     }
     
     // MARK: Cell
@@ -120,13 +103,13 @@ extension CompletedListView: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         
         let category = dataCategory[indexPath.section]
-        let categoryItems = dataList.filter { $0.0.category == category }
-        
-        let todoItem = categoryItems[indexPath.row]
-        
-        if todoItem.0.isCompleted {
-            cell.textLabel?.text = todoItem.0.title
-            cell.accessoryType = .checkmark
+        if let sectionData = datas[category] {
+            let completedItem = sectionData[indexPath.row]
+            
+            if completedItem.0.isCompleted {
+                cell.textLabel?.text = completedItem.0.title
+                cell.accessoryType = .checkmark
+            }
         }
         
         return cell
@@ -143,7 +126,6 @@ extension CompletedListView: UITableViewDelegate, UITableViewDataSource {
             }
             
             self.datas[category]?.remove(at: indexPath.row)
-            self.dataList = self.datas.flatMap { $0.value }
             
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)
