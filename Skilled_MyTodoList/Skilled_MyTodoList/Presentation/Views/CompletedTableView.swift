@@ -1,5 +1,5 @@
 //
-//  CompletedListView.swift
+//  CompletedTableView.swift
 //  Skilled_MyTodoList
 //
 //  Created by t2023-m0035 on 1/10/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CompletedListView: UIView {
+final class CompletedTableView: UIView {
     
     // MARK: - Properties
     
@@ -56,7 +56,7 @@ final class CompletedListView: UIView {
 
 // MARK: - Extensions
 
-extension CompletedListView {
+extension CompletedTableView {
     private func setUI() {
         self.addSubview(tableView)
         
@@ -73,7 +73,7 @@ extension CompletedListView {
 
 // MARK: - TableView Setting Extensions
 
-extension CompletedListView: UITableViewDelegate, UITableViewDataSource {
+extension CompletedTableView: UITableViewDelegate, UITableViewDataSource {
     private func setDelegate() {
         tableView.dataSource = self
         tableView.delegate = self

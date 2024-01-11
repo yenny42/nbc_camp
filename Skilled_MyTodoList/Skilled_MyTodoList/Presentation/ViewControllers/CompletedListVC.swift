@@ -16,7 +16,7 @@ final class CompletedListVC: UIViewController {
     
     // MARK: - UI Properties
     
-    let completedListView = CompletedListView()
+    let completedListView = CompletedTableView()
     
     // MARK: - Life Cycle
     
