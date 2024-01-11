@@ -8,7 +8,7 @@
 -->
 
 ## 폴더링
-![스크린샷 2024-01-10 오후 4 21 35](https://github.com/yenny42/nbc_camp/assets/107637741/6088d57c-24b2-4f41-871d-89f0e2f32b78)
+![스크린샷 2024-01-11 오전 11 14 06](https://github.com/yenny42/nbc_camp/assets/107637741/23e97190-2e29-494d-99d7-1dcc29ea5549)
 
 <br/>
 
@@ -28,57 +28,58 @@
 
 ### Model
 - **TodoData**:
-  - Todo 데이터 구조체
+  - Todo 데이터 `Struct`
   - 프로퍼티: `category`, `title`, `isCompleted`
 
 - **RandomDog**, **Dog**:
-  - 이미지 정보 모델 구조체
-  - 랜덤 개 이미지 api 요청할 때 사용
+  - 이미지 정보 모델 `Struct`
+  - 랜덤 개 이미지 api Request 시 사용하는 타입
 
 <br/>
 
 ### View
 - **HomeView**:
-  - 홈 화면 스택 뷰
+  - 홈 화면 `UIStackView`
   - 서브뷰: `mainImage`, `showTodoListButton`, `showCompletedListButton`, `showDogImage`
 
 - **TodoTableView**:
-  - 할 일 목록 테이블 뷰
+  - 할 일 목록 `UITableView`
   - 할 일 추가, 수정, 삭제
   - 서브뷰: `TodoTableViewCell`
 
 - **CompletedListView**:
-  - 완료된 일 목록 테이블 뷰
+  - 완료된 일 목록 `UITableView`
 
 - **RandomDogView**:
-  - 랜덤 개 이미지를 표시
+  - 랜덤 개 이미지 `UIImageView`
   - GIF 이미지 스켈레톤
 
 <br/>
 
 ### Controller
 - **HomeVC**:
-  - 홈 화면 뷰 컨트롤러
-  - 서브뷰 : `TodoListVC`, `CompletedListVC`, `RandomDogVC`
+  - 홈 화면 `ViewController`
   - 화면 전환 및 데이터 처리
+  - 서브뷰 : `TodoListVC`, `CompletedListVC`, `RandomDogVC`
 
 - **TodoListVC**:
-  - 할 일 목록 뷰 컨트롤러
-  - 할 일 추가, 수정, 삭제 로직
+  - 할 일 목록 `ViewController`
+  - UserDefaults - 할 일 추가, 완료 여부 수정, 삭제 
 
 - **CompletedListVC**:
-  - 완료된 일 목록 뷰 컨트롤러
-  - 완료된 일 목록 표시, 삭제
+  - 완료된 일 목록 `ViewController`
+  - UserDefaults - 완료된 일 목록 표시, 삭제
 
 - **RandomDogVC**:
-  - 랜덤 개 이미지 뷰 컨트롤러
-  - GIF 스켈레톤 처리 및 api 통신하여 이미지 업데이트
+  - 랜덤 개 이미지 `ViewController`
+  - GIF 스켈레톤 처리 및 api 통신 & `UIImageView` 업데이트
 
 <br/>
 
 ### 네트워크 통신
 - **RandomDogRequest**:
-  - 랜덤 개 이미지를 서버에서 가져오기 위한 네트워크 요청 클래스
+
+  - https://api.thedogapi.com/v1/images/search `api request`
   - URLSession
 
 <br/><br/>
