@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoListVC: UIViewController {
+final class TodoListVC: UIViewController {
     
     // MARK: - UI Properties
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
+final class HomeVC: UIViewController {
     
     // MARK: - Properties
     
@@ -71,6 +71,8 @@ extension HomeVC {
     }
     
     private func setMainImage() {
-        ImageLoader.loadImage(from: "https://spartacodingclub.kr/css/images/scc-og.jpg", into: self.homeView.mainImage)
+        ImageLoader.loadImage(from: "https://spartacodingclub.kr/css/images/scc-og.jpg", into: self.homeView.mainImage) {
+            self.homeView.gifImageView.removeFromSuperview()
+        }
     }
 }

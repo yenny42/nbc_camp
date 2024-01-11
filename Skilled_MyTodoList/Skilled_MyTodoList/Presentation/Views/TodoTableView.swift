@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoTableView: UIView {
+final class TodoTableView: UIView {
     
     // MARK: - Properties
     
@@ -139,18 +139,17 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
             
             let category = self.dataCategory[indexPath.section]
-            print(self.datas)
-//            let selectedData = self.datas[category]
-//            
-//            if let deletedData = selectedData?[indexPath.row] {
-//                TodoData.removeTodoData(forKey: deletedData.key)
-//            }
-//            
-//            self.datas[category]?.remove(at: indexPath.row)
-//            
-//            tableView.beginUpdates()
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//            tableView.endUpdates()
+            let selectedData = self.datas[category]
+            
+            if let deletedData = selectedData?[indexPath.row] {
+                TodoData.removeTodoData(forKey: deletedData.key)
+            }
+            
+            self.datas[category]?.remove(at: indexPath.row)
+            
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
             
             completionHandler(true)
         }

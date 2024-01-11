@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompletedListVC: UIViewController {
+final class CompletedListVC: UIViewController {
     
     // MARK: - Properties
     

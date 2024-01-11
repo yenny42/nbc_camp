@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RandomDogVC: UIViewController {
+final class RandomDogVC: UIViewController {
     
     // MARK: - UI Properties
     

@@ -8,7 +8,7 @@
 import UIKit
 import Gifu
 
-class RandomDogView: UIView {
+final class RandomDogView: UIView {
     
     // MARK: - Properties
     

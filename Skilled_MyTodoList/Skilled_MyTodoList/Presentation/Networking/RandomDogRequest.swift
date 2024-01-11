@@ -7,8 +7,7 @@
 
 import Foundation
 
-class RandomDogRequest {
-    
+final class RandomDogRequest {
     static func decodeRandomDog(completion: @escaping (Result<RandomDog, Error>) -> Void) {
         if let url = URL(string: "https://api.thedogapi.com/v1/images/search") {
             let task = URLSession.shared.dataTask(with: url) { (data, res, error) in

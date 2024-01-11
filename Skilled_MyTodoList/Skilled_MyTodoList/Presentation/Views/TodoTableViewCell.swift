@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoTableViewCell: UITableViewCell {
+final class TodoTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
