@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol TodoListDelegate: AnyObject {
-    func didTapSwitch(isOn: Bool, indexPath: IndexPath)
-}
-
 class TodoTableViewCell: UITableViewCell {
     
     // MARK: - Properties

@@ -29,19 +29,15 @@ class TodoListVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         loadData()
     }
     
     func loadData() {
         let loadData = TodoData.loadAllData()
         
-        var category: [String] = []
-    
-        for data in loadData {
-            category.append(data.0.category)
-        }
-        
-        self.todoTableView.setTodoData(loadData, category)
+        self.todoTableView.setTodoData(loadData)
     }
 }
 

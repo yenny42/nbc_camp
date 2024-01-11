@@ -12,7 +12,6 @@ class TodoTableView: UIView {
     // MARK: - Properties
     
     var dataCategory: [String] = []
-    var dataList: [(TodoData, key: String)] = []
     var datas: [String: [(TodoData, key: String)]] = [:]
     
     // MARK: - UI Properties
@@ -30,11 +29,6 @@ class TodoTableView: UIView {
         super.init(frame: frame)
         
         setDelegate()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
         setUI()
     }
     
@@ -44,18 +38,16 @@ class TodoTableView: UIView {
     
     // MARK: Data Setting
 
-    func setTodoData(_ data: [(TodoData, key: String)], _ category: [String]) {
-        dataList = data
-        dataCategory = Set(category.map { $0.lowercased() }).sorted()
-        
+    func setTodoData(_ data: [(TodoData, key: String)]) {
         var groupedData: [String: [(TodoData, key: String)]] = [:]
         
+        dataCategory = Set(data.map { $0.0.category }).sorted()
+        
         for category in dataCategory {
-            let sectionData = dataList.filter { $0.0.category == category }
+            let sectionData = data.filter { $0.0.category == category }
             groupedData[category] = sectionData
         }
         
-        dataList = groupedData.flatMap { $0.value }
         datas = groupedData
         
         tableView.reloadData()
@@ -66,21 +58,15 @@ class TodoTableView: UIView {
 
 extension TodoTableView {
     private func setUI() {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fill
+        self.addSubview(tableView)
         
-        stackView.addArrangedSubview(tableView)
-        
-        self.addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: self.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
 }
@@ -151,19 +137,20 @@ extension TodoTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
+            
             let category = self.dataCategory[indexPath.section]
-            
-            let selectedData = self.datas[category]
-            if let deletedData = selectedData?[indexPath.row] {
-                TodoData.removeTodoData(forKey: deletedData.key)
-            }
-            
-            self.datas[category]?.remove(at: indexPath.row)
-            self.dataList = self.datas.flatMap { $0.value }
-            
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
+            print(self.datas)
+//            let selectedData = self.datas[category]
+//            
+//            if let deletedData = selectedData?[indexPath.row] {
+//                TodoData.removeTodoData(forKey: deletedData.key)
+//            }
+//            
+//            self.datas[category]?.remove(at: indexPath.row)
+//            
+//            tableView.beginUpdates()
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//            tableView.endUpdates()
             
             completionHandler(true)
         }
