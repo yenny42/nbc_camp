@@ -22,6 +22,8 @@ final class RandomDogVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         fetchRandomDog()
     }
     
