@@ -25,14 +25,14 @@
 <img src="https://github.com/yenny42/nbc_camp/assets/107637741/ce2ac975-317e-4a8c-950d-4e675ad5e01d" height="500"/>
 
 
-<br/>
+<br/><br/>
 
 ## 기술 스택
 - 언어 - Swift
 - 프레임워크 - UIKit, Gifu
 - 네트워크 통신 - URLSession
 
-<br/>
+<br/><br/>
 
 ## 구조 및 설계
 
@@ -41,53 +41,70 @@
 
 <br/>
 
-### Model
-- **TodoData**:
-  - Todo 데이터 `Struct`
-  - 프로퍼티: `category`, `title`, `isCompleted`
-
-- **RandomDog**, **Dog**:
-  - 이미지 정보 모델 `Struct`
-  - 랜덤 개 이미지 api Request 시 사용하는 타입
-
-<br/>
-
-### View
-- **HomeView**:
-  - 홈 화면 `UIStackView`
-  - 서브뷰: `mainImage`, `showTodoListButton`, `showCompletedListButton`, `showDogImage`
-
-- **TodoTableView**:
-  - 할 일 목록 `UITableView`
-  - 할 일 추가, 수정, 삭제
-  - 서브뷰: `TodoTableViewCell`
-
-- **CompletedListView**:
-  - 완료된 일 목록 `UITableView`
-
-- **RandomDogView**:
-  - 랜덤 개 이미지 `UIImageView`
-  - GIF 이미지 스켈레톤
+### MVC (Model-View-Controller) 아키텍처
+- **Model**
+  - `TodoData`, `RandomDog`, `RandomDogRequest`
+- **View**
+  - `HomeView`, `TodoTableView`, `TodoTableViewCell`, `CompletedListView`, `RandomDogView`
+- **ViControllerew**
+  - `HomeVC`, `TodoListVC`, `CompletedListVC`, `RandomDogVC`
 
 <br/>
 
-### Controller
-- **HomeVC**:
-  - 홈 화면 `ViewController`
-  - 화면 전환 및 데이터 처리
-  - 서브뷰 : `TodoListVC`, `CompletedListVC`, `RandomDogVC`
+### 1. 데이터 모델 (Model):
 
-- **TodoListVC**:
-  - 할 일 목록 `ViewController`
-  - UserDefaults - 할 일 추가, 완료 여부 수정, 삭제 
+- **TodoData 구조체:**
+  - 속성: 할 일의 카테고리, 제목, 완료 여부를 나타내는 데이터 구조체.
+  - 메서드: 데이터를 로컬 스토리지에 저장하고 불러오는 메서드를 제공.
 
-- **CompletedListVC**:
-  - 완료된 일 목록 `ViewController`
-  - UserDefaults - 완료된 일 목록 표시, 삭제
+### 2. 데이터 로딩 및 저장:
 
-- **RandomDogVC**:
-  - 랜덤 개 이미지 `ViewController`
-  - GIF 스켈레톤 처리 및 api 통신 & `UIImageView` 업데이트
+- **UserDefaults**
+  - `saveTodoData`
+  - `loadTodoData`
+  - `loadAllData`
+  - `updateTodoData`
+  - `removeTodoData`
+
+### 3. 컨트롤러 (Controller)와 뷰 (View) 간의 상호 작용:
+
+- **HomeVC**
+  - `HomeView` 메인화면 구성
+  - 버튼 클릭 액션 처리: 할 일 목록 보기, 완료된 일 보기, 랜덤 강아지 이미지 보기.
+
+- **TodoListVC**
+  - 할 일 목록 표시
+  - `TodoListDelegate` 프로토콜을 통해 스위치 토글 액션 처리.
+  - 데이터 로드: `loadData` 메서드를 통해 할 일 목록 로드.
+
+- **CompletedListVC**
+  - 완료된 일 목록 표시
+  - 데이터 로드: `loadData` 메서드를 통해 완료된 일 목록 로드.
+
+### 4. 네트워킹 및 이미지 로딩:
+
+- **RandomDogRequest 클래스:**
+  - 외부 API 호출하여 랜덤 강아지 이미지 가져오는 기능 담당.
+
+- **ImageLoader 클래스:**
+  - 이미지 비동기로 로딩.
+  - `RandomDogVC`에서 호출되어 강아지 이미지 표시.
+
+### 5. 뷰의 표현:
+
+- **HomeView:**
+  - 메인 이미지, 할 일 목록 보기 버튼, 완료된 일 보기 버튼, 랜덤 강아지 이미지 버튼을 포함하는 뷰.
+
+- **TodoTableView:**
+  - 할 일 목록을 테이블 뷰로 표시.
+  - `TodoTableViewCell`에서는 각 셀의 스위치 토글 액션을 `TodoListDelegate`를 통해 처리.
+
+- **CompletedListView:**
+  - 완료된 일 목록을 테이블 뷰로 표시.
+
+- **RandomDogView:**
+  - 랜덤 강아지 이미지를 표시하는 뷰.
+
 
 <br/>
 
@@ -97,7 +114,10 @@
   - https://api.thedogapi.com/v1/images/search `api request`
   - URLSession
 
-<br/><br/>
+- **ImageLoader**
+  - 이미지 URL을 사용하여 비동기 통신
+
+<br/><br/><br/><br/>
 
 ## 저번 투두리스트 피드백
 ```
