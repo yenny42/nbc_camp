@@ -6,6 +6,19 @@
 =============
 <br/>
 
+
+
+### 💡 8주차
+- <a href="https://github.com/NBCAMP-movie-team1/iOS" target="_blank">iOS 앱개발 숙련 팀과제 - 영화 예매 앱</a>
+
+<br/>
+
+### 💡 7주차
+- <a href="https://github.com/yenny42/nbc_camp/tree/main/WishLIst_Skilled" target="_blank">iOS 앱개발 숙련 개인실습 - 위시리스트</a>
+- <a href="https://github.com/yenny42/nbc_camp/tree/main/Skilled_MyTodoList" target="_blank">iOS 앱개발 숙련 개인과제 - 투두리스트</a>
+
+<br/>
+
 ### 💡 6주차
 - <a href="https://github.com/NBCAMP-kiosk-team3/iOS" target="_blank">iOS 앱개발 입문 팀과제 - 키오스크 UI</a>
 
