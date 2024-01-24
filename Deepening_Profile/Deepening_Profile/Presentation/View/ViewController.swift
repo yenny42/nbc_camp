@@ -9,7 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let gotoProfilePage: UIButton = {
+    // MARK: - UI Properties
+    
+    private let profileDesignViewController = ProfileDesignViewController()
+    
+    private let profileButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -20,7 +24,9 @@ class ViewController: UIViewController {
         
         return button
     }()
-
+    
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,17 +35,28 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions : UI & Laytout
+
 extension ViewController {
     private func setUI() {
         view.backgroundColor = .white
         
-        view.addSubview(gotoProfilePage)
+        view.addSubview(profileButton)
+        profileButton.addTarget(self, action: #selector(navigateToProfileDesignVC), for: .touchUpInside)
     }
     
     private func setLayout() {
         NSLayoutConstraint.activate([
-            gotoProfilePage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            gotoProfilePage.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            profileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            profileButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+}
+
+// MARK: - Extensions : @objc method
+
+extension ViewController {
+    @objc private func navigateToProfileDesignVC() {
+        self.navigationController?.pushViewController(profileDesignViewController, animated: true)
     }
 }
