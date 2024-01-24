@@ -13,6 +13,16 @@ class ViewController: UIViewController {
     
     private let profileDesignViewController = ProfileDesignViewController()
     
+    private let mainImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.backgroundColor = .systemGray6
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
+    }()
+    
     private let profileButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -30,26 +40,37 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setMainLogo()
         setUI()
         setLayout()
     }
 }
 
-// MARK: - Extensions : UI & Laytout
+// MARK: - Extensions : UI & Layout
 
 extension ViewController {
     private func setUI() {
         view.backgroundColor = .white
         
+        view.addSubview(mainImage)
         view.addSubview(profileButton)
         profileButton.addTarget(self, action: #selector(navigateToProfileDesignVC), for: .touchUpInside)
     }
     
     private func setLayout() {
         NSLayoutConstraint.activate([
+            mainImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            mainImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            mainImage.widthAnchor.constraint(equalToConstant: 250),
+            mainImage.heightAnchor.constraint(equalToConstant: 200),
+            
             profileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            profileButton.topAnchor.constraint(equalTo: mainImage.bottomAnchor, constant: 15)
         ])
+    }
+    
+    private func setMainLogo() {
+        ImageLoader.loadImage(from: "https://spartacodingclub.kr/css/images/scc-og.jpg", into: self.mainImage)
     }
 }
 
@@ -57,6 +78,7 @@ extension ViewController {
 
 extension ViewController {
     @objc private func navigateToProfileDesignVC() {
-        self.navigationController?.pushViewController(profileDesignViewController, animated: true)
+        profileDesignViewController.modalPresentationStyle = .fullScreen
+        present(profileDesignViewController, animated: true)
     }
 }

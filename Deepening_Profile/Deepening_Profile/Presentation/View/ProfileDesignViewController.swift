@@ -12,6 +12,13 @@ class ProfileDesignViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemPink
+        setUI()
+    }
+}
+
+extension ProfileDesignViewController {
+    
+    private func setUI() {
+        view.backgroundColor = .systemBlue
     }
 }
