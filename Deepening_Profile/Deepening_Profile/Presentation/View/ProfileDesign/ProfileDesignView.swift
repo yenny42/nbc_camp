@@ -31,6 +31,46 @@ class ProfileDesignView: UIView {
         return button
     }()
     
+    let userImage: UIImageView = {
+       let imageView = UIImageView(image: UIImage(named: "Ellipse"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.contentMode = .scaleAspectFit
+
+        return imageView
+    }()
+    
+    let infoLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.text = "르탄이\niOS Developer 🍎 \nspartacodingclub.kr"
+        label.numberOfLines = 0
+        
+        return label
+    }()
+    
+    let navigationBar: UINavigationBar = {
+        let imageView = UIImageView(image: UIImage(systemName: "person.fill"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = CGRect(x: 0, y: 0, width: 22.5, height: 22.75)
+        
+        let navigationItem = UINavigationItem()
+        navigationItem.titleView = imageView
+        navigationItem.titleView?.tintColor = .black
+        
+        let navigationBar = UINavigationBar()
+        navigationBar.items = [navigationItem]
+        
+        navigationBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        return navigationBar
+    }()
+    
+    let postView = UserActivityView(count: 100, title: "Post")
+    let followerView = UserActivityView(count: 200, title: "Follower")
+    let followingView = UserActivityView(count: 300, title: "Following")
+    
     // MARK: - Life Cycle
     
     override init(frame: CGRect) {
@@ -48,10 +88,13 @@ class ProfileDesignView: UIView {
 
 extension ProfileDesignView {
     private func setUI() {
-        self.backgroundColor = .systemBlue
+        self.backgroundColor = .white
         
         setUserId()
         setMenuButton()
+        setProfile()
+        setUserActivity()
+        setNavBar()
     }
     
     private func setUserId() {
@@ -67,6 +110,52 @@ extension ProfileDesignView {
         NSLayoutConstraint.activate([
             menuButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
             menuButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        ])
+    }
+    
+    private func setProfile() {
+        [userImage, infoLabel].forEach {
+            self.addSubview($0)
+        }
+        
+        NSLayoutConstraint.activate([
+            userImage.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 17.5),
+            userImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 14),
+            
+            infoLabel.topAnchor.constraint(equalTo: self.userImage.bottomAnchor, constant: 14),
+            infoLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+        ])
+    }
+    
+    private func setUserActivity() {    
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        [postView, followerView, followingView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+
+        self.addSubview(stackView)
+
+        NSLayoutConstraint.activate([
+            postView.trailingAnchor.constraint(equalTo: followerView.leadingAnchor, constant: -65),
+            followerView.trailingAnchor.constraint(equalTo: followingView.leadingAnchor, constant: -80),
+            followingView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            
+            stackView.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 41),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -90)
+        ])
+    }
+    
+    private func setNavBar() {
+        self.addSubview(navigationBar)
+        NSLayoutConstraint.activate([
+            navigationBar.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            navigationBar.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            navigationBar.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            navigationBar.heightAnchor.constraint(equalToConstant: 0),
         ])
     }
 }

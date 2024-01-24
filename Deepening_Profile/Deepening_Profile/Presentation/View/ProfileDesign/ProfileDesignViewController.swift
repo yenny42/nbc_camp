@@ -22,8 +22,9 @@ extension ProfileDesignViewController {
     private func setUI() {
         view.backgroundColor = .white
         
-        view.addSubview(profileDesignView)
         profileDesignView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(profileDesignView)
         NSLayoutConstraint.activate([
             profileDesignView.topAnchor.constraint(equalTo: view.topAnchor),
             profileDesignView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
