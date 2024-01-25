@@ -7,9 +7,13 @@
 
 import UIKit
 
-class TodoCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class TodoCollectionView: UICollectionView {
+    
+    // MARK: - Properties
     
     let cellIdentifier = "TodoCell"
+    
+    // MARK: - Life Cycle
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         let layout = UICollectionViewFlowLayout()
@@ -25,7 +29,11 @@ class TodoCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
         
         setupCollectionView()
     }
-    
+}
+
+// MARK: - Extensions
+
+extension TodoCollectionView {
     private func setupCollectionView() {
         self.backgroundColor = .white
         
@@ -33,8 +41,11 @@ class TodoCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
         self.dataSource = self
         self.delegate = self
     }
+}
+
+extension TodoCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    // MARK: - UICollectionViewDataSource
+    // MARK: UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20
@@ -47,7 +58,7 @@ class TodoCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
         return cell
     }
     
-    // MARK: - UICollectionViewDelegateFlowLayout
+    // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = (collectionView.bounds.width - 10) / 2
@@ -63,3 +74,4 @@ class TodoCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
         return 10
     }
 }
+

@@ -37,9 +37,11 @@ class GalleryCollectionView: UICollectionView {
         
         setCollectionView()
     }
-    
-    // MARK: - Setting
-    
+}
+
+// MARK: - Extensions
+
+extension GalleryCollectionView {
     private func setCollectionView() {
         backgroundColor = .white
         
@@ -51,7 +53,7 @@ class GalleryCollectionView: UICollectionView {
 
 extension GalleryCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    // MARK: - UICollectionViewDataSource
+    // MARK: UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return galleryImages.count
@@ -67,7 +69,7 @@ extension GalleryCollectionView: UICollectionViewDataSource, UICollectionViewDel
         return cell
     }
     
-    // MARK: - UICollectionViewDelegateFlowLayout
+    // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = (self.bounds.width - 4) / 3

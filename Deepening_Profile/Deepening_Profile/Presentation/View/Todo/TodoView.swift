@@ -9,6 +9,8 @@ import UIKit
 
 class TodoView: UIView {
     
+    // MARK: - UI Properties
+    
     private let viewModel = TodoViewModel()
     
     func dateFormat() -> String {
@@ -63,13 +65,7 @@ class TodoView: UIView {
         return todoCollectionView
     }()
     
-//    private lazy var todoList: TodoCollectionView = {
-//        let layout = UICollectionViewFlowLayout()
-//        let todoCollectionView = TodoCollectionView(frame: .zero, collectionViewLayout: layout)
-//        todoCollectionView.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        return todoCollectionView
-//    }()
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -84,6 +80,8 @@ class TodoView: UIView {
     
 }
 
+// MARK: - Extensions
+
 extension TodoView {
     private func setUI() {
         self.backgroundColor = .white
@@ -91,7 +89,7 @@ extension TodoView {
     
     private func setLayout() {
         
-        // Today Date Label
+        // MARK: Today Date Label
         
         self.addSubview(todayLabel)
         
@@ -100,7 +98,7 @@ extension TodoView {
             todayLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 3)
         ])
         
-        // Todo TextField, Add Button
+        // MARK: Todo TextField, Add Button
         
         [titleTextField, addButton].forEach {
             self.addSubview($0)
@@ -116,7 +114,7 @@ extension TodoView {
             addButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2),
         ])
         
-        // Todo List CollectionView
+        // MARK: Todo List CollectionView
         
         self.addSubview(todoList)
         

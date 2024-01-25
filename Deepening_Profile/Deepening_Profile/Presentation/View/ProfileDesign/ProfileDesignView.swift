@@ -217,7 +217,7 @@ class ProfileDesignView: UIView{
     }
 }
 
-// MARK: - Extensions : UI & Layout
+// MARK: - Extensions : UI Setting
 
 extension ProfileDesignView {
     private func setUI() {
@@ -232,6 +232,8 @@ extension ProfileDesignView {
         setGallery()
         setNavBar()
     }
+    
+    // MARK: Auto Layout
     
     private func setUserId() {
         self.addSubview(userID)
@@ -317,7 +319,6 @@ extension ProfileDesignView {
             galleryView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -44),
         ])
     }
-    
     
     private func setNavBar() {
         self.addSubview(navigationBar)

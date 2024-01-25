@@ -9,7 +9,11 @@ import UIKit
 
 class TodoViewController: UIViewController {
     
+    // MARK: - UI Properties
+    
     let todoView = TodoView()
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +22,8 @@ class TodoViewController: UIViewController {
         setLayout()
     }
 }
+
+// MARK: - Extensions
 
 extension TodoViewController {
     private func setUI() {

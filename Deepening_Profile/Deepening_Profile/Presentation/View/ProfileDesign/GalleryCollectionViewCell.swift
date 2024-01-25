@@ -8,7 +8,12 @@
 import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
+    
     static let identifier = "ImageCollectionViewCellIdentifier"
+    
+    // MARK: - UI Properties
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -19,6 +24,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
         
         return imageView
     }()
+    
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
