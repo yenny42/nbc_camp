@@ -301,7 +301,7 @@ extension ProfileDesignView {
     private func setGalleryNav() {
         self.addSubview(galleryNav)
         NSLayoutConstraint.activate([
-            galleryNav.topAnchor.constraint(equalTo: self.moreButton.bottomAnchor, constant: 50),
+            galleryNav.topAnchor.constraint(equalTo: self.moreButton.bottomAnchor, constant: 30),
             galleryNav.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             galleryNav.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         ])
@@ -313,7 +313,7 @@ extension ProfileDesignView {
             galleryView.topAnchor.constraint(equalTo: self.galleryNav.bottomAnchor, constant: 0),
             galleryView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             galleryView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            galleryView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -85),
+            galleryView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -44),
         ])
     }
     
@@ -321,7 +321,7 @@ extension ProfileDesignView {
     private func setNavBar() {
         self.addSubview(navigationBar)
         NSLayoutConstraint.activate([
-            navigationBar.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -44),
+            navigationBar.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             navigationBar.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             navigationBar.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         ])
