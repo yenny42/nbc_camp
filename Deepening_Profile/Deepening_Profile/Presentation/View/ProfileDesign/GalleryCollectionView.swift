@@ -29,20 +29,21 @@ class GalleryCollectionView: UICollectionView {
         
         super.init(frame: frame, collectionViewLayout: layout)
         
-        setupCollectionView()
+        setCollectionView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        setupCollectionView()
+        setCollectionView()
     }
     
     // MARK: - Setting
     
-    private func setupCollectionView() {
-        register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
+    private func setCollectionView() {
         backgroundColor = .white
+        
+        register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
         dataSource = self
         delegate = self
     }

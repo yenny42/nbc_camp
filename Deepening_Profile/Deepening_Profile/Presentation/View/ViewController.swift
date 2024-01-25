@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     private lazy var profileDesignViewController = ProfileDesignViewController()
     private lazy var profileViewController = ProfileViewController()
+    private lazy var todoViewController = TodoViewController()
     
     private let mainImage: UIImageView = {
         let imageView = UIImageView()
@@ -63,6 +64,7 @@ extension ViewController {
         
         level1Button.addTarget(self, action: #selector(navigateToProfileDesignVC), for: .touchUpInside)
         level2Button.addTarget(self, action: #selector(navigateToProfileVC), for: .touchUpInside)
+        level3Button.addTarget(self, action: #selector(navigateToTodoVC), for: .touchUpInside)
     }
     
     private func setLayout() {
@@ -103,5 +105,9 @@ extension ViewController {
         profileViewController.viewModel = viewModel
         
         present(profileViewController, animated: true)
+    }
+    
+    @objc private func navigateToTodoVC() {
+        self.navigationController?.pushViewController(todoViewController, animated: true)
     }
 }
