@@ -67,9 +67,68 @@ class ProfileDesignView: UIView {
         return navigationBar
     }()
     
-    let postView = UserActivityView(count: 100, title: "Post")
-    let followerView = UserActivityView(count: 200, title: "Follower")
-    let followingView = UserActivityView(count: 300, title: "Following")
+    let post: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let count = UILabel()
+        count.text = "100"
+        
+        let title = UILabel()
+        title.text = "post"
+        
+        [count, title].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        
+        return stackView
+    }()
+    
+    let follower: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let count = UILabel()
+        count.text = "200"
+        
+        let title = UILabel()
+        title.text = "follower"
+        
+        [count, title].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        
+        return stackView
+    }()
+
+    let following: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let count = UILabel()
+        count.text = "300"
+        
+        let title = UILabel()
+        title.text = "following"
+        
+        [count, title].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        
+        return stackView
+    }()
     
     // MARK: - Life Cycle
     
@@ -127,26 +186,24 @@ extension ProfileDesignView {
         ])
     }
     
-    private func setUserActivity() {    
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        [postView, followerView, followingView].forEach {
-            stackView.addArrangedSubview($0)
+    private func setUserActivity() {
+        [post, follower, following].forEach {
+            self.addSubview($0)
         }
 
-        self.addSubview(stackView)
-
         NSLayoutConstraint.activate([
-            postView.trailingAnchor.constraint(equalTo: followerView.leadingAnchor, constant: -65),
-            followerView.trailingAnchor.constraint(equalTo: followingView.leadingAnchor, constant: -80),
-            followingView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            post.trailingAnchor.constraint(equalTo: self.follower.leadingAnchor, constant: -20),
+            follower.trailingAnchor.constraint(equalTo: self.following.leadingAnchor, constant: -15),
+            following.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
             
-            stackView.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 41),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -90)
+            post.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 41),
+            follower.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 41),
+            following.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 41),
         ])
+    }
+    
+    private func setNavGallery() {
+        
     }
     
     private func setNavBar() {
