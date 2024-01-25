@@ -9,6 +9,8 @@ import UIKit
 
 class TodoView: UIView {
     
+    private let viewModel = TodoViewModel()
+    
     func dateFormat() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
@@ -23,7 +25,7 @@ class TodoView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "오늘 날짜 : \(dateFormat())"
+        label.text = "오늘 날짜 : \(viewModel.dateFormat())"
         label.font = UIFont.systemFont(ofSize: 16)
         
         return label
@@ -54,7 +56,20 @@ class TodoView: UIView {
         return button
     }()
     
+    private lazy var todoList: TodoCollectionView = {
+        let todoCollectionView = TodoCollectionView()
+        todoCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return todoCollectionView
+    }()
     
+//    private lazy var todoList: TodoCollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        let todoCollectionView = TodoCollectionView(frame: .zero, collectionViewLayout: layout)
+//        todoCollectionView.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        return todoCollectionView
+//    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -75,12 +90,17 @@ extension TodoView {
     }
     
     private func setLayout() {
+        
+        // Today Date Label
+        
         self.addSubview(todayLabel)
         
         NSLayoutConstraint.activate([
             todayLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
             todayLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18)
         ])
+        
+        // Todo TextField, Add Button
         
         [titleTextField, addButton].forEach {
             self.addSubview($0)
@@ -94,6 +114,17 @@ extension TodoView {
             addButton.topAnchor.constraint(equalTo: self.todayLabel.bottomAnchor, constant: 15),
             addButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
             addButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2),
+        ])
+        
+        // Todo List CollectionView
+        
+        self.addSubview(todoList)
+        
+        NSLayoutConstraint.activate([
+            todoList.topAnchor.constraint(equalTo: self.addButton.bottomAnchor, constant: 30),
+            todoList.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+            todoList.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
+            todoList.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

@@ -182,6 +182,7 @@ class ProfileDesignView: UIView{
     private lazy var galleryView: GalleryCollectionView = {
         let galleryView = GalleryCollectionView()
         galleryView.translatesAutoresizingMaskIntoConstraints = false
+        
         return galleryView
     }()
     

@@ -1,5 +1,5 @@
 //
-//  Gallery.swift
+//  TodoCollectionView.swift
 //  Deepening_Profile
 //
 //  Created by t2023-m0035 on 1/25/24.
@@ -7,21 +7,9 @@
 
 import UIKit
 
-class GalleryCollectionView: UICollectionView {
+class TodoCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    // MARK: - Properties
-    
-    private let galleryImages = [
-        UIImage(named: "Picture1"),
-        UIImage(named: "Picture2"),
-        UIImage(named: "Picture3"),
-        UIImage(named: "Picture4"),
-        UIImage(named: "Picture5"),
-        UIImage(named: "Picture6"),
-        UIImage(named: "Picture7"),
-    ]
-    
-    // MARK: - Life Cycle
+    let cellIdentifier = "TodoCell"
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         let layout = UICollectionViewFlowLayout()
@@ -29,40 +17,32 @@ class GalleryCollectionView: UICollectionView {
         
         super.init(frame: frame, collectionViewLayout: layout)
         
-        setCollectionView()
+        setupCollectionView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        setCollectionView()
+        setupCollectionView()
     }
     
-    // MARK: - Setting
-    
-    private func setCollectionView() {
-        backgroundColor = .white
+    private func setupCollectionView() {
+        self.backgroundColor = .white
         
-        register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
-        dataSource = self
-        delegate = self
+        self.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        self.dataSource = self
+        self.delegate = self
     }
-}
-
-extension GalleryCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return galleryImages.count
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as? ImageCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        cell.imageView.image = self.galleryImages[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+        cell.backgroundColor = .lightGray
         
         return cell
     }
@@ -70,12 +50,12 @@ extension GalleryCollectionView: UICollectionViewDataSource, UICollectionViewDel
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = (self.bounds.width - 4) / 3
+        let cellWidth = (collectionView.bounds.width - 10) / 2
         
         return CGSize(width: cellWidth, height: cellWidth)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
+        return 10
     }
 }
