@@ -170,7 +170,6 @@ class ProfileDesignView: UIView{
         imageView.contentMode = .scaleAspectFit
         
         let imageView2 = UIImageView(image: UIImage(systemName: ""))
-        
         let imageView3 = UIImageView(image: UIImage(systemName: ""))
         
         [imageView, imageView2, imageView3].forEach {

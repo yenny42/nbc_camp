@@ -11,7 +11,8 @@ class ViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    private let profileDesignViewController = ProfileDesignViewController()
+    private lazy var profileDesignViewController = ProfileDesignViewController()
+    private lazy var profileViewController = ProfileViewController()
     
     private let mainImage: UIImageView = {
         let imageView = UIImageView()
@@ -61,6 +62,7 @@ extension ViewController {
         }
         
         level1Button.addTarget(self, action: #selector(navigateToProfileDesignVC), for: .touchUpInside)
+        level2Button.addTarget(self, action: #selector(navigateToProfileVC), for: .touchUpInside)
     }
     
     private func setLayout() {
@@ -93,5 +95,13 @@ extension ViewController {
     @objc private func navigateToProfileDesignVC() {
         profileDesignViewController.modalPresentationStyle = .fullScreen
         present(profileDesignViewController, animated: true)
+    }
+    
+    @objc private func navigateToProfileVC() {
+        let userProfile = UserProfile(userName: "최예은", userAge: 25)
+        let viewModel = ProfileViewModel(userProfile: userProfile)
+        profileViewController.viewModel = viewModel
+        
+        present(profileViewController, animated: true)
     }
 }
