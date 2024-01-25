@@ -16,8 +16,9 @@
 		1BBB7BC22B6107D3008F2E52 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BC12B6107D3008F2E52 /* ImageLoader.swift */; };
 		1BBB7BC42B610A73008F2E52 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BC32B610A73008F2E52 /* User.swift */; };
 		1BBB7BC72B610BE7008F2E52 /* ProfileDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BC62B610BE7008F2E52 /* ProfileDesignView.swift */; };
-		1BBB7BCD2B612F03008F2E52 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BCC2B612F03008F2E52 /* CollectionView.swift */; };
 		1BBB7BD02B61DF15008F2E52 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BCF2B61DF14008F2E52 /* CustomButton.swift */; };
+		1BBB7BD42B61ECCA008F2E52 /* GalleryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BD32B61ECCA008F2E52 /* GalleryCollectionView.swift */; };
+		1BBB7BD62B61F3D1008F2E52 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BD52B61F3D1008F2E52 /* GalleryCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +33,9 @@
 		1BBB7BC12B6107D3008F2E52 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		1BBB7BC32B610A73008F2E52 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = Deepening_Profile/Global/Utilites/User.swift; sourceTree = SOURCE_ROOT; };
 		1BBB7BC62B610BE7008F2E52 /* ProfileDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDesignView.swift; sourceTree = "<group>"; };
-		1BBB7BCC2B612F03008F2E52 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		1BBB7BCF2B61DF14008F2E52 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		1BBB7BD32B61ECCA008F2E52 /* GalleryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionView.swift; sourceTree = "<group>"; };
+		1BBB7BD52B61F3D1008F2E52 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +151,8 @@
 			children = (
 				1B48CC462B60FF6C00741BA7 /* ProfileDesignViewController.swift */,
 				1BBB7BC62B610BE7008F2E52 /* ProfileDesignView.swift */,
-				1BBB7BCC2B612F03008F2E52 /* CollectionView.swift */,
+				1BBB7BD52B61F3D1008F2E52 /* GalleryCollectionViewCell.swift */,
+				1BBB7BD32B61ECCA008F2E52 /* GalleryCollectionView.swift */,
 			);
 			path = ProfileDesign;
 			sourceTree = "<group>";
@@ -232,12 +235,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BBB7BC72B610BE7008F2E52 /* ProfileDesignView.swift in Sources */,
+				1BBB7BD62B61F3D1008F2E52 /* GalleryCollectionViewCell.swift in Sources */,
 				1B48CC492B60FFEC00741BA7 /* MainViewModel.swift in Sources */,
 				1B48CC302B60FB3200741BA7 /* ViewController.swift in Sources */,
 				1BBB7BC22B6107D3008F2E52 /* ImageLoader.swift in Sources */,
 				1B48CC2C2B60FB3200741BA7 /* AppDelegate.swift in Sources */,
-				1BBB7BCD2B612F03008F2E52 /* CollectionView.swift in Sources */,
 				1BBB7BD02B61DF15008F2E52 /* CustomButton.swift in Sources */,
+				1BBB7BD42B61ECCA008F2E52 /* GalleryCollectionView.swift in Sources */,
 				1B48CC472B60FF6C00741BA7 /* ProfileDesignViewController.swift in Sources */,
 				1B48CC2E2B60FB3200741BA7 /* SceneDelegate.swift in Sources */,
 				1BBB7BC42B610A73008F2E52 /* User.swift in Sources */,

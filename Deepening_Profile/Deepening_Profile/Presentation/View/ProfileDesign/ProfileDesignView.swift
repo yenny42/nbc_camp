@@ -7,12 +7,12 @@
 
 import UIKit
 
-class ProfileDesignView: UIView {
+class ProfileDesignView: UIView{
     
     // MARK: - UI Properties
     
-    let userID: UILabel = {
-       let label = UILabel()
+    private lazy var userID: UILabel = {
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.text = "nabaecamp"
@@ -22,8 +22,8 @@ class ProfileDesignView: UIView {
         return label
     }()
     
-    let menuButton: UIButton = {
-       let button = UIButton()
+    private lazy var menuButton: UIButton = {
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.setImage(UIImage(named: "Menu"), for: .normal)
@@ -31,16 +31,16 @@ class ProfileDesignView: UIView {
         return button
     }()
     
-    let userImage: UIImageView = {
-       let imageView = UIImageView(image: UIImage(named: "Ellipse"))
+    private lazy var userImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "Ellipse"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         imageView.contentMode = .scaleAspectFit
-
+        
         return imageView
     }()
     
-    let infoLabel: UILabel = {
+    private lazy var infoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -50,25 +50,8 @@ class ProfileDesignView: UIView {
         return label
     }()
     
-    let navigationBar: UINavigationBar = {
-        let imageView = UIImageView(image: UIImage(systemName: "person.fill"))
-        imageView.contentMode = .scaleAspectFit
-        imageView.frame = CGRect(x: 0, y: 0, width: 22.5, height: 22.75)
-        
-        let navigationItem = UINavigationItem()
-        navigationItem.titleView = imageView
-        navigationItem.titleView?.tintColor = .black
-        
-        let navigationBar = UINavigationBar()
-        navigationBar.items = [navigationItem]
-        
-        navigationBar.translatesAutoresizingMaskIntoConstraints = false
-        
-        return navigationBar
-    }()
-    
-    let post: UIStackView = {
-       let stackView = UIStackView()
+    private lazy var post: UIStackView = {
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .center
@@ -88,8 +71,8 @@ class ProfileDesignView: UIView {
         return stackView
     }()
     
-    let follower: UIStackView = {
-       let stackView = UIStackView()
+    private lazy var follower: UIStackView = {
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .center
@@ -108,9 +91,9 @@ class ProfileDesignView: UIView {
         
         return stackView
     }()
-
-    let following: UIStackView = {
-       let stackView = UIStackView()
+    
+    private lazy var following: UIStackView = {
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .center
@@ -129,6 +112,97 @@ class ProfileDesignView: UIView {
         
         return stackView
     }()
+    
+    private lazy var followButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        button.setTitle("Follow", for: .normal)
+        button.layer.cornerRadius = 4
+        button.backgroundColor = .systemBlue
+        
+        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        return button
+    }()
+    
+    private lazy var messageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        button.setTitle("Message", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 4
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.systemGray3.cgColor
+        
+        return button
+    }()
+    
+    private lazy var moreButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
+        
+        button.setImage(UIImage(named: "More"), for: .normal)
+        button.layer.cornerRadius = 4
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.systemGray3.cgColor
+        
+        return button
+    }()
+    
+    private lazy var galleryNav: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 0
+        stackView.backgroundColor = .systemGray6
+        
+        let imageView = UIImageView(image: UIImage(named: "Grid"))
+        imageView.contentMode = .scaleAspectFit
+        
+        let imageView2 = UIImageView(image: UIImage(systemName: ""))
+        
+        let imageView3 = UIImageView(image: UIImage(systemName: ""))
+        
+        [imageView, imageView2, imageView3].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        
+        return stackView
+    }()
+
+    private lazy var galleryView: GalleryCollectionView = {
+        let galleryView = GalleryCollectionView()
+        galleryView.translatesAutoresizingMaskIntoConstraints = false
+        return galleryView
+    }()
+    
+    private lazy var navigationBar: UINavigationBar = {
+        let imageView = UIImageView(image: UIImage(systemName: "person.fill"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = CGRect(x: 0, y: 0, width: 22.5, height: 22.75)
+        
+        let navigationItem = UINavigationItem()
+        navigationItem.titleView = imageView
+        navigationItem.titleView?.tintColor = .black
+        
+        let navigationBar = UINavigationBar()
+        navigationBar.items = [navigationItem]
+        
+        navigationBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        return navigationBar
+    }()
+    
     
     // MARK: - Life Cycle
     
@@ -153,6 +227,9 @@ extension ProfileDesignView {
         setMenuButton()
         setProfile()
         setUserActivity()
+        setButtons()
+        setGalleryNav()
+        setGallery()
         setNavBar()
     }
     
@@ -190,7 +267,7 @@ extension ProfileDesignView {
         [post, follower, following].forEach {
             self.addSubview($0)
         }
-
+        
         NSLayoutConstraint.activate([
             post.trailingAnchor.constraint(equalTo: self.follower.leadingAnchor, constant: -20),
             follower.trailingAnchor.constraint(equalTo: self.following.leadingAnchor, constant: -15),
@@ -202,17 +279,52 @@ extension ProfileDesignView {
         ])
     }
     
-    private func setNavGallery() {
+    private func setButtons() {
+        [followButton, messageButton, moreButton].forEach {
+            self.addSubview($0)
+        }
         
+        NSLayoutConstraint.activate([
+            followButton.topAnchor.constraint(equalTo: self.infoLabel.bottomAnchor, constant: 15),
+            messageButton.topAnchor.constraint(equalTo: self.infoLabel.bottomAnchor, constant: 15),
+            moreButton.topAnchor.constraint(equalTo: self.infoLabel.bottomAnchor, constant: 15),
+            
+            followButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+            followButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5, constant: -45),
+            
+            messageButton.leadingAnchor.constraint(equalTo: followButton.trailingAnchor, constant: 15),
+            messageButton.widthAnchor.constraint(equalTo: followButton.widthAnchor),
+            
+            moreButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
+        ])
     }
+    
+    private func setGalleryNav() {
+        self.addSubview(galleryNav)
+        NSLayoutConstraint.activate([
+            galleryNav.topAnchor.constraint(equalTo: self.moreButton.bottomAnchor, constant: 50),
+            galleryNav.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            galleryNav.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+        ])
+    }
+    
+    private func setGallery() {
+        self.addSubview(galleryView)
+        NSLayoutConstraint.activate([
+            galleryView.topAnchor.constraint(equalTo: self.galleryNav.bottomAnchor, constant: 0),
+            galleryView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            galleryView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            galleryView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -85),
+        ])
+    }
+    
     
     private func setNavBar() {
         self.addSubview(navigationBar)
         NSLayoutConstraint.activate([
-            navigationBar.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            navigationBar.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -44),
             navigationBar.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             navigationBar.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            navigationBar.heightAnchor.constraint(equalToConstant: 0),
         ])
     }
 }
