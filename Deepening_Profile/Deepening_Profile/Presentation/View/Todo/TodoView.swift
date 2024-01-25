@@ -97,7 +97,7 @@ extension TodoView {
         
         NSLayoutConstraint.activate([
             todayLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
-            todayLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18)
+            todayLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 3)
         ])
         
         // Todo TextField, Add Button
@@ -108,11 +108,11 @@ extension TodoView {
         
         NSLayoutConstraint.activate([
             titleTextField.topAnchor.constraint(equalTo: self.todayLabel.bottomAnchor, constant: 15),
-            titleTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
-            titleTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            titleTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            titleTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8, constant: -15),
             
             addButton.topAnchor.constraint(equalTo: self.todayLabel.bottomAnchor, constant: 15),
-            addButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
+            addButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             addButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2),
         ])
         
@@ -122,8 +122,8 @@ extension TodoView {
         
         NSLayoutConstraint.activate([
             todoList.topAnchor.constraint(equalTo: self.addButton.bottomAnchor, constant: 30),
-            todoList.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
-            todoList.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
+            todoList.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            todoList.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             todoList.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
     }

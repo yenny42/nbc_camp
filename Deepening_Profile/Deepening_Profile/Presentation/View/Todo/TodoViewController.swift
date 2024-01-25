@@ -31,8 +31,8 @@ extension TodoViewController {
         view.addSubview(todoView)
         NSLayoutConstraint.activate([
             todoView.topAnchor.constraint(equalTo: view.topAnchor),
-            todoView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            todoView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            todoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            todoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             todoView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
