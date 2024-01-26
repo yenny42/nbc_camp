@@ -55,11 +55,12 @@ extension TodoViewController {
 
 extension TodoViewController {
     private func setAddTarget() {
-        todoView.addButton.addTarget(self, action: #selector(navigateToDetailTodo), for: .touchUpInside)
+        todoView.addButton.addTarget(self, action: #selector(didTapAddTodoButton), for: .touchUpInside)
+        todoView.todoList.didSelectItemAction = didSelectItem(selectedItem:)
     }
     
     @objc
-    private func navigateToDetailTodo() {
+    private func didTapAddTodoButton() {
         if todoView.titleTextField.text?.count != 0 {
             let title = todoView.titleTextField.text!
             
@@ -70,5 +71,10 @@ extension TodoViewController {
         } else {
             print("할 일을 입력해주세요 alert창 띄우기")
         }
+    }
+    
+    func didSelectItem(selectedItem: Todo) {
+        let todoDetailViewController = TodoDetailViewController(data: selectedItem)
+        self.navigationController?.pushViewController(todoDetailViewController, animated: true)
     }
 }

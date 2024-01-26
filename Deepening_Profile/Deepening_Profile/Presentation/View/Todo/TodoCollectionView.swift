@@ -9,11 +9,10 @@ import UIKit
 
 class TodoCollectionView: UICollectionView {
     
+    var didSelectItemAction: ((Todo) -> Void)?
     private let viewModel: TodoViewModel
     var data: [Todo] = [] {
         didSet {
-//            print("collectionView")
-//            print(data)
             reloadData()
         }
     }
@@ -92,3 +91,15 @@ extension TodoCollectionView: UICollectionViewDataSource, UICollectionViewDelega
     }
 }
 
+// MARK: UICollectionViewDelegate
+
+extension TodoCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        print(data[indexPath.row])
+        
+        let selectedItem = data[indexPath.row]
+        
+        // 클로저가 설정되어 있다면 실행
+        didSelectItemAction?(selectedItem)
+    }
+}
