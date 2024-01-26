@@ -9,10 +9,6 @@ import UIKit
 
 class TodoCollectionView: UICollectionView {
     
-    // MARK: - Properties
-    
-    let cellIdentifier = "TodoCell"
-    
     // MARK: - Life Cycle
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -37,7 +33,7 @@ extension TodoCollectionView {
     private func setupCollectionView() {
         self.backgroundColor = .white
         
-        self.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        self.register(TodoCollectionViewCell.self, forCellWithReuseIdentifier: TodoCollectionViewCell.identifier)
         self.dataSource = self
         self.delegate = self
     }
@@ -52,8 +48,12 @@ extension TodoCollectionView: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
-        cell.backgroundColor = .lightGray
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodoCollectionViewCell.identifier, for: indexPath) as? TodoCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        cell.title.text = "title"
+        cell.createDate.text = "2000.00.00"
         
         return cell
     }
@@ -62,8 +62,9 @@ extension TodoCollectionView: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = (collectionView.bounds.width - 10) / 2
+        let cellHeight = cellWidth * 3/4
         
-        return CGSize(width: cellWidth, height: cellWidth)
+        return CGSize(width: cellWidth, height: cellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
