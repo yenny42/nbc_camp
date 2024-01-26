@@ -74,7 +74,7 @@ extension TodoViewController {
     }
     
     func didSelectItem(selectedItem: Todo) {
-        let todoDetailViewController = TodoDetailViewController(data: selectedItem)
+        let todoDetailViewController = TodoDetailViewController(data: selectedItem, viewModel: viewModel)
         self.navigationController?.pushViewController(todoDetailViewController, animated: true)
     }
 }
