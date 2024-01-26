@@ -9,31 +9,23 @@ import UIKit
 
 class TodoView: UIView {
     
+    // MARK: - View Model
+    
+    private let viewModel: TodoViewModel
+    
     // MARK: - UI Properties
-    
-    private let viewModel = TodoViewModel()
-    
-    func dateFormat() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        
-        let currentDate = Date()
-        let formattedDate = dateFormatter.string(from: currentDate)
-        
-        return formattedDate
-    }
     
     private lazy var todayLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "오늘 날짜 : \(viewModel.dateFormat())"
+        label.text = "오늘 날짜 : \(viewModel.dateFormat(Date()))"
         label.font = UIFont.systemFont(ofSize: 16)
         
         return label
     }()
     
-    private lazy var titleTextField: UITextField = {
+    lazy var titleTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -47,7 +39,7 @@ class TodoView: UIView {
         return textField
     }()
     
-    private lazy var addButton: UIButton = {
+    lazy var addButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -58,17 +50,19 @@ class TodoView: UIView {
         return button
     }()
     
-    private lazy var todoList: TodoCollectionView = {
-        let todoCollectionView = TodoCollectionView()
+    lazy var todoList: TodoCollectionView = {
+        let todoCollectionView = TodoCollectionView(viewModel: viewModel)
         todoCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return todoCollectionView
     }()
     
     // MARK: - Life Cycle
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+
+    init(viewModel: TodoViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(frame: .zero)
         
         setUI()
         setLayout()
@@ -78,6 +72,10 @@ class TodoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func updateData() {
+        titleTextField.text = ""
+        todoList.setData()
+    }
 }
 
 // MARK: - Extensions

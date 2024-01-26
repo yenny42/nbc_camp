@@ -9,21 +9,35 @@ import UIKit
 
 class TodoCollectionView: UICollectionView {
     
+    private let viewModel: TodoViewModel
+    var data: [Todo] = [] {
+        didSet {
+//            print("collectionView")
+//            print(data)
+            reloadData()
+        }
+    }
+    
     // MARK: - Life Cycle
     
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    init(viewModel: TodoViewModel) {
+        self.viewModel = viewModel
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         
-        super.init(frame: frame, collectionViewLayout: layout)
+        super.init(frame: .zero, collectionViewLayout: layout)
         
         setupCollectionView()
+        setData()
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        setupCollectionView()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setData() {
+        data = viewModel.readData()
     }
 }
 
@@ -44,7 +58,7 @@ extension TodoCollectionView: UICollectionViewDataSource, UICollectionViewDelega
     // MARK: UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -52,8 +66,10 @@ extension TodoCollectionView: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         }
         
-        cell.title.text = "title"
-        cell.createDate.text = "2000.00.00"
+        let item = data[indexPath.row]
+        
+        cell.title.text = item.title
+        cell.createDate.text = String(describing: viewModel.dateFormat(item.createDate))
         
         return cell
     }
