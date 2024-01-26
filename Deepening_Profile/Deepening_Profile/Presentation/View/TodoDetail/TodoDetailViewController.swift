@@ -11,8 +11,8 @@ class TodoDetailViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var data: Todo?
-    private var viewModel: TodoViewModel?
+    private var data: Todo
+    private var viewModel: TodoViewModel
     
     // MARK: - UI Properties
     
@@ -20,7 +20,7 @@ class TodoDetailViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "등록일 : "
+        label.text = "등록일 : \(String(describing: viewModel.dateFormat(data.createDate)))"
         
         return label
     }()
@@ -29,8 +29,13 @@ class TodoDetailViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "수정일 : "
-        
+        if let modifyDate = data.modifyDate {
+            let formattedDate = viewModel.dateFormat(modifyDate)
+            label.text = "수정일 : \(String(describing: formattedDate))"
+        } else {
+            label.text = "수정일 : -"
+        }
+
         return label
     }()
     
@@ -52,7 +57,7 @@ class TodoDetailViewController: UIViewController {
         let heightRatio: CGFloat = 0.5
         textField.heightAnchor.constraint(equalToConstant: screenHeight * heightRatio).isActive = true
         
-        textField.text = data?.title
+        textField.text = data.title
         textField.borderStyle = .roundedRect
         textField.placeholder = "할 일을 입력하세요"
         
@@ -102,7 +107,6 @@ class TodoDetailViewController: UIViewController {
         setUI()
         setLayout()
     }
-    
 }
 
 // MARK: - Extensions

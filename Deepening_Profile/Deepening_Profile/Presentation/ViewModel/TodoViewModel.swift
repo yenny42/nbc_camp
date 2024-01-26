@@ -16,39 +16,55 @@ class TodoViewModel {
     
     func saveData(title: String) {
         guard let context = self.persistentContainer?.viewContext else { return }
-        
-        let newTodo = TodoItem(context: context)
-        
-        newTodo.id = UUID()
-        newTodo.title = title
-        newTodo.createDate = Date()
-        newTodo.isCompleted = false
-        
-        try? context.save()
+
+        if title.count > 30 {
+            print("30자 이내로 입력하라는 alert")
+            return
+        }
+
+        do {
+            let newTodo = TodoItem(context: context)
+            newTodo.id = UUID()
+            newTodo.title = title
+            newTodo.createDate = Date()
+            newTodo.isCompleted = false
+            
+            try context.save()
+        } catch {
+            print("Error saving todo: \(error)")
+        }
     }
+
 
     func readData() -> [Todo] {
         guard let context = self.persistentContainer?.viewContext else { return [] }
         
         let request = TodoItem.fetchRequest()
-        let todos = try? context.fetch(request)
         
-        var data: [Todo] = []
-        
-        for todo in todos! {
-            let todoModel = Todo(
-                id: String(describing: todo.id),
-                title: todo.title!,
-                createDate: todo.createDate!,
-                modifyDate: todo.modifyDate ?? nil,
-                isCompleted: todo.isCompleted
-            )
+        do {
+            let todos = try context.fetch(request)
             
-            data.append(todoModel)
+            var data: [Todo] = []
+            
+            for todo in todos {
+                let todoModel = Todo(
+                    id: String(describing: todo.id),
+                    title: todo.title!,
+                    createDate: todo.createDate!,
+                    modifyDate: todo.modifyDate ?? nil,
+                    isCompleted: todo.isCompleted
+                )
+                
+                data.append(todoModel)
+            }
+            
+            return data
+        } catch {
+            print("Error fetching todos: \(error)")
+            return []
         }
-        
-        return data
     }
+
     
     func updateData() {
         guard let context = self.persistentContainer?.viewContext else { return }
