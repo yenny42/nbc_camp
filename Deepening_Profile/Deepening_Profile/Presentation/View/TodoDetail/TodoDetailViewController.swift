@@ -54,7 +54,7 @@ class TodoDetailViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         let screenHeight = UIScreen.main.bounds.height
-        let heightRatio: CGFloat = 0.5
+        let heightRatio: CGFloat = 0.2
         textField.heightAnchor.constraint(equalToConstant: screenHeight * heightRatio).isActive = true
         
         textField.text = data.title
@@ -142,7 +142,7 @@ extension TodoDetailViewController {
             
             buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
     }
     
