@@ -11,6 +11,7 @@ class TodoCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
+    weak var delegate: TodoCellDelegate?
     static let identifier = "TodoCollectionViewCellIdentifier"
     
     // MARK: - UI Properties
@@ -38,7 +39,7 @@ class TodoCollectionViewCell: UICollectionViewCell {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setImage(UIImage(systemName: "checkmark.bubble"), for: .normal)
+        button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         button.tintColor = .systemGray2
         
         return button
@@ -60,6 +61,8 @@ class TodoCollectionViewCell: UICollectionViewCell {
 
 extension TodoCollectionViewCell {
     private func setUI() {
+        checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
+        
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.systemGray4.cgColor
         self.layer.cornerRadius = 10
@@ -81,5 +84,13 @@ extension TodoCollectionViewCell {
             title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             title.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
         ])
+    }
+}
+
+// MARK: TodoCellDelegate Method
+
+extension TodoCollectionViewCell {
+    @objc private func checkButtonTapped() {
+        delegate?.todoCellDidTapCheckButton(self)
     }
 }

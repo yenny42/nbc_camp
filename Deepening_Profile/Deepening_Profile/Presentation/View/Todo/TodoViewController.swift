@@ -30,6 +30,13 @@ class TodoViewController: UIViewController {
         setUI()
         setLayout()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        todoView.todoList.setData()
+        todoView.todoList.reloadData()
+    }
 }
 
 // MARK: - Extensions
@@ -56,7 +63,7 @@ extension TodoViewController {
 extension TodoViewController {
     private func setAddTarget() {
         todoView.addButton.addTarget(self, action: #selector(didTapAddTodoButton), for: .touchUpInside)
-        todoView.todoList.didSelectItemAction = didSelectItem(selectedItem:)
+        todoView.todoList.navigateToTodoDetail = navigateToDetailVC(selectedItem:)
     }
     
     @objc
@@ -73,7 +80,7 @@ extension TodoViewController {
         }
     }
     
-    func didSelectItem(selectedItem: Todo) {
+    func navigateToDetailVC(selectedItem: Todo) {
         let todoDetailViewController = TodoDetailViewController(data: selectedItem, viewModel: viewModel)
         self.navigationController?.pushViewController(todoDetailViewController, animated: true)
     }

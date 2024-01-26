@@ -43,9 +43,16 @@ class TodoDetailViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setImage(UIImage(systemName: "checkmark.bubble"), for: .normal)
-        button.tintColor = .systemGray2
+        if data.isCompleted {
+            button.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            button.tintColor = .systemGreen
+        } else {
+            button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+            button.tintColor = .systemGray2
+        }
         
+        button.addTarget(self, action: #selector(didTapCheckButton), for: .touchUpInside)
+            
         return button
     }()
     
@@ -83,6 +90,8 @@ class TodoDetailViewController: UIViewController {
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 5
         
+        button.addTarget(self, action: #selector(didTapUpdateButton), for: .touchUpInside)
+        
         return button
     }()
     
@@ -114,6 +123,7 @@ class TodoDetailViewController: UIViewController {
 extension TodoDetailViewController {
     private func setUI() {
         view.backgroundColor = .white
+        self.title = "Detail"
         
         [createDate, modifyDate, checkButton, titleTextField, buttonStackView].forEach {
             view.addSubview($0)
@@ -157,3 +167,41 @@ extension TodoDetailViewController {
         return stackView
     }
 }
+
+extension TodoDetailViewController {
+    @objc
+    private func didTapUpdateButton() {
+        let id = data.id
+        viewModel.updateData(data.id, title: titleTextField.text)
+        
+        if let index = viewModel.readData().firstIndex(where: { $0.id == id }) {
+            data = viewModel.readData()[index]
+        }
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func didTapCheckButton() {
+        let id = data.id
+        viewModel.updateData(data.id, isCompleted: !data.isCompleted)
+        
+        if let index = viewModel.readData().firstIndex(where: { $0.id == id }) {
+            data = viewModel.readData()[index]
+        }
+        // 데이터 업데이트 후 UI 반영
+        updateCheckButtonUI()
+    }
+    
+    
+    private func updateCheckButtonUI() {
+        if data.isCompleted {
+            checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            checkButton.tintColor = .systemGreen
+        } else {
+            checkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+            checkButton.tintColor = .systemGray2
+        }
+    }
+}
+

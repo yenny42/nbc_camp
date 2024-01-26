@@ -9,9 +9,12 @@ import UIKit
 
 class TodoCollectionView: UICollectionView {
     
-    var didSelectItemAction: ((Todo) -> Void)?
-    private let viewModel: TodoViewModel
-    var data: [Todo] = [] {
+    // MARK: - Properties
+    
+    var navigateToTodoDetail: ((Todo) -> Void)?
+    
+    private var viewModel: TodoViewModel
+    private lazy var data: [Todo] = [] {
         didSet {
             reloadData()
         }
@@ -34,6 +37,7 @@ class TodoCollectionView: UICollectionView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     func setData() {
         data = viewModel.readData()
@@ -67,8 +71,18 @@ extension TodoCollectionView: UICollectionViewDataSource, UICollectionViewDelega
         
         let item = data[indexPath.row]
         
+        cell.delegate = self
+        
         cell.title.text = item.title
         cell.createDate.text = String(describing: viewModel.dateFormat(item.createDate))
+        
+        if item.isCompleted {
+            cell.checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            cell.checkButton.tintColor = .systemGreen
+        } else {
+            cell.checkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+            cell.checkButton.tintColor = .systemGray2
+        }
         
         return cell
     }
@@ -95,11 +109,22 @@ extension TodoCollectionView: UICollectionViewDataSource, UICollectionViewDelega
 
 extension TodoCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print(data[indexPath.row])
-        
+        let selectedItem = data[indexPath.row]
+        navigateToTodoDetail?(selectedItem)
+    }
+}
+
+// MARK: TodoCellDelegate
+
+extension TodoCollectionView: TodoCellDelegate {
+    func todoCellDidTapCheckButton(_ cell: TodoCollectionViewCell) {
+        guard let indexPath = indexPath(for: cell) else {
+            return
+        }
+
         let selectedItem = data[indexPath.row]
         
-        // 클로저가 설정되어 있다면 실행
-        didSelectItemAction?(selectedItem)
+        viewModel.updateData(selectedItem.id, isCompleted: !selectedItem.isCompleted)
+        setData()
     }
 }

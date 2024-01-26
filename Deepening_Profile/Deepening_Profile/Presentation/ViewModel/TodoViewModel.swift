@@ -64,20 +64,29 @@ class TodoViewModel {
             return []
         }
     }
-
     
-    func updateData() {
+    func updateData(_ id: String, title: String? = nil, isCompleted: Bool? = nil) {
         guard let context = self.persistentContainer?.viewContext else { return }
         
         let request = TodoItem.fetchRequest()
         guard let todos = try? context.fetch(request) else { return }
         
-        // update
-        let filteredData = todos.filter { $0.title == "메룽메룽" }
+        let filteredData = todos.filter { String(describing: $0.id) == id }[0]
         
-        for data in filteredData {
-            data.title = "water melon"
+        if title != nil {
+            if title!.count > 30 {
+                print("30자 이내로 입력하라는 alert")
+                return
+            } else {
+                filteredData.title = title
+            }
         }
+
+        if isCompleted != nil {
+            filteredData.isCompleted = isCompleted!
+        }
+        
+        filteredData.modifyDate = Date()
         
         try? context.save()
     }

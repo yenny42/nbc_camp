@@ -28,6 +28,7 @@
 		1BBB7BEF2B637ABF008F2E52 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BEE2B637ABF008F2E52 /* Todo.swift */; };
 		1BBB7BF12B639CA5008F2E52 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BF02B639CA5008F2E52 /* UserProfile.swift */; };
 		1BBB7BF42B639ECC008F2E52 /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BF32B639ECC008F2E52 /* TodoDetailViewController.swift */; };
+		1BBB7BF82B63C280008F2E52 /* TodoCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BF72B63C280008F2E52 /* TodoCellDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		1BBB7BEE2B637ABF008F2E52 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		1BBB7BF02B639CA5008F2E52 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		1BBB7BF32B639ECC008F2E52 /* TodoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
+		1BBB7BF72B63C280008F2E52 /* TodoCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCellDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				1BBB7BE02B625800008F2E52 /* TodoItem.xcdatamodeld */,
 				1BBB7BEE2B637ABF008F2E52 /* Todo.swift */,
 				1BBB7BF02B639CA5008F2E52 /* UserProfile.swift */,
+				1BBB7BF72B63C280008F2E52 /* TodoCellDelegate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				1BBB7BDB2B620BAE008F2E52 /* ProfileViewController.swift in Sources */,
 				1BBB7BD02B61DF15008F2E52 /* CustomButton.swift in Sources */,
 				1BBB7BD42B61ECCA008F2E52 /* GalleryCollectionView.swift in Sources */,
+				1BBB7BF82B63C280008F2E52 /* TodoCellDelegate.swift in Sources */,
 				1B48CC472B60FF6C00741BA7 /* ProfileDesignViewController.swift in Sources */,
 				1BBB7BF12B639CA5008F2E52 /* UserProfile.swift in Sources */,
 				1BBB7BE72B625DFD008F2E52 /* TodoView.swift in Sources */,
