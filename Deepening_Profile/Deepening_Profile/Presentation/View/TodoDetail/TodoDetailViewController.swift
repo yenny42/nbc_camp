@@ -79,6 +79,8 @@ class TodoDetailViewController: UIViewController {
         button.backgroundColor = .systemRed
         button.layer.cornerRadius = 5
         
+        button.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
+        
         return button
     }()
     
@@ -171,6 +173,15 @@ extension TodoDetailViewController {
 // MARK: - @objc Method
 
 extension TodoDetailViewController {
+    @objc
+    private func didTapDeleteButton() {
+        print("삭제하시겠습니까? alert")
+        
+        viewModel.deleteData(data.id)
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @objc
     private func didTapUpdateButton() {
         let id = data.id
