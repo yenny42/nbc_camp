@@ -26,6 +26,7 @@
 		1BBB7BE92B6264FF008F2E52 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BE82B6264FF008F2E52 /* TodoViewModel.swift */; };
 		1BBB7BEB2B626981008F2E52 /* TodoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BEA2B626981008F2E52 /* TodoCollectionView.swift */; };
 		1BBB7BED2B634B5F008F2E52 /* TodoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BEC2B634B5F008F2E52 /* TodoCollectionViewCell.swift */; };
+		1BBB7BEF2B637ABF008F2E52 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BEE2B637ABF008F2E52 /* Todo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		1BBB7BE82B6264FF008F2E52 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		1BBB7BEA2B626981008F2E52 /* TodoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCollectionView.swift; sourceTree = "<group>"; };
 		1BBB7BEC2B634B5F008F2E52 /* TodoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCollectionViewCell.swift; sourceTree = "<group>"; };
+		1BBB7BEE2B637ABF008F2E52 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			children = (
 				1BBB7BE02B625800008F2E52 /* TodoItem.xcdatamodeld */,
 				1BBB7BC32B610A73008F2E52 /* UserProfile.swift */,
+				1BBB7BEE2B637ABF008F2E52 /* Todo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				1BBB7BE72B625DFD008F2E52 /* TodoView.swift in Sources */,
 				1B48CC2E2B60FB3200741BA7 /* SceneDelegate.swift in Sources */,
 				1BBB7BED2B634B5F008F2E52 /* TodoCollectionViewCell.swift in Sources */,
+				1BBB7BEF2B637ABF008F2E52 /* Todo.swift in Sources */,
 				1BBB7BC42B610A73008F2E52 /* UserProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
