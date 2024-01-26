@@ -168,6 +168,8 @@ extension TodoDetailViewController {
     }
 }
 
+// MARK: - @objc Method
+
 extension TodoDetailViewController {
     @objc
     private func didTapUpdateButton() {
@@ -189,10 +191,9 @@ extension TodoDetailViewController {
         if let index = viewModel.readData().firstIndex(where: { $0.id == id }) {
             data = viewModel.readData()[index]
         }
-        // 데이터 업데이트 후 UI 반영
+        
         updateCheckButtonUI()
     }
-    
     
     private func updateCheckButtonUI() {
         if data.isCompleted {
@@ -204,4 +205,3 @@ extension TodoDetailViewController {
         }
     }
 }
-
