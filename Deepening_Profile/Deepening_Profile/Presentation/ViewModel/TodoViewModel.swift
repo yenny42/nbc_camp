@@ -18,7 +18,7 @@ class TodoViewModel {
         guard let context = self.persistentContainer?.viewContext else { return }
 
         if title.count > 30 {
-            print("30자 이내로 입력하라는 alert")
+            
             return
         }
 
@@ -34,7 +34,6 @@ class TodoViewModel {
             print("Error saving todo: \(error)")
         }
     }
-
 
     func readData() -> [Todo] {
         guard let context = self.persistentContainer?.viewContext else { return [] }
@@ -75,7 +74,6 @@ class TodoViewModel {
         
         if title != nil {
             if title!.count > 30 {
-                print("30자 이내로 입력하라는 alert")
                 return
             } else {
                 filteredData.title = title

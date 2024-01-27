@@ -175,17 +175,23 @@ extension TodoDetailViewController {
 extension TodoDetailViewController {
     @objc
     private func didTapDeleteButton() {
-        print("삭제하시겠습니까? alert")
-        
-        viewModel.deleteData(data.id)
-        
-        self.navigationController?.popViewController(animated: true)
+        actionAlert(in: self, title: "삭제하기", message: "삭제하시겠습니까?") {
+            self.viewModel.deleteData(self.data.id)
+            self.navigationController?.popViewController(animated: true)
+            
+            actionAlert(in: self, title: "삭제가 완료되었습니다.", message: "", cancelButton: false)
+        }
     }
     
     @objc
     private func didTapUpdateButton() {
         let id = data.id
-        viewModel.updateData(data.id, title: titleTextField.text)
+        
+        if titleTextField.text!.count > 30 {
+            maxinumStringAlert(in: self)
+        } else {
+            viewModel.updateData(data.id, title: titleTextField.text)
+        }
         
         if let index = viewModel.readData().firstIndex(where: { $0.id == id }) {
             data = viewModel.readData()[index]
@@ -203,7 +209,9 @@ extension TodoDetailViewController {
             data = viewModel.readData()[index]
         }
         
-        updateCheckButtonUI()
+        DispatchQueue.main.async {
+            self.updateCheckButtonUI()
+        }
     }
     
     private func updateCheckButtonUI() {

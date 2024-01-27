@@ -72,7 +72,7 @@ class TodoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateData() {
+    func updateUI() {
         titleTextField.text = ""
         todoList.setData()
     }

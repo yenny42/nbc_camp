@@ -63,9 +63,11 @@ extension TodoCollectionViewCell {
     private func setUI() {
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.systemGray4.cgColor
-        self.layer.cornerRadius = 10
+        DispatchQueue.main.async {
+            self.layer.borderWidth = 1
+            self.layer.borderColor = UIColor.systemGray4.cgColor
+            self.layer.cornerRadius = 10
+        }
         
         [checkButton, createDate, title].forEach {
             self.addSubview($0)

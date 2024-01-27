@@ -71,12 +71,16 @@ extension TodoViewController {
         if todoView.titleTextField.text?.count != 0 {
             let title = todoView.titleTextField.text!
             
-            viewModel.saveData(title: title)
+            if todoView.titleTextField.text!.count > 30 {
+                maxinumStringAlert(in: self)
+            } else {
+                viewModel.saveData(title: title)
+            }
             
-            todoView.updateData()
+            todoView.updateUI()
             
         } else {
-            print("할 일을 입력해주세요 alert창 띄우기")
+            actionAlert(in: self, title: "내용을 입력해주세요.", message: "", cancelButton: false)
         }
     }
     
