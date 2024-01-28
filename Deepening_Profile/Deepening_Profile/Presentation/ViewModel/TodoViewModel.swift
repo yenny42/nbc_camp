@@ -18,7 +18,6 @@ class TodoViewModel {
         guard let context = self.persistentContainer?.viewContext else { return }
 
         if title.count > 30 {
-            
             return
         }
 
@@ -95,8 +94,8 @@ class TodoViewModel {
         let request = TodoItem.fetchRequest()
         guard let todos = try? context.fetch(request) else { return }
         
-        let filteredData = todos.filter { String(describing: $0.id) == id }[0]
-        context.delete(filteredData)
+        let filteredData = todos.first { String(describing: $0.id) == id }
+        context.delete(filteredData!)
         
         try? context.save()
     }

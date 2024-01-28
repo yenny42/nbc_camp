@@ -30,11 +30,7 @@ class ProfileViewController: UIViewController {
     
     // MARK: - ViewModel
     
-    var viewModel: ProfileViewModel? {
-        didSet {
-            bindingViewModel()
-        }
-    }
+    var viewModel: ProfileViewModel?
     
     // MARK: - Life Cycle
     

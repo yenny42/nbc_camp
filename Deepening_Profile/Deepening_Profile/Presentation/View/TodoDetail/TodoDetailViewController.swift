@@ -51,7 +51,7 @@ class TodoDetailViewController: UIViewController {
             button.tintColor = .systemGray2
         }
         
-        button.addTarget(self, action: #selector(didTapCheckButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapUpdateIsCompletedButton), for: .touchUpInside)
             
         return button
     }()
@@ -92,7 +92,7 @@ class TodoDetailViewController: UIViewController {
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 5
         
-        button.addTarget(self, action: #selector(didTapUpdateButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapUpdateTitleButton), for: .touchUpInside)
         
         return button
     }()
@@ -184,7 +184,7 @@ extension TodoDetailViewController {
     }
     
     @objc
-    private func didTapUpdateButton() {
+    private func didTapUpdateTitleButton() {
         let id = data.id
         
         if titleTextField.text!.count > 30 {
@@ -201,7 +201,7 @@ extension TodoDetailViewController {
     }
     
     @objc
-    private func didTapCheckButton() {
+    private func didTapUpdateIsCompletedButton() {
         let id = data.id
         viewModel.updateData(data.id, isCompleted: !data.isCompleted)
         

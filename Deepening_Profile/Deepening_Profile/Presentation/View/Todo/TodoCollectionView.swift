@@ -31,15 +31,14 @@ class TodoCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: layout)
         
         setupCollectionView()
-        setData()
+        getTodoData()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    func setData() {
+    func getTodoData() {
         data = viewModel.readData()
     }
 }
@@ -125,6 +124,6 @@ extension TodoCollectionView: TodoCellDelegate {
         let selectedItem = data[indexPath.row]
         
         viewModel.updateData(selectedItem.id, isCompleted: !selectedItem.isCompleted)
-        setData()
+        getTodoData()
     }
 }

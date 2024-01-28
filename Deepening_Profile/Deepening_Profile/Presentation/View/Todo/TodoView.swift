@@ -74,7 +74,7 @@ class TodoView: UIView {
     
     func updateUI() {
         titleTextField.text = ""
-        todoList.setData()
+        todoList.getTodoData()
     }
 }
 
