@@ -24,8 +24,7 @@
 
 ⬇️ 구현한 화면 (Gif) ⬇️
 
-<img src = "
-https://github.com/yenny42/nbc_camp/assets/107637741/8e76c759-eb3c-4b8a-b16c-c5379597752a" width = "300" />
+<img src = "https://github.com/yenny42/nbc_camp/assets/107637741/0aca4e4a-ceab-4f3f-98f5-174c468ed101" width = "300" />
 
 1. 사용한 UI 요소
 
