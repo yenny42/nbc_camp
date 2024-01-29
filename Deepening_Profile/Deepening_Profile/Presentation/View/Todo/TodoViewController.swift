@@ -26,8 +26,6 @@ class TodoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        todoView.todoList.getTodoData()
-        
         setAddTarget()
         setUI()
         setLayout()
@@ -36,6 +34,7 @@ class TodoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        todoView.todoList.getTodoData()
         DispatchQueue.main.async {
             self.todoView.todoList.reloadData()
         }

@@ -31,7 +31,6 @@ class TodoCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: layout)
         
         setupCollectionView()
-        getTodoData()
     }
     
     required init?(coder aDecoder: NSCoder) {
