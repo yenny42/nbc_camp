@@ -14,6 +14,9 @@
 		1B48CC472B60FF6C00741BA7 /* ProfileDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48CC462B60FF6C00741BA7 /* ProfileDesignViewController.swift */; };
 		1B48CC492B60FFEC00741BA7 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48CC482B60FFEC00741BA7 /* ProfileViewModel.swift */; };
 		1BB90F612B652CAC00B1C663 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB90F602B652CAC00B1C663 /* CustomAlert.swift */; };
+		1BB90F662B676D9E00B1C663 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB90F652B676D9E00B1C663 /* PlayerViewModel.swift */; };
+		1BB90F692B677CB600B1C663 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB90F682B677CB600B1C663 /* PlayerViewController.swift */; };
+		1BB90F6D2B677FC500B1C663 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB90F6C2B677FC500B1C663 /* PlayerTableViewCell.swift */; };
 		1BBB7BC22B6107D3008F2E52 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BC12B6107D3008F2E52 /* ImageLoader.swift */; };
 		1BBB7BC72B610BE7008F2E52 /* ProfileDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BC62B610BE7008F2E52 /* ProfileDesignView.swift */; };
 		1BBB7BD02B61DF15008F2E52 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB7BCF2B61DF14008F2E52 /* CustomButton.swift */; };
@@ -42,6 +45,9 @@
 		1B48CC462B60FF6C00741BA7 /* ProfileDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDesignViewController.swift; sourceTree = "<group>"; };
 		1B48CC482B60FFEC00741BA7 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		1BB90F602B652CAC00B1C663 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		1BB90F652B676D9E00B1C663 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		1BB90F682B677CB600B1C663 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		1BB90F6C2B677FC500B1C663 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		1BBB7BC12B6107D3008F2E52 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		1BBB7BC62B610BE7008F2E52 /* ProfileDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDesignView.swift; sourceTree = "<group>"; };
 		1BBB7BCF2B61DF14008F2E52 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -139,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				1B48CC482B60FFEC00741BA7 /* ProfileViewModel.swift */,
+				1BB90F652B676D9E00B1C663 /* PlayerViewModel.swift */,
 				1BBB7BE82B6264FF008F2E52 /* TodoViewModel.swift */,
 			);
 			path = ViewModel;
@@ -148,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				1B48CC2F2B60FB3200741BA7 /* ViewController.swift */,
+				1BB90F672B677C3E00B1C663 /* Player */,
 				1BBB7BF22B639D84008F2E52 /* TodoDetail */,
 				1BBB7BE32B625B67008F2E52 /* Todo */,
 				1BBB7BD92B620B9A008F2E52 /* Profile */,
@@ -165,6 +173,15 @@
 				1BBB7BF72B63C280008F2E52 /* TodoCellDelegate.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1BB90F672B677C3E00B1C663 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				1BB90F682B677CB600B1C663 /* PlayerViewController.swift */,
+				1BB90F6C2B677FC500B1C663 /* PlayerTableViewCell.swift */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 		1BBB7BC02B6107C9008F2E52 /* Utilites */ = {
@@ -298,8 +315,10 @@
 				1BBB7BE52B625B85008F2E52 /* TodoViewController.swift in Sources */,
 				1BBB7BEB2B626981008F2E52 /* TodoCollectionView.swift in Sources */,
 				1B48CC492B60FFEC00741BA7 /* ProfileViewModel.swift in Sources */,
+				1BB90F6D2B677FC500B1C663 /* PlayerTableViewCell.swift in Sources */,
 				1BBB7BE22B625800008F2E52 /* TodoItem.xcdatamodeld in Sources */,
 				1B48CC302B60FB3200741BA7 /* ViewController.swift in Sources */,
+				1BB90F662B676D9E00B1C663 /* PlayerViewModel.swift in Sources */,
 				1BBB7BC22B6107D3008F2E52 /* ImageLoader.swift in Sources */,
 				1B48CC2C2B60FB3200741BA7 /* AppDelegate.swift in Sources */,
 				1BB90F612B652CAC00B1C663 /* CustomAlert.swift in Sources */,
@@ -307,6 +326,7 @@
 				1BBB7BD02B61DF15008F2E52 /* CustomButton.swift in Sources */,
 				1BBB7BD42B61ECCA008F2E52 /* GalleryCollectionView.swift in Sources */,
 				1BBB7BF82B63C280008F2E52 /* TodoCellDelegate.swift in Sources */,
+				1BB90F692B677CB600B1C663 /* PlayerViewController.swift in Sources */,
 				1B48CC472B60FF6C00741BA7 /* ProfileDesignViewController.swift in Sources */,
 				1BBB7BF12B639CA5008F2E52 /* UserProfile.swift in Sources */,
 				1BBB7BE72B625DFD008F2E52 /* TodoView.swift in Sources */,

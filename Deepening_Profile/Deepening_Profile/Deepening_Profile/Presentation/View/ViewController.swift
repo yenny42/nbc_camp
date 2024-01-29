@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     private lazy var profileDesignViewController = ProfileDesignViewController()
     private lazy var profileViewController = ProfileViewController()
     private lazy var todoViewController = TodoViewController()
+    private lazy var playerViewController = PlayerViewController()
     
     private let mainImage: UIImageView = {
         let imageView = UIImageView()
@@ -31,12 +32,17 @@ class ViewController: UIViewController {
     }()
     
     private let level2Button: CustomButton = {
-        let button = CustomButton(text: "Lv.2 : ProfileVC", backgroundColor: .systemTeal)
+        let button = CustomButton(text: "Lv.2 : ProfileVC", backgroundColor: .systemOrange)
         return button
     }()
     
     private let level3Button: CustomButton = {
-        let button = CustomButton(text: "Lv.3 : Core Data", backgroundColor: .systemIndigo)
+        let button = CustomButton(text: "Lv.3 : Core Data", backgroundColor: .systemTeal)
+        return button
+    }()
+    
+    private let level4Button: CustomButton = {
+        let button = CustomButton(text: "Lv.4 : Random Video", backgroundColor: .systemIndigo)
         return button
     }()
 
@@ -58,13 +64,14 @@ extension ViewController {
     private func setUI() {
         view.backgroundColor = .white
         
-        [mainImage, level1Button, level2Button, level3Button].forEach {
+        [mainImage, level1Button, level2Button, level3Button, level4Button].forEach {
             view.addSubview($0)
         }
         
         level1Button.addTarget(self, action: #selector(navigateToProfileDesignVC), for: .touchUpInside)
         level2Button.addTarget(self, action: #selector(navigateToProfileVC), for: .touchUpInside)
         level3Button.addTarget(self, action: #selector(navigateToTodoVC), for: .touchUpInside)
+        level4Button.addTarget(self, action: #selector(navigateToPlayerVC), for: .touchUpInside)
     }
     
     private func setLayout() {
@@ -83,6 +90,9 @@ extension ViewController {
             
             level3Button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             level3Button.topAnchor.constraint(equalTo: level2Button.bottomAnchor, constant: 15),
+            
+            level4Button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            level4Button.topAnchor.constraint(equalTo: level3Button.bottomAnchor, constant: 15),
         ])
     }
     
@@ -109,5 +119,9 @@ extension ViewController {
     
     @objc private func navigateToTodoVC() {
         self.navigationController?.pushViewController(todoViewController, animated: true)
+    }
+
+    @objc private func navigateToPlayerVC() {
+        self.navigationController?.pushViewController(playerViewController, animated: true)
     }
 }
