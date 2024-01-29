@@ -3,6 +3,12 @@
 
 <br/>
 
+- Minimum Developments `14.5`
+- UIKit
+- CoreData
+
+<br/>
+
 ## UserDefaults와 CoreData의 차이점
 
 | UserDefaults | CoreData |
