@@ -235,31 +235,34 @@ func deleteData(_ id: String) {
 
 ### Life Cycle
 
-#### - TodoViewController / viewDidLoad
+#### - TodoViewController / viewWillAppear
 
-- getTodoData()로 데이터 가져오기 
-- `viewModel.readData()`
+- `getTodoData()`로 데이터 가져온 뒤 CollectionView reloadData()
+  - `viewModel.readData()`
 
 #### - TodoViewController / didTapAddTodoButton
 
 - textField 값을 사용하여 저장하기 
-- `viewModel.saveData(title: title)`
+  - `viewModel.saveData(title: title)`
+- `getTodoData()`로 데이터 가져와서 ui 업데이트
+  - `viewModel.readData()`
 
 #### - TodoDetailViewController / didTapDeleteButton
 
 - 삭제하기 버튼 클릭시 해당하는 id 값을 조회하여 제거 
-- `viewModel.deleteData(self.data.id)`
+  - `viewModel.deleteData(self.data.id)`
 
 #### - TodoDetailViewController / didTapUpdateTitleButton
 
 - 수정하기 버튼 클릭시 textField 값으로 title을 업데이트 
-- `viewModel.updateData(data.id, title: titleTextField.text)`
+  - `viewModel.updateData(data.id, title: titleTextField.text)`
 
 #### - TodoDetailViewController / didTapUpdateIsCompletedButton
 
 - 수정하기 버튼 클릭시 isCompleted 값을 반전하여 isCompleted을 업데이트 
-- `viewModel.updateData(data.id, isCompleted: !data.isCompleted)`
-
+  - `viewModel.updateData(data.id, isCompleted: !data.isCompleted)`
+- `getTodoData()`로 데이터 가져와서 ui 업데이트
+  - `viewModel.readData()`
 
 <br/>
 <br/>
