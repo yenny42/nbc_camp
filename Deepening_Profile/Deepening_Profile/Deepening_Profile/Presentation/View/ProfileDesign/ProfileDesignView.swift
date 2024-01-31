@@ -266,18 +266,23 @@ extension ProfileDesignView {
     }
     
     private func setUserActivity() {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .systemPink
+        
         [post, follower, following].forEach {
-            self.addSubview($0)
+            stackView.addArrangedSubview($0)
         }
         
+        self.addSubview(stackView)
+        
         NSLayoutConstraint.activate([
-            post.trailingAnchor.constraint(equalTo: self.follower.leadingAnchor, constant: -20),
-            follower.trailingAnchor.constraint(equalTo: self.following.leadingAnchor, constant: -15),
-            following.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
-            
-            post.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 41),
-            follower.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 41),
-            following.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 41),
+//            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
+            stackView.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 41),
         ])
     }
     
