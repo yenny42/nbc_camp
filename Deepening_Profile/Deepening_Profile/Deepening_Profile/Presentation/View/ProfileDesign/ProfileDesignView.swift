@@ -280,7 +280,6 @@ extension ProfileDesignView {
         self.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-//            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
             stackView.topAnchor.constraint(equalTo: self.menuButton.bottomAnchor, constant: 41),
         ])

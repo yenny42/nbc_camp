@@ -11,7 +11,6 @@ import AVKit
 class PlayerViewController: UIViewController {
     
     // MARK: - Properties
-    let viewModel = PlayerViewModel()
     
     var data: [Video] = [] {
         didSet {
