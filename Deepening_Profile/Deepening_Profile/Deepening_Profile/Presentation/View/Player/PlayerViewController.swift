@@ -12,6 +12,8 @@ class PlayerViewController: UIViewController {
     
     // MARK: - Properties
     
+    let viewModel = PlayerViewModel()
+    
     var data: [Video] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -66,14 +68,16 @@ extension PlayerViewController {
     }
     
     private func fetchData() {
-        if self.data.isEmpty {
-            PlayerVideoAPI.getVideo { result in
-                switch result {
-                case .success(let video):
-                    self.data = video
-                case .failure(let error):
-                    print("Error decoding video: \(error)")
+        viewModel.fetchData { result in
+            switch result {
+            case .success(let data):
+                self.data = data
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                 }
+            case .failure(let error):
+                print("Error: \(error)")
             }
         }
     }

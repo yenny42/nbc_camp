@@ -13,6 +13,7 @@
 		1B48CC352B60FB3300741BA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B48CC342B60FB3300741BA7 /* Assets.xcassets */; };
 		1B48CC472B60FF6C00741BA7 /* ProfileDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48CC462B60FF6C00741BA7 /* ProfileDesignViewController.swift */; };
 		1B48CC492B60FFEC00741BA7 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48CC482B60FFEC00741BA7 /* ProfileViewModel.swift */; };
+		1B5DB5152B69F5CB008DAA66 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5DB5142B69F5CB008DAA66 /* PlayerViewModel.swift */; };
 		1BB90F612B652CAC00B1C663 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB90F602B652CAC00B1C663 /* CustomAlert.swift */; };
 		1BB90F662B676D9E00B1C663 /* GetVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB90F652B676D9E00B1C663 /* GetVideo.swift */; };
 		1BB90F692B677CB600B1C663 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB90F682B677CB600B1C663 /* PlayerViewController.swift */; };
@@ -45,6 +46,7 @@
 		1B48CC392B60FB3300741BA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B48CC462B60FF6C00741BA7 /* ProfileDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDesignViewController.swift; sourceTree = "<group>"; };
 		1B48CC482B60FFEC00741BA7 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		1B5DB5142B69F5CB008DAA66 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		1BB90F602B652CAC00B1C663 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		1BB90F652B676D9E00B1C663 /* GetVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVideo.swift; sourceTree = "<group>"; };
 		1BB90F682B677CB600B1C663 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				1B48CC482B60FFEC00741BA7 /* ProfileViewModel.swift */,
 				1BBB7BE82B6264FF008F2E52 /* TodoViewModel.swift */,
+				1B5DB5142B69F5CB008DAA66 /* PlayerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				1B48CC492B60FFEC00741BA7 /* ProfileViewModel.swift in Sources */,
 				1BB90F6D2B677FC500B1C663 /* PlayerTableViewCell.swift in Sources */,
 				1BBB7BE22B625800008F2E52 /* TodoItem.xcdatamodeld in Sources */,
+				1B5DB5152B69F5CB008DAA66 /* PlayerViewModel.swift in Sources */,
 				1B48CC302B60FB3200741BA7 /* ViewController.swift in Sources */,
 				1BB90F662B676D9E00B1C663 /* GetVideo.swift in Sources */,
 				1BBB7BC22B6107D3008F2E52 /* ImageLoader.swift in Sources */,
