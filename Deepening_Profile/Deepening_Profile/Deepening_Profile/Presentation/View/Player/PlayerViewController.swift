@@ -11,20 +11,27 @@ import AVKit
 class PlayerViewController: UIViewController {
     
     // MARK: - Properties
+    let viewModel = PlayerViewModel()
     
-    var data: [Video] = []
+    var data: [Video] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     let playerController = AVPlayerViewController()
-    lazy var url: URL = URL(string: "")!
-    lazy var player = AVPlayer(url: self.url as URL)
+    var url: URL?
+    lazy var player: AVPlayer = {
+        AVPlayer(url: self.url!)
+    }()
     
     // MARK: - UI Properties
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        tableView.rowHeight = 100
         
         return tableView
     }()
@@ -34,10 +41,9 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setData()
+        fetchData()
         setDelegate()
         setUI()
-        setLayout()
     }
 }
 
@@ -48,6 +54,7 @@ extension PlayerViewController {
         view.backgroundColor = .white
         
         view.addSubview(tableView)
+        setLayout()
     }
     
     private func setLayout() {
@@ -59,13 +66,15 @@ extension PlayerViewController {
         ])
     }
     
-    private func setData() {
-        PlayerViewModel.randomVideo { result in
-            switch result {
+    private func fetchData() {
+        if self.data.isEmpty {
+            PlayerVideoAPI.getVideo { result in
+                switch result {
                 case .success(let video):
                     self.data = video
                 case .failure(let error):
-                    print("Error decoding RandomDog: \(error)")
+                    print("Error decoding video: \(error)")
+                }
             }
         }
     }
@@ -80,29 +89,42 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.register(PlayerTableViewCell.self, forCellReuseIdentifier: PlayerTableViewCell.identifier)
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PlayerTableViewCell.identifier, for: indexPath) as! PlayerTableViewCell
         cell.selectionStyle = .none
-        
+
         let item = data[indexPath.row]
         
         cell.title.text = "\(item.title)"
-        ImageLoader.loadImage(from: item.thumbnailUrl, into: cell.thumbnail)
+        
+        cell.tag = indexPath.row
+        cell.loadImage(from: item.thumbnailUrl)
         
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.url = URL(string: data[indexPath.row].videoUrl)!
-        self.player = AVPlayer(url: self.url as URL)
-        
-        playerController.player = self.player
-        
+        url = URL(string: data[indexPath.row].videoUrl)
+        if let url = url {
+            navigateToAVPlayerVC(url)
+        } else {
+            print("The video URL is not valid.")
+        }
+    }
+
+    private func navigateToAVPlayerVC(_ url: URL) {
+        player.replaceCurrentItem(with: AVPlayerItem(url: url))
+
+        playerController.player = player
+
         present(playerController, animated: true) {
             self.player.play()
         }

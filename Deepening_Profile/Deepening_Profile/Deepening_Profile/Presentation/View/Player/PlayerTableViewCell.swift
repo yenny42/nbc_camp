@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+ 
 class PlayerTableViewCell: UITableViewCell {
     
     static let identifier = "PlayerTableViewCellIdentifier"
@@ -18,7 +18,6 @@ class PlayerTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .systemGray5
         
         return imageView
     }()
@@ -47,7 +46,12 @@ class PlayerTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        thumbnail.image = nil
+    }
 }
 
 // MARK: - Extensions
@@ -68,4 +72,25 @@ extension PlayerTableViewCell {
             title.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
     }
+    
+    func loadImage(from urlString: String) {
+        let currentTag = self.tag
+        
+        ImageLoader.loadImage(from: urlString) { result in
+            DispatchQueue.main.async {
+                if self.tag == currentTag {
+                    switch result {
+                    case .success(let image):
+                        self.thumbnail.backgroundColor = .clear
+                        self.thumbnail.image = image
+                    case .failure(let error):
+                        print("Error decoding image: \(error)")
+                        self.thumbnail.image = UIImage(systemName: "questionmark.video")
+                    }
+                    
+                }
+            }
+        }
+    }
+
 }
