@@ -45,7 +45,6 @@ class ViewController: UIViewController {
         let button = CustomButton(text: "Lv.4 : Random Video", backgroundColor: .systemIndigo)
         return button
     }()
-
     
     // MARK: - Life Cycle
     
@@ -78,7 +77,7 @@ extension ViewController {
         NSLayoutConstraint.activate([
             
             mainImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             mainImage.widthAnchor.constraint(equalToConstant: 250),
             mainImage.heightAnchor.constraint(equalToConstant: 200),
             
@@ -97,7 +96,17 @@ extension ViewController {
     }
     
     private func setMainLogo() {
-        ImageLoader.loadImage(from: "https://spartacodingclub.kr/css/images/scc-og.jpg", into: self.mainImage)
+        ImageLoader.loadImage(from: "https://spartacodingclub.kr/css/images/scc-og.jpg") { result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.mainImage.backgroundColor = .clear
+                    self.mainImage.image = image
+                }
+            case .failure(let error):
+                print("Error decoding image: \(error)")
+            }
+        }
     }
 }
 

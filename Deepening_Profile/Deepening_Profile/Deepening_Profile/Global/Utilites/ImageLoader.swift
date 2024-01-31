@@ -8,19 +8,16 @@
 import UIKit
 
 final class ImageLoader {
-    static func loadImage(from url: String, into imageView: UIImageView, completion: (() -> Void)? = nil) {
+    static func loadImage(from url: String, completion: @escaping (Result<UIImage?, Error>) -> Void) {
         if let imageURL = URL(string: url) {
             let task = URLSession.shared.dataTask(with: imageURL) { (data, _, error) in
                 if let error = error {
-                    print("Error loading image: \(error.localizedDescription)")
-                    return
+                    completion(.failure(error))
                 }
-                else if let imageData = data, let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        imageView.backgroundColor = .clear
-                        imageView.image = image
-                        completion?()
-                    }
+                else if let imageData = data {
+                    let image = UIImage(data: imageData)
+                    
+                    completion(.success(image))
                 }
             }
             task.resume()
