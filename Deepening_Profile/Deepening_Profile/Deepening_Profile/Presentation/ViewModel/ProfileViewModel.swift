@@ -8,9 +8,9 @@
 import Foundation
 
 class ProfileViewModel {
-    var userProfile: UserProfile?
+    var userProfile: ProfileInfo?
 
-    init(userProfile: UserProfile?) {
+    init(userProfile: ProfileInfo?) {
         self.userProfile = userProfile
     }
 

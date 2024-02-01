@@ -119,7 +119,7 @@ extension ViewController {
     }
     
     @objc private func navigateToProfileVC() {
-        let userProfile = UserProfile(userName: "최예은", userAge: 25)
+        let userProfile = ProfileInfo(userName: "최예은", userAge: 25)
         let viewModel = ProfileViewModel(userProfile: userProfile)
         profileViewController.viewModel = viewModel
         
