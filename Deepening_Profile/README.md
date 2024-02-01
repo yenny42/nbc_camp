@@ -271,6 +271,9 @@ func deleteData(_ id: String) {
   - `viewModel.readData()`
 
 <br/>
+
+> 뷰모델 사용방법..? 이 맞는지 모르겠습니다..ㅎㅎ
+
 <br/>
 
 
