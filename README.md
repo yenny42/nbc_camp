@@ -8,7 +8,7 @@
 
 
 ### 💡 10-11주차
-- <a href="https://github.com/yenny42/nbc_camp/tree/Deepening_Profile" target="_blank">iOS 앱개발 심화 개인과제</a>
+- <a href="https://github.com/yenny42/nbc_camp/tree/main/Deepening_Profile" target="_blank">iOS 앱개발 심화 개인과제</a>
 
 <br/>
 
