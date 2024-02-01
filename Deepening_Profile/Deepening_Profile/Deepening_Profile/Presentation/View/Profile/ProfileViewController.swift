@@ -28,17 +28,41 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
+    private lazy var randomButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(" 🎲 RANDOM 🎲 ", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .systemGray6
+        button.layer.cornerRadius = 10
+        
+        button.addTarget(self, action: #selector(changeAge), for: .touchUpInside)
+        
+        return button
+    }()
+    
     // MARK: - ViewModel
     
-    var viewModel: ProfileViewModel?
+    var viewModel: ProfileViewModel
+    
+    init(viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel.delegate = self
         
-        setUI()
         bindingViewModel()
+        setUI()
     }
 }
 
@@ -48,25 +72,45 @@ extension ProfileViewController {
     private func setUI() {
         view.backgroundColor = .white
         
-        [nameLabel, ageLabel].forEach {
+        [nameLabel, ageLabel, randomButton].forEach {
             view.addSubview($0)
         }
         
         NSLayoutConstraint.activate([
             nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
+            nameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             
             ageLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             ageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            randomButton.topAnchor.constraint(equalTo: ageLabel.bottomAnchor, constant: 30),
+            randomButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+    }
+}
+
+extension ProfileViewController: UserViewModel {
+    @objc
+    func changeAge() {
+        viewModel.userAge = Int.random(in: 0 ..< 100)
+    }
+    
+    func updateUserName(name: String) {
+        DispatchQueue.main.async {
+            self.nameLabel.text = name
+        }
+    }
+    
+    func updateUserAge(age: Int) {
+        DispatchQueue.main.async {
+            self.ageLabel.text = String(age)
+        }
     }
     
     private func bindingViewModel() {
-        guard let viewModel = viewModel else { return }
-        
         DispatchQueue.main.async {
-            self.nameLabel.text = viewModel.userName
-            self.ageLabel.text = viewModel.userAge
+            self.nameLabel.text = self.viewModel.userName
+            self.ageLabel.text = String(self.viewModel.userAge)
         }
     }
 }

@@ -12,9 +12,12 @@ class ViewController: UIViewController {
     // MARK: - UI Properties
     
     private lazy var profileDesignViewController = ProfileDesignViewController()
-    private lazy var profileViewController = ProfileViewController()
     private lazy var todoViewController = TodoViewController()
     private lazy var playerViewController = PlayerViewController()
+    
+//    private lazy var viewModel = ProfileViewModel(userProfile: ProfileInfo(userName: "최예은", userAge: 25))
+//    private lazy var profileViewController = ProfileViewController(viewModel: viewModel)
+    
     
     private let mainImage: UIImageView = {
         let imageView = UIImageView()
@@ -119,10 +122,9 @@ extension ViewController {
     }
     
     @objc private func navigateToProfileVC() {
-        let userProfile = ProfileInfo(userName: "최예은", userAge: 25)
-        let viewModel = ProfileViewModel(userProfile: userProfile)
+        lazy var viewModel = ProfileViewModel(userProfile: ProfileInfo(userName: "최예은", userAge: 25))
+        lazy var profileViewController = ProfileViewController(viewModel: viewModel)
         profileViewController.viewModel = viewModel
-        
         present(profileViewController, animated: true)
     }
     

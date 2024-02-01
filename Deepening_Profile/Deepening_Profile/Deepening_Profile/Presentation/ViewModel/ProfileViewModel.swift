@@ -7,18 +7,28 @@
 
 import Foundation
 
-class ProfileViewModel {
-    var userProfile: ProfileInfo?
+protocol UserViewModel: AnyObject {
+    func updateUserName(name: String)
+    func updateUserAge(age: Int)
+}
 
-    init(userProfile: ProfileInfo?) {
+class ProfileViewModel {
+    private var userProfile: ProfileInfo
+    weak var delegate: UserViewModel?
+    
+    init(userProfile: ProfileInfo) {
         self.userProfile = userProfile
     }
 
-    var userName: String {
-        return userProfile?.userName ?? "Please Enter user name"
+    lazy var userName: String = userProfile.userName {
+        didSet {
+            delegate?.updateUserName(name: userName)
+        }
     }
 
-    var userAge: String {
-        return userProfile?.userAge.description ?? "Please Enter user age"
+    lazy var userAge: Int = userProfile.userAge {
+        didSet {
+            delegate?.updateUserAge(age: userAge)
+        }
     }
 }
