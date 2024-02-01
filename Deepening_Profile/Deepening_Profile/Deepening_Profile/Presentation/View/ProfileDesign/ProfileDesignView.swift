@@ -268,10 +268,8 @@ extension ProfileDesignView {
     private func setUserActivity() {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.spacing = 10
+        stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .systemPink
         
         [post, follower, following].forEach {
             stackView.addArrangedSubview($0)

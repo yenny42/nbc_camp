@@ -6,7 +6,7 @@
 //
 
 import UIKit
- 
+
 class PlayerTableViewCell: UITableViewCell {
     
     static let identifier = "PlayerTableViewCellIdentifier"
@@ -18,6 +18,7 @@ class PlayerTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .clear
         
         return imageView
     }()
@@ -81,7 +82,6 @@ extension PlayerTableViewCell {
                 if self.tag == currentTag {
                     switch result {
                     case .success(let image):
-                        self.thumbnail.backgroundColor = .clear
                         self.thumbnail.image = image
                     case .failure(let error):
                         print("Error decoding image: \(error)")
@@ -92,5 +92,4 @@ extension PlayerTableViewCell {
             }
         }
     }
-
 }
