@@ -272,7 +272,16 @@ func deleteData(_ id: String) {
 
 <br/>
 
-> 뷰모델 사용방법..? 이 맞는지 모르겠습니다..ㅎㅎ
+### 다른 방법 - TaskManager
+<a href="https://github.com/yenny42/nbc_camp/blob/Deepening_ProFile_TaskManager/Deepening_Profile/Deepening_Profile/Deepening_Profile/Presentation/Manager/TaskManager.swift">TaskManager 브랜치</a>
+
+- TodoViewModel 대신 사용할 수 있는 방법으로 TaskManager를 구현
+- 데이터 상호 작용을 위해 정적 메서드를 사용
+- MVVM을 따르지 않지만 간단
+
+<br/>
+
+> 뷰모델 사용방법..? 이 맞는지 모르겠습니다..
 
 <br/>
 
