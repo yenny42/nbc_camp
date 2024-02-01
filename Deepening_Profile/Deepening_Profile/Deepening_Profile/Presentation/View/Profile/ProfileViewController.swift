@@ -78,10 +78,10 @@ extension ProfileViewController {
         
         NSLayoutConstraint.activate([
             nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             
             ageLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             ageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            ageLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
             randomButton.topAnchor.constraint(equalTo: ageLabel.bottomAnchor, constant: 30),
             randomButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
