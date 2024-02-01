@@ -11,7 +11,7 @@ class TodoViewController: UIViewController {
     
     // MARK: - View Model
     
-    private lazy var viewModel = TodoViewModel()
+//    private lazy var viewModel = TodoViewModel()
     
     // MARK: - Properties
     
@@ -19,7 +19,7 @@ class TodoViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    private lazy var todoView = TodoView(viewModel: viewModel)
+    private lazy var todoView = TodoView()
     
     // MARK: - Life Cycle
     
@@ -76,7 +76,7 @@ extension TodoViewController {
             if todoView.titleTextField.text!.count > 30 {
                 maxinumStringAlert(in: self)
             } else {
-                viewModel.saveData(title: title)
+                TaskManager.saveData(title: title)
             }
             
             todoView.updateUI()
@@ -87,7 +87,7 @@ extension TodoViewController {
     }
     
     func navigateToDetailVC(selectedItem: TaskInfo) {
-        let todoDetailViewController = TodoDetailViewController(data: selectedItem, viewModel: viewModel)
+        let todoDetailViewController = TodoDetailViewController(data: selectedItem)
         self.navigationController?.pushViewController(todoDetailViewController, animated: true)
     }
 }

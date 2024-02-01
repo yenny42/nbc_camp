@@ -12,7 +12,7 @@ class TodoDetailViewController: UIViewController {
     // MARK: - Properties
     
     private var data: TaskInfo
-    private var viewModel: TodoViewModel
+//    private var viewModel: TodoViewModel
     
     // MARK: - UI Properties
     
@@ -20,7 +20,7 @@ class TodoDetailViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "등록일 : \(String(describing: viewModel.dateFormat(data.createDate)))"
+        label.text = "등록일 : \(String(describing: TaskManager.dateFormat(data.createDate)))"
         
         return label
     }()
@@ -30,7 +30,7 @@ class TodoDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         
         if let modifyDate = data.modifyDate {
-            let formattedDate = viewModel.dateFormat(modifyDate)
+            let formattedDate = TaskManager.dateFormat(modifyDate)
             label.text = "수정일 : \(String(describing: formattedDate))"
         } else {
             label.text = "수정일 : -"
@@ -101,9 +101,9 @@ class TodoDetailViewController: UIViewController {
     
     // MARK: - Life Cycle
     
-    init(data: TaskInfo, viewModel: TodoViewModel) {
+    init(data: TaskInfo) {
         self.data = data
-        self.viewModel = viewModel
+//        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -176,7 +176,7 @@ extension TodoDetailViewController {
     @objc
     private func didTapDeleteButton() {
         actionAlert(in: self, title: "삭제하기", message: "삭제하시겠습니까?") {
-            self.viewModel.deleteData(self.data.id)
+            TaskManager.deleteData(self.data.id)
             self.navigationController?.popViewController(animated: true)
             
             actionAlert(in: self, title: "삭제가 완료되었습니다.", message: "", cancelButton: false)
@@ -190,11 +190,11 @@ extension TodoDetailViewController {
         if titleTextField.text!.count > 30 {
             maxinumStringAlert(in: self)
         } else {
-            viewModel.updateData(data.id, title: titleTextField.text)
+            TaskManager.updateData(data.id, title: titleTextField.text)
         }
         
-        if let index = viewModel.readData().firstIndex(where: { $0.id == id }) {
-            data = viewModel.readData()[index]
+        if let index = TaskManager.readData().firstIndex(where: { $0.id == id }) {
+            data = TaskManager.readData()[index]
         }
         
         self.navigationController?.popViewController(animated: true)
@@ -203,10 +203,10 @@ extension TodoDetailViewController {
     @objc
     private func didTapUpdateIsCompletedButton() {
         let id = data.id
-        viewModel.updateData(data.id, isCompleted: !data.isCompleted)
+        TaskManager.updateData(data.id, isCompleted: !data.isCompleted)
         
-        if let index = viewModel.readData().firstIndex(where: { $0.id == id }) {
-            data = viewModel.readData()[index]
+        if let index = TaskManager.readData().firstIndex(where: { $0.id == id }) {
+            data = TaskManager.readData()[index]
         }
         
         DispatchQueue.main.async {

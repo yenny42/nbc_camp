@@ -13,7 +13,7 @@ class TodoCollectionView: UICollectionView {
     
     var navigateToTodoDetail: ((TaskInfo) -> Void)?
     
-    private var viewModel: TodoViewModel
+//    private var viewModel: TodoViewModel
     private lazy var data: [TaskInfo] = [] {
         didSet {
             reloadData()
@@ -22,8 +22,8 @@ class TodoCollectionView: UICollectionView {
     
     // MARK: - Life Cycle
     
-    init(viewModel: TodoViewModel) {
-        self.viewModel = viewModel
+    init() {
+//        self.viewModel = viewModel
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -38,7 +38,7 @@ class TodoCollectionView: UICollectionView {
     }
     
     func getTodoData() {
-        data = viewModel.readData()
+        data = TaskManager.readData()
     }
 }
 
@@ -72,7 +72,7 @@ extension TodoCollectionView: UICollectionViewDataSource, UICollectionViewDelega
         cell.delegate = self
         
         cell.title.text = item.title
-        cell.createDate.text = String(describing: viewModel.dateFormat(item.createDate))
+        cell.createDate.text = String(describing: TaskManager.dateFormat(item.createDate))
         
         if item.isCompleted {
             cell.checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
@@ -122,7 +122,7 @@ extension TodoCollectionView: TodoCellDelegate {
 
         let selectedItem = data[indexPath.row]
         
-        viewModel.updateData(selectedItem.id, isCompleted: !selectedItem.isCompleted)
+        TaskManager.updateData(selectedItem.id, isCompleted: !selectedItem.isCompleted)
         getTodoData()
     }
 }

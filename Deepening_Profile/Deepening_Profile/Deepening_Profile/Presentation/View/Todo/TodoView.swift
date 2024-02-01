@@ -11,7 +11,7 @@ class TodoView: UIView {
     
     // MARK: - View Model
     
-    private let viewModel: TodoViewModel
+//    private let viewModel: TodoViewModel
     
     // MARK: - UI Properties
     
@@ -19,7 +19,7 @@ class TodoView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "오늘 날짜 : \(viewModel.dateFormat(Date()))"
+        label.text = "오늘 날짜 : \(TaskManager.dateFormat(Date()))"
         label.font = UIFont.systemFont(ofSize: 16)
         
         return label
@@ -51,7 +51,7 @@ class TodoView: UIView {
     }()
     
     lazy var todoList: TodoCollectionView = {
-        let todoCollectionView = TodoCollectionView(viewModel: viewModel)
+        let todoCollectionView = TodoCollectionView()
         todoCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return todoCollectionView
@@ -59,8 +59,15 @@ class TodoView: UIView {
     
     // MARK: - Life Cycle
 
-    init(viewModel: TodoViewModel) {
-        self.viewModel = viewModel
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//     
+//        setUI()
+//        setLayout()
+//    }
+    
+    init() {
+//        self.viewModel = viewModel
         
         super.init(frame: .zero)
         

@@ -1,5 +1,5 @@
 //
-//  TodoViewModel.swift
+//  TaskManager.swift
 //  Deepening_Profile
 //
 //  Created by t2023-m0035 on 1/25/24.
@@ -8,13 +8,13 @@
 import UIKit
 import CoreData
 
-class TodoViewModel {
+class TaskManager {
     
-    var persistentContainer: NSPersistentContainer? {
+    static private var persistentContainer: NSPersistentContainer? {
         (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     }
     
-    func saveData(title: String) {
+    static func saveData(title: String) {
         guard let context = self.persistentContainer?.viewContext else { return }
 
         if title.count > 30 {
@@ -34,7 +34,7 @@ class TodoViewModel {
         }
     }
 
-    func readData() -> [TaskInfo] {
+    static func readData() -> [TaskInfo] {
         guard let context = self.persistentContainer?.viewContext else { return [] }
         
         let request = Task.fetchRequest()
@@ -63,7 +63,7 @@ class TodoViewModel {
         }
     }
     
-    func updateData(_ id: String, title: String? = nil, isCompleted: Bool? = nil) {
+    static func updateData(_ id: String, title: String? = nil, isCompleted: Bool? = nil) {
         guard let context = self.persistentContainer?.viewContext else { return }
         
         let request = Task.fetchRequest()
@@ -88,7 +88,7 @@ class TodoViewModel {
         try? context.save()
     }
     
-    func deleteData(_ id: String) {
+    static func deleteData(_ id: String) {
         guard let context = self.persistentContainer?.viewContext else { return }
         
         let request = Task.fetchRequest()
@@ -101,8 +101,8 @@ class TodoViewModel {
     }
 }
 
-extension TodoViewModel {
-    func dateFormat(_ input: Date) -> String {
+extension TaskManager {
+    static func dateFormat(_ input: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
