@@ -11,10 +11,10 @@ class TodoCollectionView: UICollectionView {
     
     // MARK: - Properties
     
-    var navigateToTodoDetail: ((Todo) -> Void)?
+    var navigateToTodoDetail: ((TaskInfo) -> Void)?
     
     private var viewModel: TodoViewModel
-    private lazy var data: [Todo] = [] {
+    private lazy var data: [TaskInfo] = [] {
         didSet {
             reloadData()
         }

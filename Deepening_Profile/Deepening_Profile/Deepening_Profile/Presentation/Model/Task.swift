@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Todo {
+struct TaskInfo {
     var id: String
     var title: String
     var createDate: Date

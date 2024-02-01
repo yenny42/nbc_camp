@@ -9,7 +9,7 @@ import Foundation
 
 final class PlayerVideoAPI {
 
-    static func getVideo(completion: @escaping (Result<[Video], Error>) -> Void) {
+    static func getVideo(completion: @escaping (Result<[VideoInfo], Error>) -> Void) {
         let session = URLSession.shared
         
         if let url = URL(string: "https://gist.githubusercontent.com/poudyalanil/ca84582cbeb4fc123a13290a586da925/raw/14a27bd0bcd0cd323b35ad79cf3b493dddf6216b/videos.json") {
@@ -21,7 +21,7 @@ final class PlayerVideoAPI {
                 }
                 else if let data = data {
                     do {
-                        let video = try JSONDecoder().decode([Video].self, from: data)
+                        let video = try JSONDecoder().decode([VideoInfo].self, from: data)
                         completion(.success(video))
                     } catch {
                         completion(.failure(error))

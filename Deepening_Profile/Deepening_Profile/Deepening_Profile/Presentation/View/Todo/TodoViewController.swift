@@ -15,7 +15,7 @@ class TodoViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var todoList: [Todo]?
+    private var todoList: [TaskInfo]?
     
     // MARK: - UI Properties
     
@@ -86,7 +86,7 @@ extension TodoViewController {
         }
     }
     
-    func navigateToDetailVC(selectedItem: Todo) {
+    func navigateToDetailVC(selectedItem: TaskInfo) {
         let todoDetailViewController = TodoDetailViewController(data: selectedItem, viewModel: viewModel)
         self.navigationController?.pushViewController(todoDetailViewController, animated: true)
     }

@@ -22,30 +22,30 @@ class TodoViewModel {
         }
 
         do {
-            let newTodo = TodoItem(context: context)
+            let newTodo = Task(context: context)
             newTodo.id = UUID()
             newTodo.title = title
             newTodo.createDate = Date()
             newTodo.isCompleted = false
-            
+
             try context.save()
         } catch {
             print("Error saving todo: \(error)")
         }
     }
 
-    func readData() -> [Todo] {
+    func readData() -> [TaskInfo] {
         guard let context = self.persistentContainer?.viewContext else { return [] }
         
-        let request = TodoItem.fetchRequest()
+        let request = Task.fetchRequest()
         
         do {
             let todos = try context.fetch(request)
             
-            var data: [Todo] = []
+            var data: [TaskInfo] = []
             
             for todo in todos {
-                let todoModel = Todo(
+                let todoModel = TaskInfo(
                     id: String(describing: todo.id),
                     title: todo.title!,
                     createDate: todo.createDate!,
@@ -66,7 +66,7 @@ class TodoViewModel {
     func updateData(_ id: String, title: String? = nil, isCompleted: Bool? = nil) {
         guard let context = self.persistentContainer?.viewContext else { return }
         
-        let request = TodoItem.fetchRequest()
+        let request = Task.fetchRequest()
         guard let todos = try? context.fetch(request) else { return }
         
         let filteredData = todos.filter { String(describing: $0.id) == id }[0]
@@ -91,7 +91,7 @@ class TodoViewModel {
     func deleteData(_ id: String) {
         guard let context = self.persistentContainer?.viewContext else { return }
         
-        let request = TodoItem.fetchRequest()
+        let request = Task.fetchRequest()
         guard let todos = try? context.fetch(request) else { return }
         
         let filteredData = todos.first { String(describing: $0.id) == id }
@@ -99,7 +99,6 @@ class TodoViewModel {
         
         try? context.save()
     }
-    
 }
 
 extension TodoViewModel {

@@ -11,7 +11,7 @@ class TodoDetailViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var data: Todo
+    private var data: TaskInfo
     private var viewModel: TodoViewModel
     
     // MARK: - UI Properties
@@ -101,7 +101,7 @@ class TodoDetailViewController: UIViewController {
     
     // MARK: - Life Cycle
     
-    init(data: Todo, viewModel: TodoViewModel) {
+    init(data: TaskInfo, viewModel: TodoViewModel) {
         self.data = data
         self.viewModel = viewModel
         

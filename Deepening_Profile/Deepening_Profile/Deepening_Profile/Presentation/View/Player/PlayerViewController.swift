@@ -14,7 +14,7 @@ class PlayerViewController: UIViewController {
     
     let viewModel = PlayerViewModel()
     
-    var data: [Video] = [] {
+    var data: [VideoInfo] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()

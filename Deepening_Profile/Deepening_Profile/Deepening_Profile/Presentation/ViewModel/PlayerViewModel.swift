@@ -8,9 +8,9 @@
 import Foundation
 
 class PlayerViewModel {
-    var data: [Video] = []
+    var data: [VideoInfo] = []
 
-    func fetchData(completion: @escaping (Result<[Video], Error>) -> Void) {
+    func fetchData(completion: @escaping (Result<[VideoInfo], Error>) -> Void) {
         if data.isEmpty {
             PlayerVideoAPI.getVideo { result in
                 switch result {
