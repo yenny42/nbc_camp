@@ -285,4 +285,34 @@ func deleteData(_ id: String) {
 
 <br/>
 
+## Lv6. Todo와 Category의 관계(Relation) 정하기
 
+⬇️ 구현한 화면 (gif) ⬇️
+
+<img src = "https://github.com/yenny42/nbc_camp/assets/107637741/cd620f84-ad79-4774-85da-29d72b4669cc" width = "300" />
+
+<br/>
+
+#### Entity
+
+![스크린샷 2024-02-02 오후 7 55 04](https://github.com/yenny42/nbc_camp/assets/107637741/5e8a760b-34a1-43f8-9eed-08bce23305d6)
+![스크린샷 2024-02-02 오후 7 54 56](https://github.com/yenny42/nbc_camp/assets/107637741/d7798f04-cc71-4f39-96e3-e1f35041755d)
+
+- Category의 tasks = To Many 옵션
+
+<br/>
+
+#### readData()
+
+- 데이터와 카테고리를 읽어와서 `TaskInfo` 타입으로 데이터를 가공한 뒤 반환
+
+```
+struct TaskInfo {
+    var id: String
+    var title: String
+    var createDate: Date
+    var modifyDate: Date?
+    var isCompleted: Bool
+    var category: String
+}
+```
