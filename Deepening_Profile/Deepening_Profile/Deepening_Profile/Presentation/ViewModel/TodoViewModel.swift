@@ -14,15 +14,6 @@ class TodoViewModel {
         (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     }
     
-    func readCategory() -> [Category] {
-        guard let context = self.persistentContainer?.viewContext else { return [] }
-        
-        let request = Category.fetchRequest()
-        
-        let categories = try? context.fetch(request)
-        return categories!
-    }
-    
     func saveData(category: String, title: String) {
         guard let context = self.persistentContainer?.viewContext else { return }
         
@@ -53,7 +44,16 @@ class TodoViewModel {
         }
     }
     
-    func readDataCategory() -> [[Task]] {
+    func readCategory() -> [Category] {
+        guard let context = self.persistentContainer?.viewContext else { return [] }
+        
+        let request = Category.fetchRequest()
+        
+        let categories = try? context.fetch(request)
+        return categories!
+    }
+    
+    func readData() -> [TaskInfo] {
         guard let context = self.persistentContainer?.viewContext else {
             print("Error fetching tasks")
             return []
@@ -61,16 +61,26 @@ class TodoViewModel {
         
         let request = Task.fetchRequest()
         
-        var data: [[Task]] = []
-        let category = readCategory()
+        var data: [TaskInfo] = []
         
-        category.forEach {
-            guard let tasks = $0.tasks?.allObjects.compactMap({ $0 as? Task }) else { return }
-            
-            data.append(tasks)
+        let readCategoryData = readCategory()
+        readCategoryData.forEach {
+            let tasks = $0.tasks?.allObjects.compactMap({ $0 as? Task })
+            for task in tasks! {
+                let inputTask = TaskInfo(
+                    id: String(describing: task.id),
+                    title: task.title!,
+                    createDate: task.createDate!,
+                    modifyDate: task.modifyDate,
+                    isCompleted: task.isCompleted,
+                    category: (task.category?.title)!
+                )
+                
+                data.append(inputTask)
+            }
         }
         
-        return data
+        return data.sorted { $0.createDate < $1.createDate }
     }
     
     func updateData(_ id: String, title: String? = nil, isCompleted: Bool? = nil) {

@@ -73,6 +73,7 @@ extension TodoCollectionView: UICollectionViewDataSource, UICollectionViewDelega
         
         cell.title.text = item.title
         cell.createDate.text = String(describing: viewModel.dateFormat(item.createDate))
+        cell.categoryLabel.text = item.category
         
         if item.isCompleted {
             cell.checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)

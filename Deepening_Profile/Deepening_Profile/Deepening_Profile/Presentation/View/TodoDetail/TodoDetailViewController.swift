@@ -60,10 +60,6 @@ class TodoDetailViewController: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         
-        let screenHeight = UIScreen.main.bounds.height
-        let heightRatio: CGFloat = 0.2
-        textField.heightAnchor.constraint(equalToConstant: screenHeight * heightRatio).isActive = true
-        
         textField.text = data.title
         textField.borderStyle = .roundedRect
         textField.placeholder = "할 일을 입력하세요"

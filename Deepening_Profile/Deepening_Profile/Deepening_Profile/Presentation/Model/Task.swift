@@ -13,4 +13,5 @@ struct TaskInfo {
     var createDate: Date
     var modifyDate: Date?
     var isCompleted: Bool
+    var category: String
 }
