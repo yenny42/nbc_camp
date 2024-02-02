@@ -54,33 +54,32 @@ class TodoViewModel {
     }
     
     func readData() -> [TaskInfo] {
-        guard let context = self.persistentContainer?.viewContext else {
-            print("Error fetching tasks")
-            return []
-        }
+        guard let context = self.persistentContainer?.viewContext else { return [] }
         
         let request = Task.fetchRequest()
         
-        var data: [TaskInfo] = []
-        
-        let readCategoryData = readCategory()
-        readCategoryData.forEach {
-            let tasks = $0.tasks?.allObjects.compactMap({ $0 as? Task })
-            for task in tasks! {
+        do {
+            let tasks = try context.fetch(request)
+            var data: [TaskInfo] = []
+            
+            for task in tasks {
                 let inputTask = TaskInfo(
                     id: String(describing: task.id),
-                    title: task.title!,
+                    title: task.title ?? "No Title",
                     createDate: task.createDate!,
                     modifyDate: task.modifyDate,
                     isCompleted: task.isCompleted,
-                    category: (task.category?.title)!
+                    category: task.category?.title ?? "No Category"
                 )
                 
                 data.append(inputTask)
             }
+            
+            return data.sorted { $0.createDate < $1.createDate }
+        } catch {
+            print("Error fetching tasks: \(error)")
+            return []
         }
-        
-        return data.sorted { $0.createDate < $1.createDate }
     }
     
     func updateData(_ id: String, title: String? = nil, category: String? = nil, isCompleted: Bool? = nil) {
