@@ -14,53 +14,63 @@ class TodoViewModel {
         (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     }
     
-    func saveData(title: String) {
+    func readCategory() -> [Category] {
+        guard let context = self.persistentContainer?.viewContext else { return [] }
+        
+        let request = Category.fetchRequest()
+        
+        let categories = try? context.fetch(request)
+        return categories!
+    }
+    
+    func saveData(category: String, title: String) {
         guard let context = self.persistentContainer?.viewContext else { return }
-
+        
         if title.count > 30 {
             return
         }
-
+        
         do {
             let newTodo = Task(context: context)
             newTodo.id = UUID()
             newTodo.title = title
             newTodo.createDate = Date()
             newTodo.isCompleted = false
-
+            
+            let categories = readCategory()
+            if let targetCategory = categories.first(where: { $0.title == category }) {
+                newTodo.category = targetCategory
+            } else {
+                let newCategory = Category(context: context)
+                newCategory.id = UUID()
+                newCategory.title = category
+                newCategory.addToTasks(newTodo)
+            }
+            
             try context.save()
         } catch {
             print("Error saving todo: \(error)")
         }
     }
-
-    func readData() -> [TaskInfo] {
-        guard let context = self.persistentContainer?.viewContext else { return [] }
+    
+    func readDataCategory() -> [[Task]] {
+        guard let context = self.persistentContainer?.viewContext else {
+            print("Error fetching tasks")
+            return []
+        }
         
         let request = Task.fetchRequest()
         
-        do {
-            let todos = try context.fetch(request)
+        var data: [[Task]] = []
+        let category = readCategory()
+        
+        category.forEach {
+            guard let tasks = $0.tasks?.allObjects.compactMap({ $0 as? Task }) else { return }
             
-            var data: [TaskInfo] = []
-            
-            for todo in todos {
-                let todoModel = TaskInfo(
-                    id: String(describing: todo.id),
-                    title: todo.title!,
-                    createDate: todo.createDate!,
-                    modifyDate: todo.modifyDate ?? nil,
-                    isCompleted: todo.isCompleted
-                )
-                
-                data.append(todoModel)
-            }
-            
-            return data
-        } catch {
-            print("Error fetching todos: \(error)")
-            return []
+            data.append(tasks)
         }
+        
+        return data
     }
     
     func updateData(_ id: String, title: String? = nil, isCompleted: Bool? = nil) {
@@ -69,21 +79,21 @@ class TodoViewModel {
         let request = Task.fetchRequest()
         guard let todos = try? context.fetch(request) else { return }
         
-        let filteredData = todos.filter { String(describing: $0.id) == id }[0]
+        let filteredData = todos.first { String(describing: $0.id) == id }
         
         if title != nil {
             if title!.count > 30 {
                 return
             } else {
-                filteredData.title = title
+                filteredData?.title = title
             }
         }
-
+        
         if isCompleted != nil {
-            filteredData.isCompleted = isCompleted!
+            filteredData?.isCompleted = isCompleted!
         }
         
-        filteredData.modifyDate = Date()
+        filteredData?.modifyDate = Date()
         
         try? context.save()
     }
