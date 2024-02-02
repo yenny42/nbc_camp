@@ -13,6 +13,7 @@ class TodoDetailViewController: UIViewController {
     
     private var data: TaskInfo
     private var viewModel: TodoViewModel
+    private var categoryData: String = ""
     
     // MARK: - UI Properties
     
@@ -88,12 +89,18 @@ class TodoDetailViewController: UIViewController {
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 5
         
-        button.addTarget(self, action: #selector(didTapUpdateTitleButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapUpdateTaskButton), for: .touchUpInside)
         
         return button
     }()
     
-    private lazy var buttonStackView: UIStackView = { createStackView() }()
+    private lazy var buttonStackView: UIStackView = { createActionButtonStackView() }()
+    
+    private lazy var studyButton = createCategoryButton(title: "공부", color: .systemBlue)
+    private lazy var houseWorkButton = createCategoryButton(title: "집안일", color: .systemPink)
+    private lazy var exerciseButton = createCategoryButton(title: "운동", color: .systemGreen)
+
+    private lazy var categoryStackView: UIStackView = { createCategoryButtonStackView() }()
     
     // MARK: - Life Cycle
     
@@ -113,17 +120,26 @@ class TodoDetailViewController: UIViewController {
             
         setUI()
         setLayout()
+        setAddTarget()
     }
 }
 
 // MARK: - Extensions
 
 extension TodoDetailViewController {
+    private func setAddTarget() {
+        studyButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        houseWorkButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        exerciseButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+    }
+    
     private func setUI() {
         view.backgroundColor = .white
         self.title = "Detail"
         
-        [createDate, modifyDate, checkButton, titleTextField, buttonStackView].forEach {
+        isSelectCategoryUI()
+        
+        [createDate, modifyDate, checkButton, titleTextField, buttonStackView, categoryStackView].forEach {
             view.addSubview($0)
         }
     }
@@ -148,19 +164,33 @@ extension TodoDetailViewController {
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             
+            categoryStackView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 15),
+            categoryStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            
             buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
     }
     
-    private func createStackView() -> UIStackView {
+    private func createActionButtonStackView() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [deleteButton, updateButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 10
+        
+        return stackView
+    }
+    
+    private func createCategoryButtonStackView() -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: [studyButton, houseWorkButton, exerciseButton])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .leading
         
         return stackView
     }
@@ -180,13 +210,13 @@ extension TodoDetailViewController {
     }
     
     @objc
-    private func didTapUpdateTitleButton() {
+    private func didTapUpdateTaskButton() {
         let id = data.id
         
         if titleTextField.text!.count > 30 {
             maxinumStringAlert(in: self)
         } else {
-            viewModel.updateData(data.id, title: titleTextField.text)
+            viewModel.updateData(data.id, title: titleTextField.text, category: categoryData)
         }
         
         if let index = viewModel.readData().firstIndex(where: { $0.id == id }) {
@@ -210,6 +240,23 @@ extension TodoDetailViewController {
         }
     }
     
+    @objc
+    func categoryButtonTapped(_ sender: UIButton) {
+        for button in [studyButton, houseWorkButton, exerciseButton] {
+            button.backgroundColor = .clear
+            button.layer.borderWidth = 1
+            button.setTitleColor(button.layer.borderColor != nil ? UIColor(cgColor: button.layer.borderColor!) : .black, for: .normal)
+        }
+
+        sender.backgroundColor = sender.currentTitleColor
+        sender.layer.borderWidth = 0
+        sender.setTitleColor(.white, for: .normal)
+        
+        self.categoryData = (sender.titleLabel?.text)!
+    }
+}
+
+extension TodoDetailViewController {
     private func updateCheckButtonUI() {
         if data.isCompleted {
             checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
@@ -217,6 +264,17 @@ extension TodoDetailViewController {
         } else {
             checkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
             checkButton.tintColor = .systemGray2
+        }
+    }
+    
+    private func isSelectCategoryUI() {
+        for button in [studyButton, houseWorkButton, exerciseButton] {
+            if button.titleLabel?.text == data.category {
+                button.backgroundColor = UIColor(cgColor: button.layer.borderColor!)
+                button.setTitleColor(.white, for: .normal)
+                
+                self.categoryData = (button.titleLabel?.text)!
+            }
         }
     }
 }

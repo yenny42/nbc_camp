@@ -83,6 +83,7 @@ class TodoView: UIView {
         
         setUI()
         setLayout()
+        setAddTarget()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -146,18 +147,10 @@ extension TodoView {
 }
 
 extension TodoView {
-    private func createCategoryButton(title: String, color: UIColor) -> UIButton {
-        let button = UIButton(type: .system)
-        button.setTitle(title, for: .normal)
-        button.tintColor = color
-        button.layer.borderWidth = 1
-        button.layer.borderColor = color.cgColor
-        button.layer.cornerRadius = 13
-        button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
-        
-        button.addTarget(self, action: #selector(categoryButtonTapped(_:)), for: .touchUpInside)
-        
-        return button
+    private func setAddTarget() {
+        studyButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        houseWorkButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        exerciseButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
     }
     
     @objc

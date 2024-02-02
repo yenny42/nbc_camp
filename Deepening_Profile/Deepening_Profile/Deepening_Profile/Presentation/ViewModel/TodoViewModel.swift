@@ -83,14 +83,13 @@ class TodoViewModel {
         return data.sorted { $0.createDate < $1.createDate }
     }
     
-    func updateData(_ id: String, title: String? = nil, isCompleted: Bool? = nil) {
+    func updateData(_ id: String, title: String? = nil, category: String? = nil, isCompleted: Bool? = nil) {
         guard let context = self.persistentContainer?.viewContext else { return }
         
         let request = Task.fetchRequest()
         guard let todos = try? context.fetch(request) else { return }
         
         let filteredData = todos.first { String(describing: $0.id) == id }
-        
         if title != nil {
             if title!.count > 30 {
                 return
@@ -98,10 +97,12 @@ class TodoViewModel {
                 filteredData?.title = title
             }
         }
-        
         if isCompleted != nil {
             filteredData?.isCompleted = isCompleted!
         }
+        
+        let category = readCategory().first { $0.title == category }
+        filteredData?.category = category
         
         filteredData?.modifyDate = Date()
         

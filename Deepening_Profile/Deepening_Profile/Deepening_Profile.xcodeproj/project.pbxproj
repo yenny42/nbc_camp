@@ -14,6 +14,7 @@
 		1B48CC472B60FF6C00741BA7 /* ProfileDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48CC462B60FF6C00741BA7 /* ProfileDesignViewController.swift */; };
 		1B48CC492B60FFEC00741BA7 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48CC482B60FFEC00741BA7 /* ProfileViewModel.swift */; };
 		1B5DB5152B69F5CB008DAA66 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5DB5142B69F5CB008DAA66 /* PlayerViewModel.swift */; };
+		1B5DB5182B6CD93C008DAA66 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5DB5172B6CD93C008DAA66 /* CategoryButton.swift */; };
 		1BB90F612B652CAC00B1C663 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB90F602B652CAC00B1C663 /* CustomAlert.swift */; };
 		1BB90F662B676D9E00B1C663 /* GetVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB90F652B676D9E00B1C663 /* GetVideo.swift */; };
 		1BB90F692B677CB600B1C663 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB90F682B677CB600B1C663 /* PlayerViewController.swift */; };
@@ -47,6 +48,7 @@
 		1B48CC462B60FF6C00741BA7 /* ProfileDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDesignViewController.swift; sourceTree = "<group>"; };
 		1B48CC482B60FFEC00741BA7 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		1B5DB5142B69F5CB008DAA66 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		1B5DB5172B6CD93C008DAA66 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		1BB90F602B652CAC00B1C663 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		1BB90F652B676D9E00B1C663 /* GetVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVideo.swift; sourceTree = "<group>"; };
 		1BB90F682B677CB600B1C663 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			children = (
 				1BBB7BCF2B61DF14008F2E52 /* CustomButton.swift */,
 				1BB90F602B652CAC00B1C663 /* CustomAlert.swift */,
+				1B5DB5172B6CD93C008DAA66 /* CategoryButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				1BBB7BF12B639CA5008F2E52 /* ProfileInfo.swift in Sources */,
 				1BBB7BE72B625DFD008F2E52 /* TodoView.swift in Sources */,
 				1B48CC2E2B60FB3200741BA7 /* SceneDelegate.swift in Sources */,
+				1B5DB5182B6CD93C008DAA66 /* CategoryButton.swift in Sources */,
 				1BBB7BED2B634B5F008F2E52 /* TodoCollectionViewCell.swift in Sources */,
 				1BBB7BEF2B637ABF008F2E52 /* Task.swift in Sources */,
 			);
