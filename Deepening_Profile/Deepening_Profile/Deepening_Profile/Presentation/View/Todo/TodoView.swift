@@ -9,6 +9,8 @@ import UIKit
 
 class TodoView: UIView {
     
+    var categoryTitle: String = ""
+    
     // MARK: - View Model
     
     private let viewModel: TodoViewModel
@@ -40,10 +42,11 @@ class TodoView: UIView {
     }()
     
     lazy var addButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.setTitle("추가", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 4
         
@@ -55,6 +58,20 @@ class TodoView: UIView {
         todoCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return todoCollectionView
+    }()
+
+    lazy var studyButton = createCategoryButton(title: "공부", color: .systemBlue)
+    lazy var houseWorkButton = createCategoryButton(title: "집안일", color: .systemPink)
+    lazy var exerciseButton = createCategoryButton(title: "운동", color: .systemGreen)
+
+    lazy var category: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [studyButton, houseWorkButton, exerciseButton])
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
     }()
     
     // MARK: - Life Cycle
@@ -98,7 +115,7 @@ extension TodoView {
         
         // MARK: Todo TextField, Add Button
         
-        [titleTextField, addButton].forEach {
+        [category, titleTextField, addButton].forEach {
             self.addSubview($0)
         }
         
@@ -110,6 +127,9 @@ extension TodoView {
             addButton.topAnchor.constraint(equalTo: self.todayLabel.bottomAnchor, constant: 15),
             addButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             addButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2),
+            
+            category.topAnchor.constraint(equalTo: self.titleTextField.bottomAnchor, constant: 15),
+            category.leadingAnchor.constraint(equalTo: self.leadingAnchor),
         ])
         
         // MARK: Todo List CollectionView
@@ -117,10 +137,41 @@ extension TodoView {
         self.addSubview(todoList)
         
         NSLayoutConstraint.activate([
-            todoList.topAnchor.constraint(equalTo: self.addButton.bottomAnchor, constant: 30),
+            todoList.topAnchor.constraint(equalTo: self.addButton.bottomAnchor, constant: 70),
             todoList.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             todoList.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             todoList.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+}
+
+extension TodoView {
+    private func createCategoryButton(title: String, color: UIColor) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle(title, for: .normal)
+        button.tintColor = color
+        button.layer.borderWidth = 1
+        button.layer.borderColor = color.cgColor
+        button.layer.cornerRadius = 13
+        button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        
+        button.addTarget(self, action: #selector(categoryButtonTapped(_:)), for: .touchUpInside)
+        
+        return button
+    }
+    
+    @objc
+    func categoryButtonTapped(_ sender: UIButton) {
+        for button in [studyButton, houseWorkButton, exerciseButton] {
+            button.backgroundColor = .clear
+            button.layer.borderWidth = 1
+            button.setTitleColor(button.layer.borderColor != nil ? UIColor(cgColor: button.layer.borderColor!) : .black, for: .normal)
+        }
+
+        sender.backgroundColor = sender.currentTitleColor
+        sender.layer.borderWidth = 0
+        sender.setTitleColor(.white, for: .normal)
+        
+        self.categoryTitle = (sender.titleLabel?.text)!
     }
 }

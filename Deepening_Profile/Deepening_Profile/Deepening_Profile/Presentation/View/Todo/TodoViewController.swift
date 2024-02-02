@@ -76,9 +76,9 @@ extension TodoViewController {
             if todoView.titleTextField.text!.count > 30 {
                 maxinumStringAlert(in: self)
             } else {
-                viewModel.saveData(title: title)
+                viewModel.saveData(category: todoView.categoryTitle, title: title)
             }
-            
+            print(viewModel.readCategory())
             todoView.updateUI()
             
         } else {

@@ -45,6 +45,16 @@ class TodoCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
+    lazy var categoryLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .systemBlue
+        
+        return label
+    }()
+    
     // MARK: - Life Cycle
     
     override init(frame: CGRect) {
@@ -69,7 +79,7 @@ extension TodoCollectionViewCell {
             self.layer.cornerRadius = 10
         }
         
-        [checkButton, createDate, title].forEach {
+        [checkButton, createDate, categoryLabel, title].forEach {
             self.addSubview($0)
         }
     }
@@ -81,6 +91,9 @@ extension TodoCollectionViewCell {
             
             createDate.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
             createDate.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            
+            categoryLabel.bottomAnchor.constraint(equalTo: self.title.topAnchor, constant: -8),
+            categoryLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             
             title.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
